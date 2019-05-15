@@ -1,4 +1,4 @@
-let controls, stats;
+let controls, stats, gui;
 
 /**
  * Creates an istance of THREE.OrbitControls used to move the camera.
@@ -64,11 +64,29 @@ function createScene() {
   var cube = new THREE.Mesh(geometry, material);
   scene.add(cube);
 }
+let textureParametersTable = {
+  material: "wood",
+  type: 1
+};
+
+function createTools() {
+  // Creating a GUI with options.
+  gui = new dat.GUI({ name: 'My GUI' });
+  let table = gui.addFolder("Table");
+  table.add(textureParametersTable, 'material', ['wood', 'metal', 'plastic']).onChange(
+      function (newVal) {
+        console.log(newVal);
+      });
+  table.add(textureParametersTable, 'type');
+
+  let feets = gui.addFolder("Feets");
+}
 
 function init() {
   scene = new THREE.Scene();
   show_debug_tools = true;
   enable_shadows = true;
+  createTools();
   createRenderer();
 
   createCamera(new THREE.Vector3(10, 10, 20));
