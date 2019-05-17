@@ -14,107 +14,125 @@
     <script src="lib/stats.min.js"></script>
     <script src="lib/Coordinates.js"></script>
     <script src="lib/OrbitControls.js"></script>
+    <script src="lib/tmpl.js"></script>
     <script src="scripts/utils.js"></script>
     <script src="scripts/globalVariables.js"></script>
     <script src="scripts/EditorPartController.js"></script>
     <script src="scripts/main.js"></script>
+    <script type="text/x-tmpl" id="tmpl-insert-part-wrapper">
+                <div class="part" data-part="{%=part.name_id%}">
+                    <div class="part-name">{%=part.name%}</div>
+                    <div class="avaiable-materials">
+                        <p>Materiale</p>
+                        <select class="select-texture-material"></select>
+                    </div>
+                    <div class="available-colors">
+                        <p>Colore</p>
+                    </div>
+                </div>
+                </script>
+    
+    <script type="text/x-tmpl" id="tmpl-insert-texture-type-wrapper">
+                <div class="available-textures hide" data-texture-type="{%=texture.type%}"></div>
+                </script>
+    
+    <script type="text/x-tmpl" id="tmpl-insert-texture-icon-wrapper">
+                <div class="texture-icon-wrapper" data-icon-id="{%=texture_info.id%}">
+                    <img class="texture-icon" src="{%=texture_info.url%}" alt="{%=texture_info.id%} icon" />
+                </div>
+                </script>
+    
+    <script type="text/x-tmpl" id="tmpl-option-texture-type">
+                <option value="{%=texture.type_name%}">{%=texture.type%}</option>
+                </script>
 </head>
 
-<body onload="init();">
+<body onload="init()">
     <div id="editorOptions" class="options">
-        <div class="part" data-part="table">
-            <div>Tavolo</div>
-            <div class="avaiable-materials">
-                <p>Materiale</p>
-                <select id="table-material-select" class="select-texture-material">
-                    <option value="wood">Wood</option>
-                    <option value="metal">Metal</option>
-                    <option value="plastic">Plastic</option>
-                </select>
-            </div>
-            <div class="available-colors">
-                <p>Colore</p>
-                <div id="table-wood-textures" class="available-textures" data-texture-type="wood">
-                    <div class="texture-icon-wrapper" data-icon-id="acero">
-                        <img class="texture-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png"
-                            alt="acero" />
-                    </div>
-                    <div class="texture-icon-wrapper" data-icon-id="bamboo">
-                        <img class="texture-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png"
-                            alt="bamboo" />
-                    </div>
-                    <div class="texture-icon-wrapper selected" data-icon-id="ebano">
-                        <img class="texture-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png"
-                            alt="ebano" />
-                    </div>
-                    <div class="texture-icon-wrapper" data-icon-id="noce">
-                        <img class="texture-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png"
-                            alt="noce" />
-                    </div>
-                    <div class="texture-icon-wrapper" data-icon-id="pino">
-                        <img class="texture-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png"
-                            alt="pino" />
-                    </div>
-                </div>
-                <div id="table-metal-textures" class="available-textures hide" data-texture-type="metal">
-                    <div class="texture-icon-wrapper" data-icon-id="acero">
-                        <img class="texture-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png"
-                            alt="acero" />
-                    </div>
-                    <div class="texture-icon-wrapper" data-icon-id="bamboo">
-                        <img class="texture-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png"
-                            alt="bamboo" />
-                    </div>
-                    <div class="texture-icon-wrapper" data-icon-id="ebano">
-                        <img class="texture-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png"
-                            alt="ebano" />
-                    </div>
-                </div>
-                <div id="table-plastic-textures" class="available-textures hide" data-texture-type="plastic">
-                    <div class="texture-icon-wrapper" data-icon-id="acero">
-                        <img class="texture-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png"
-                            alt="acero" />
-                    </div>
-                    <div class="texture-icon-wrapper" data-icon-id="bamboo">
-                        <img class="texture-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png"
-                            alt="bamboo" />
-                    </div>
-                    <div class="texture-icon-wrapper" data-icon-id="ebano">
-                        <img class="texture-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png"
-                            alt="ebano" />
-                    </div>
-                    <div class="texture-icon-wrapper" data-icon-id="noce">
-                        <img class="texture-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png"
-                            alt="noce" />
-                    </div>
-                </div>
-            </div>
-            <div id="table-avaiable-plots-container" class="available-plots">
-                <p>Trama</p>
-                <select id="table-plot-select" class="select-texture-plot">
-                    <option value="a">A</option>
-                    <option value="b">B</option>
-                    <option value="c">C</option>
-                </select>
-            </div>
-          <div class="slidecontainer">
-      <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-    </div>
     
-        </div>
     </div>
+    <script>
+        
+            let optionsContainer = document.getElementById("editorOptions");
+            //optionsContainer.querySelectorAll(".part")[0];
+            //let tableEditorContainer = 
+
+            let menuData = {
+                partID: "table",
+                partName: "Piano Tavolo",
+                textures: [{
+                    typeID: "wood",
+                    typeSelect: "Wood",
+                    colors: [
+                        {
+                            id: "bambo",
+                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+                        },
+                        {
+                            id: "acero",
+                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+                        },
+                        {
+                            id: "pino",
+                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+                        },
+                        {
+                            id: "mogano",
+                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+                        },
+                        {
+                            id: "ebano",
+                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+                        },
+                    ]
+                },
+                {
+                    typeID: "metal",
+                    typeSelect: "Metallo",
+                    colors: [
+                        {
+                            id: "oro",
+                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+                        },
+                        {
+                            id: "ferro",
+                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+                        },
+                        {
+                            id: "argento",
+                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+                        },
+                    ]
+                },
+                {
+                    typeID: "plastic",
+                    typeSelect: "Plastica",
+                    colors: [
+                        {
+                            id: "rosso",
+                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+                        },
+                        {
+                            id: "bianco",
+                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+                        },
+                        {
+                            id: "verde",
+                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+                        },
+                        {
+                            id: "arancione",
+                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+                        },
+                    ]
+                },
+                ]
+            }
+
+            buildMenuOptions(optionsContainer, menuData);
+        </script>
+    <!-- templates used to create options menu -->
+
 </body>
 
 </html>
