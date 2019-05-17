@@ -86,7 +86,7 @@ function init() {
   scene = new THREE.Scene();
   show_debug_tools = true;
   enable_shadows = true;
-  createTools();
+//  createTools();
   createRenderer();
 
   createCamera(new THREE.Vector3(10, 10, 20));

@@ -1,0 +1,36 @@
+
+#editorOptions{
+    width: 300px;
+    position: fixed;
+    right: 0;
+    background-color: aquamarine;
+    padding: 10px;
+  }
+  
+  .available-textures {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+      align-content: flex-start;
+  }
+  .texture-icon-wrapper{
+    padding: 5px;
+  }
+  .texture-icon-wrapper.selected{
+    background-color: red;
+  }
+  .texture-icon-wrapper:hover{
+    background-color:blue;
+    cursor: pointer;
+  }
+  .texture-icon{
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+  
+  .hide {
+    display: none;
+  }
