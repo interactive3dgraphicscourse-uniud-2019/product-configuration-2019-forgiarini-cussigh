@@ -89,7 +89,7 @@ function degToRad(deg) {
  * @returns {Number} Angle expressend in radians
  */
 function radToDeg(rad) {
-    return rad * (180/Math.PI);
+    return rad * (180 / Math.PI);
 }
 
 /**
@@ -119,12 +119,25 @@ function isOBJMovingTo(currPosition, direction, destPosition) {
     let calculatedDirection = new THREE.Vector3(
         destPosition.x - currPosition.x,
         destPosition.y - currPosition.y,
-        destPosition.z - currPosition.z 
+        destPosition.z - currPosition.z
     );
-    
-    if (isNullVector(calculatedDirection)){
+
+    if (isNullVector(calculatedDirection)) {
         return false;
     }
 
     return (Math.abs(direction.angleTo(calculatedDirection)) < MAX_DIFFERENCE_ANGLE);
+}
+
+function xmlToString(xmlData) {
+    let xmlString;
+    //IE
+    if (window.ActiveXObject) {
+        xmlString = xmlData.xml;
+    }
+    // code for Mozilla, Firefox, Opera, etc.
+    else {
+        xmlString = (new XMLSerializer()).serializeToString(xmlData);
+    }
+    return xmlString;
 }
