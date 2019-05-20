@@ -71,22 +71,107 @@ let textureParametersTable = {
 
 function createTools() {
   // Creating a GUI with options.
-  gui = new dat.GUI({ name: 'My GUI' });
-  let table = gui.addFolder("Table");
-  table.add(textureParametersTable, 'material', ['wood', 'metal', 'plastic']).onChange(
-      function (newVal) {
-        console.log(newVal);
-      });
-  table.add(textureParametersTable, 'type');
 
-  let feets = gui.addFolder("Feets");
+  let menuData = {
+    partID: "table",
+    partName: "Piano Tavolo",
+    textures: [{
+      typeID: "wood",
+      typeSelect: "Wood",
+      colors: [
+        {
+          id: "bambo",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+        {
+          id: "acero",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+        {
+          id: "pino",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+        {
+          id: "mogano",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+        {
+          id: "ebano",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+      ]
+    },
+    {
+      typeID: "metal",
+      typeSelect: "Metallo",
+      colors: [
+        {
+          id: "oro",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+        {
+          id: "ferro",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+        {
+          id: "argento",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+      ]
+    },
+    {
+      typeID: "plastic",
+      typeSelect: "Plastica",
+      colors: [
+        {
+          id: "rosso",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+        {
+          id: "bianco",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+        {
+          id: "verde",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+        {
+          id: "arancione",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+      ]
+    },
+    ]
+  }
+
+  let optionsContainer = document.getElementById("editorOptions");
+  let partContainer = buildMenuOptions(optionsContainer, menuData);
+  let control = new EditorPartController(partContainer, "table");
+
+}
+
+/**
+ * @param {String} name Texture color
+ * @param {String} part Object part name
+ */
+let updateTextureColor = function (name, part) {
+  console.log("need to update *" + part + "* color with *" + name + "*");
+}
+
+/**
+* @param {String} name Texture ID
+* @param {String} color Texture color ID
+* @param {String} part Object part name
+*/
+let loadTexture = function (name, color, part) {
+  console.log("need to update *" + part + "* texture with *" + name + "*" + " color *"+color+"*");
 }
 
 function init() {
   scene = new THREE.Scene();
   show_debug_tools = true;
   enable_shadows = true;
-//  createTools();
+  createTools();
   createRenderer();
 
   createCamera(new THREE.Vector3(10, 10, 20));

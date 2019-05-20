@@ -1,17 +1,11 @@
 
-let updateTexture = function (name, part) {
-    console.log("need to update *" + part + "* texture with *" + name + "*");
-}
-
 let iconSelectHandler = function (controller, e) {
     let textureID = this.getAttribute("data-icon-id");
     if (controller.currentTextureSelected == textureID) {
         return;
     }
     controller.clearTextureSelection();
-    controller.currentTextureSelected = textureID;
-    this.classList += " selected";
-    updateTexture(textureID, controller.name);
+    controller.selectTexture(textureID, true);
 }
 
 let textureTypeSelectHandler = function (controller, e) {
@@ -21,7 +15,6 @@ let textureTypeSelectHandler = function (controller, e) {
     }
     controller.hideTexturesAvaiable();
     controller.showTextureTypes(selectedType);
-    controller.currentTextureTypeSelected = selectedType;
 }
 
 class EditorPartController {
@@ -43,8 +36,19 @@ class EditorPartController {
         });
 
         this.selectTextureMenu.addEventListener("change", textureTypeSelectHandler.bind(this.selectTextureMenu, that), false);
-        this.currentTextureTypeSelected = "wood";
-        this.currentTextureSelected = "ebano";
+        this.showTextureTypes("wood");
+    }
+
+    selectTexture(textureID, updateActiveColor){
+        this.textures.forEach(textureWrapper => {
+            if (textureWrapper.getAttribute("data-icon-id") == textureID) {
+                textureWrapper.classList += " selected";
+            }
+        });
+        this.currentTextureSelected = textureID;
+        if(updateActiveColor){
+            updateTextureColor(textureID, this.name);
+        }
     }
 
     clearTextureSelection() {
@@ -53,18 +57,26 @@ class EditorPartController {
         });
     }
 
+    showTextureTypes(typeName) {
+        let that = this;
+        this.clearTextureSelection();
+        let colorID = "";
+        this.texturesTypes.forEach(textureTypeWrapper => {
+            if (textureTypeWrapper.getAttribute("data-texture-type") == typeName) {
+                textureTypeWrapper.classList.remove("hide");
+                colorID = textureTypeWrapper.querySelectorAll(".texture-icon-wrapper")[0].getAttribute("data-icon-id");
+                that.selectTexture(colorID, false);
+                return;
+            }
+        });
+        this.currentTextureTypeSelected = typeName;
+        loadTexture(typeName, colorID, this.name);
+    }
+
     hideTexturesAvaiable() {
         this.texturesTypes.forEach(textureTypeWrapper => {
             if (!textureTypeWrapper.classList.contains("hide")) {
                 textureTypeWrapper.classList += " hide";
-            }
-        });
-    }
-    showTextureTypes(typeName) {
-        this.texturesTypes.forEach(textureTypeWrapper => {
-            if (textureTypeWrapper.getAttribute("data-texture-type") == typeName) {
-                textureTypeWrapper.classList.remove("hide");
-                return;
             }
         });
     }
@@ -111,11 +123,8 @@ function buildMenuOptions(container, data) {
         });
         textureTypes.appendChild(typeWrapper);
     });
-    console.log(container);
-    let func = function (container, objectPartEditor) {
-        console.log({ container, objectPartEditor });
-        container.appendChild(objectPartEditor);
-        
-    }
-    setTimeout(func.bind(null, container, objectPartEditor), 3000);
+    let insertingHTML = parser.parseFromString(xmlToString(objectPartEditor), "text/html");
+    let partContainer = insertingHTML.documentElement.children[1].firstChild;
+    container.appendChild(partContainer);
+    return partContainer;
 }

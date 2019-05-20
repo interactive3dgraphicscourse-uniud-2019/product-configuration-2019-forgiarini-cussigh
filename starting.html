@@ -19,120 +19,46 @@
     <script src="scripts/globalVariables.js"></script>
     <script src="scripts/EditorPartController.js"></script>
     <script src="scripts/main.js"></script>
-    <script type="text/x-tmpl" id="tmpl-insert-part-wrapper">
-                <div class="part" data-part="{%=part.name_id%}">
-                    <div class="part-name">{%=part.name%}</div>
-                    <div class="avaiable-materials">
-                        <p>Materiale</p>
-                        <select class="select-texture-material"></select>
-                    </div>
-                    <div class="available-colors">
-                        <p>Colore</p>
-                    </div>
-                </div>
-                </script>
-    
-    <script type="text/x-tmpl" id="tmpl-insert-texture-type-wrapper">
-                <div class="available-textures hide" data-texture-type="{%=texture.type%}"></div>
-                </script>
-    
-    <script type="text/x-tmpl" id="tmpl-insert-texture-icon-wrapper">
-                <div class="texture-icon-wrapper" data-icon-id="{%=texture_info.id%}">
-                    <img class="texture-icon" src="{%=texture_info.url%}" alt="{%=texture_info.id%} icon" />
-                </div>
-                </script>
-    
-    <script type="text/x-tmpl" id="tmpl-option-texture-type">
-                <option value="{%=texture.type_name%}">{%=texture.type%}</option>
-                </script>
 </head>
 
 <body onload="init()">
-    <div id="editorOptions" class="options">
-    
-    </div>
-    <script>
-        
-            let optionsContainer = document.getElementById("editorOptions");
-            //optionsContainer.querySelectorAll(".part")[0];
-            //let tableEditorContainer = 
-
-            let menuData = {
-                partID: "table",
-                partName: "Piano Tavolo",
-                textures: [{
-                    typeID: "wood",
-                    typeSelect: "Wood",
-                    colors: [
-                        {
-                            id: "bambo",
-                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-                        },
-                        {
-                            id: "acero",
-                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-                        },
-                        {
-                            id: "pino",
-                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-                        },
-                        {
-                            id: "mogano",
-                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-                        },
-                        {
-                            id: "ebano",
-                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-                        },
-                    ]
-                },
-                {
-                    typeID: "metal",
-                    typeSelect: "Metallo",
-                    colors: [
-                        {
-                            id: "oro",
-                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-                        },
-                        {
-                            id: "ferro",
-                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-                        },
-                        {
-                            id: "argento",
-                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-                        },
-                    ]
-                },
-                {
-                    typeID: "plastic",
-                    typeSelect: "Plastica",
-                    colors: [
-                        {
-                            id: "rosso",
-                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-                        },
-                        {
-                            id: "bianco",
-                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-                        },
-                        {
-                            id: "verde",
-                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-                        },
-                        {
-                            id: "arancione",
-                            iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-                        },
-                    ]
-                },
-                ]
-            }
-
-            buildMenuOptions(optionsContainer, menuData);
-        </script>
     <!-- templates used to create options menu -->
-
+    <div class="options-container">
+        <div id="editorOptions" class="options">
+        </div>
+    </div>
+    
+    <div style="display: none">
+      <script type="text/x-tmpl" id="tmpl-insert-part-wrapper">
+        <div class="part" data-part="{%=part.name_id%}">
+          <div class="part-name">{%=part.name%}</div>
+          <div class="avaiable-materials">
+              <p>Materiale</p>
+              <select class="select-texture-material"></select>
+          </div>
+          <div class="available-colors">
+              <p>Colore</p>
+          </div>
+          <div class="slidecontainer">
+              <input type="range" min="1" max="100" value="50" class="slider" id="myRange"/>
+          </div>
+      </div>
+      </script>
+    
+      <script type="text/x-tmpl" id="tmpl-insert-texture-type-wrapper">
+        <div class="available-textures hide" data-texture-type="{%=texture.type_name%}"></div>
+      </script>
+    
+      <script type="text/x-tmpl" id="tmpl-insert-texture-icon-wrapper">
+        <div class="texture-icon-wrapper" data-icon-id="{%=texture_info.id%}">
+          <img class="texture-icon" src="{%=texture_info.url%}" alt="{%=texture_info.id%} icon" />
+        </div>
+      </script>
+    
+      <script type="text/x-tmpl" id="tmpl-option-texture-type">
+        <option value="{%=texture.type_name%}">{%=texture.type%}</option>
+      </script>
+    </div>    
 </body>
 
 </html>

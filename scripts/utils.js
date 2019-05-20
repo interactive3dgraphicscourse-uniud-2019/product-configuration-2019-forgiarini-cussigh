@@ -128,3 +128,16 @@ function isOBJMovingTo(currPosition, direction, destPosition) {
 
     return (Math.abs(direction.angleTo(calculatedDirection)) < MAX_DIFFERENCE_ANGLE);
 }
+
+function xmlToString(xmlData) {
+    let xmlString;
+    //IE
+    if (window.ActiveXObject) {
+        xmlString = xmlData.xml;
+    }
+    // code for Mozilla, Firefox, Opera, etc.
+    else {
+        xmlString = (new XMLSerializer()).serializeToString(xmlData);
+    }
+    return xmlString;
+}
