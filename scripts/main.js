@@ -1,5 +1,52 @@
 let controls, stats;
 
+var textureParameters = {
+  material: "plastic",
+  color: "_1",
+  repeatS: 1.0,
+  repeatT: 1.0,
+  normalScale: 0.0,
+}
+
+var path;
+var normalMap;
+var diffuseMap;
+var specularMap;
+var roughnessMap;
+
+var uniforms = {
+  specularMap: { type: "t", value: specularMap },
+  diffuseMap: { type: "t", value: diffuseMap },
+  roughnessMap: { type: "t", value: roughnessMap },
+  pointLightPosition1: { type: "v3", value: new THREE.Vector3() },
+  pointLightPosition2: { type: "v3", value: new THREE.Vector3() },
+  normalMap: { type: "t", value: normalMap },
+  normalScale: { type: "v2", value: new THREE.Vector2(1, 1) },
+  clight1: { type: "v3", value: new THREE.Vector3() },
+  clight2: { type: "v3", value: new THREE.Vector3() },
+  textureRepeat: { type: "v2", value: new THREE.Vector2(1, 1) }
+};
+
+let vs;
+let fs;
+
+var ourMaterial;
+
+var loader = new THREE.OBJLoader2();
+loader.useIndices = true;
+
+function loadTexture(file) {
+  var texture = new THREE.TextureLoader().load(file, function (texture) {
+
+    texture.minFilter = THREE.LinearMipMapLinearFilter;
+    texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.offset.set(0, 0);
+    texture.needsUpdate = true;
+    renderWorld();
+  })
+  return texture;
+}
 /**
  * Creates an istance of THREE.OrbitControls used to move the camera.
  */
@@ -31,9 +78,9 @@ function createRenderer() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0xf0f0f0);
   renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.gammaInput = true;
-  renderer.gammaOutput = true;
-  renderer.shadowMap.enabled = true;
+  //renderer.gammaInput = true;
+  //renderer.gammaOutput = true;
+  //renderer.shadowMap.enabled = true;
   document.body.appendChild(renderer.domElement);
 }
 
@@ -59,15 +106,16 @@ function createCamera(position, lookAt) {
 }
 
 function createScene() {
-  var geometry = new THREE.BoxGeometry(1, 1, 1);
-  var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  var cube = new THREE.Mesh(geometry, material);
-  scene.add(cube);
+  loader.load("models/table2.obj", function (obj) {
+    geometry = obj.detail.loaderRootNode.children[0].geometry;
+    geometry.center();
+    mesh = new THREE.Mesh(geometry, ourMaterial);
+    mesh.scale.multiplyScalar(0.05);
+    THREE.BufferGeometryUtils.computeTangents(geometry);
+    scene.add(mesh);
+  });
+  createLights();
 }
-let textureParametersTable = {
-  material: "wood",
-  type: 1
-};
 
 function createTools() {
   // Creating a GUI with options.
@@ -76,50 +124,33 @@ function createTools() {
     partID: "table",
     partName: "Piano Tavolo",
     roughness: {
-      min: 0,
-      max: 100,
-      start: 100
+      min: 0.0,
+      max: 5.0,
+      step: 0.2,
+      start: 0
     },
     textures: [{
       typeID: "wood",
       typeSelect: "Wood",
       colors: [
         {
-          id: "bambo",
+          id: "_1",
           iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
         },
         {
-          id: "acero",
+          id: "_2",
           iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
         },
         {
-          id: "pino",
+          id: "_3",
           iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
         },
         {
-          id: "mogano",
+          id: "_4",
           iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
         },
         {
-          id: "ebano",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-        },
-      ]
-    },
-    {
-      typeID: "metal",
-      typeSelect: "Metallo",
-      colors: [
-        {
-          id: "oro",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-        },
-        {
-          id: "ferro",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
-        },
-        {
-          id: "argento",
+          id: "_5",
           iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
         },
       ]
@@ -129,19 +160,27 @@ function createTools() {
       typeSelect: "Plastica",
       colors: [
         {
-          id: "rosso",
+          id: "_1",
           iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
         },
         {
-          id: "bianco",
+          id: "_2",
           iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
         },
         {
-          id: "verde",
+          id: "_3",
           iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
         },
         {
-          id: "arancione",
+          id: "_4",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+        {
+          id: "_5",
+          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+        },
+        {
+          id: "_6",
           iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
         },
       ]
@@ -161,6 +200,9 @@ function createTools() {
  */
 let updateTextureColor = function (name, part) {
   console.log("need to update *" + part + "* color with *" + name + "*");
+  textureParameters.color = name;
+  diffuseMap = loadTexture(path + textureParameters.material + textureParameters.color + "_Diffuse.jpg");
+  ourMaterial.needsUpdate = true;
 }
 
 /**
@@ -168,12 +210,21 @@ let updateTextureColor = function (name, part) {
 * @param {String} color Texture color ID
 * @param {String} part Object part name
 */
-let loadTexture = function (name, color, part) {
+
+let updateTexture = function (name, color, part) {
   console.log("need to update *" + part + "* texture with *" + name + "*" + " color *" + color + "*");
+  textureParameters.material = name;
+  textureParameters.color = color;
+  path = "textures/tables/" + textureParameters.material + "/";
+  normalMap = loadTexture(path + textureParameters.material + "_Normal.jpg");
+  diffuseMap = loadTexture(path + textureParameters.material + textureParameters.color + "_Diffuse.jpg");
+  specularMap = loadTexture(path + textureParameters.material + "_Specular.jpg");
+  roughnessMap = loadTexture(path + textureParameters.material + "_Roughness.jpg");
 }
 
 let updateTextureRoughness = function (part, val) {
   console.log("need to update *" + part + "* roughness with *" + val + "*");
+  textureParameters.normalScale = val;
 }
 
 function init() {
@@ -197,12 +248,42 @@ function init() {
 
   // add listener for resize event of window to update renderer
   window.addEventListener("resize", resizeListener, false);
+
+  
+  vs = document.getElementById("vertex").textContent;
+  fs = document.getElementById("fragment").textContent;
+  ourMaterial = new THREE.ShaderMaterial({ uniforms: uniforms, vertexShader: vs, fragmentShader: fs });
+  ourMaterial.vertexTangents = true;
+  ourMaterial.needsUpdate = true;
+  
   createScene();
+
   updateWorld();
+}
+
+function updateUniforms() {
+
+  uniforms.clight1.value = new THREE.Vector3(
+    light1Parameters.red * light1Parameters.intensity,
+    light1Parameters.green * light1Parameters.intensity,
+    light1Parameters.blue * light1Parameters.intensity);
+
+  uniforms.clight2.value = new THREE.Vector3(
+    light2Parameters.red * light2Parameters.intensity,
+    light2Parameters.green * light2Parameters.intensity,
+    light2Parameters.blue * light2Parameters.intensity);
+
+  uniforms.textureRepeat.value = new THREE.Vector2(textureParameters.repeatS, textureParameters.repeatT);
+  uniforms.diffuseMap.value = diffuseMap;
+  uniforms.specularMap.value = specularMap;
+  uniforms.roughnessMap.value = roughnessMap;
+  uniforms.normalMap.value = normalMap;
+  uniforms.normalScale.value = new THREE.Vector2(textureParameters.normalScale, textureParameters.normalScale);
 }
 
 function updateWorld() {
   requestAnimationFrame(updateWorld);
+  updateUniforms();
   controls.update();
   if (show_debug_tools) {
     stats.update();

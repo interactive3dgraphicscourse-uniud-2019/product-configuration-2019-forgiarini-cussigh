@@ -76,7 +76,7 @@ class EditorPartController {
             }
         });
         this.currentTextureTypeSelected = typeName;
-        loadTexture(typeName, colorID, this.name);
+        updateTexture(typeName, colorID, this.name);
     }
 
     hideTexturesAvaiable() {
@@ -99,6 +99,7 @@ function buildMenuOptions(container, data) {
         minValSlider: data.roughness.min,
         maxValSlider: data.roughness.max,
         startValSlider: data.roughness.start,
+        stepSlider: data.roughness.step
     };
 
     let parser = new DOMParser();
