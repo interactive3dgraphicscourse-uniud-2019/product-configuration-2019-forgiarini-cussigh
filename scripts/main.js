@@ -135,22 +135,27 @@ function createTools() {
       colors: [
         {
           id: "_1",
+          alt: "bambo",
           iconURL: "textures\\tables\\wood\\wood_1_Diffuse.jpg",
         },
         {
           id: "_2",
+          alt: "acero",
           iconURL: "textures\\tables\\wood\\wood_2_Diffuse.jpg",
         },
         {
           id: "_3",
+          alt: "ebano",
           iconURL: "textures\\tables\\wood\\wood_3_Diffuse.jpg",
         },
         {
           id: "_4",
+          alt: "olmo",
           iconURL: "textures\\tables\\wood\\wood_4_Diffuse.jpg",
         },
         {
           id: "_5",
+          alt: "pino",
           iconURL: "textures\\tables\\wood\\wood_5_Diffuse.jpg",
         },
       ]

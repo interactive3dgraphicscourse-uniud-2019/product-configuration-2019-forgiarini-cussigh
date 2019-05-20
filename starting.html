@@ -156,33 +156,34 @@
     <!-- templates used to create options menu -->
     <script type="text/x-tmpl" id="tmpl-insert-part-wrapper">
         <div class="part" data-part="{%=part.name_id%}">
-          <div class="part-name">{%=part.name%}</div>
-          <div class="avaiable-materials">
-              <p>Materiale</p>
-              <select class="select-texture-material"></select>
-          </div>
-          <div class="available-colors">
-              <p>Colore</p>
-          </div>
-          <div class="slidercontainer">
-              <input type="range" step="{%=part.stepSlider%}" min="{%=part.minValSlider%}" max="{%=part.maxValSlider%}" value="{%=part.startValSlider%}" class="slider"/>
-          </div>
-      </div>
-      </script>
-
+            <div class="part-name">{%=part.name%}</div>
+            <div class="avaiable-materials">
+                <p>Materiale</p>
+                <select class="select-texture-material"></select>
+            </div>
+            <div class="available-colors">
+                <p>Colore</p>
+            </div>
+            <div class="slidercontainer">
+                <input type="range" min="{%=part.minValSlider%}" max="{%=part.maxValSlider%}" value="{%=part.startValSlider%}" step="{%=part.stepSlider%}" class="slider" />
+            </div>
+        </div>
+    </script>
+    
     <script type="text/x-tmpl" id="tmpl-insert-texture-type-wrapper">
         <div class="available-textures hide" data-texture-type="{%=texture.type_name%}"></div>
-      </script>
-
+    </script>
+    
     <script type="text/x-tmpl" id="tmpl-insert-texture-icon-wrapper">
-        <div class="texture-icon-wrapper" data-icon-id="{%=texture_info.id%}">
-          <img class="texture-icon" src="{%=texture_info.url%}" alt="{%=texture_info.id%} icon" />
+        <div class="texture-icon-wrapper tooltip" data-icon-id="{%=texture_info.id%}">
+            <span class="tooltiptext">{%=texture_info.alt%}</span>
+            <img class="texture-icon" src="{%=texture_info.url%}" alt="{%=texture_info.alt%} icon" />
         </div>
-      </script>
-
+    </script>
+    
     <script type="text/x-tmpl" id="tmpl-option-texture-type">
         <option value="{%=texture.type_name%}">{%=texture.type%}</option>
-      </script>
+    </script>
   </div>
 </body>
 
