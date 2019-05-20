@@ -135,23 +135,23 @@ function createTools() {
       colors: [
         {
           id: "_1",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+          iconURL: "textures\\tables\\wood\\wood_1_Diffuse.jpg",
         },
         {
           id: "_2",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+          iconURL: "textures\\tables\\wood\\wood_2_Diffuse.jpg",
         },
         {
           id: "_3",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+          iconURL: "textures\\tables\\wood\\wood_3_Diffuse.jpg",
         },
         {
           id: "_4",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+          iconURL: "textures\\tables\\wood\\wood_4_Diffuse.jpg",
         },
         {
           id: "_5",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+          iconURL: "textures\\tables\\wood\\wood_5_Diffuse.jpg",
         },
       ]
     },
@@ -161,27 +161,33 @@ function createTools() {
       colors: [
         {
           id: "_1",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+          alt: "bianco",
+          iconURL: "textures\\tables\\plastic\\plastic_1_Diffuse.jpg",
         },
         {
           id: "_2",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+          alt: "rosso",
+          iconURL: "textures\\tables\\plastic\\plastic_2_Diffuse.jpg",
         },
         {
           id: "_3",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+          alt: "verde",
+          iconURL: "textures\\tables\\plastic\\plastic_3_Diffuse.jpg",
         },
         {
           id: "_4",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+          alt: "blu",
+          iconURL: "textures\\tables\\plastic\\plastic_4_Diffuse.jpg",
         },
         {
           id: "_5",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+          alt: "marrone",
+          iconURL: "textures\\tables\\plastic\\plastic_5_Diffuse.jpg",
         },
         {
           id: "_6",
-          iconURL: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png",
+          alt: "grigio",
+          iconURL: "textures\\tables\\plastic\\plastic_6_Diffuse.jpg",
         },
       ]
     },

@@ -13,3 +13,5 @@ In base alle funzionalità che volevamo fornire, abbiamo creato un prototipo del
 Dopo un iniziale tentativo di utilizzo della libreria [Dat Gui](https://github.com/dataarts/dat.gui), abbiamo deciso di creare da zero l'interfaccia poichè dat gui non forniva gli strumenti di necessitavamo.
 
 Finita la logica per l'interfaccia.
+
+Collegato lavoro fatto sugli shader con l'interfaccia e aggiornate le icone delle texture nel  menu
