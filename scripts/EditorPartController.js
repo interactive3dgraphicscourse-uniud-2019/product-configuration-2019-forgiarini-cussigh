@@ -17,6 +17,10 @@ let textureTypeSelectHandler = function (controller, e) {
     controller.showTextureTypes(selectedType);
 }
 
+let sliderHandler = function (controller, e) {
+    controller.updateSlider();
+}
+
 class EditorPartController {
     constructor(domEl, name, data) {
         let el = domEl;
@@ -28,6 +32,7 @@ class EditorPartController {
         this.selectTextureMenu = this.container.querySelectorAll(".select-texture-material")[0];
         this.textures = this.container.querySelectorAll(".texture-icon-wrapper");
         this.texturesTypes = this.container.querySelectorAll(".available-textures");
+        this.rangeInput = this.container.querySelectorAll(".slidercontainer input")[0];
 
         let that = this;
 
@@ -36,17 +41,18 @@ class EditorPartController {
         });
 
         this.selectTextureMenu.addEventListener("change", textureTypeSelectHandler.bind(this.selectTextureMenu, that), false);
+        this.rangeInput.addEventListener("input", sliderHandler.bind(this.rangeInput, that), false);
         this.showTextureTypes("wood");
     }
 
-    selectTexture(textureID, updateActiveColor){
+    selectTexture(textureID, updateActiveColor) {
         this.textures.forEach(textureWrapper => {
             if (textureWrapper.getAttribute("data-icon-id") == textureID) {
                 textureWrapper.classList += " selected";
             }
         });
         this.currentTextureSelected = textureID;
-        if(updateActiveColor){
+        if (updateActiveColor) {
             updateTextureColor(textureID, this.name);
         }
     }
@@ -80,13 +86,19 @@ class EditorPartController {
             }
         });
     }
+    updateSlider() {
+        updateTextureRoughness(this.name, this.rangeInput.value);
+    }
 }
 
 function buildMenuOptions(container, data) {
     tmpl.arg = "part";
     let tmpl_obj = {
         name_id: data.partID,
-        name: data.partName
+        name: data.partName,
+        minValSlider: data.roughness.min,
+        maxValSlider: data.roughness.max,
+        startValSlider: data.roughness.start,
     };
 
     let parser = new DOMParser();

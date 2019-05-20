@@ -75,6 +75,11 @@ function createTools() {
   let menuData = {
     partID: "table",
     partName: "Piano Tavolo",
+    roughness: {
+      min: 0,
+      max: 100,
+      start: 100
+    },
     textures: [{
       typeID: "wood",
       typeSelect: "Wood",
@@ -164,7 +169,11 @@ let updateTextureColor = function (name, part) {
 * @param {String} part Object part name
 */
 let loadTexture = function (name, color, part) {
-  console.log("need to update *" + part + "* texture with *" + name + "*" + " color *"+color+"*");
+  console.log("need to update *" + part + "* texture with *" + name + "*" + " color *" + color + "*");
+}
+
+let updateTextureRoughness = function (part, val) {
+  console.log("need to update *" + part + "* roughness with *" + val + "*");
 }
 
 function init() {
