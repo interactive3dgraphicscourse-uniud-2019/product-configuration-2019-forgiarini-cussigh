@@ -1,4 +1,4 @@
-let controls, stats, gui;
+let controls, stats;
 
 /**
  * Creates an istance of THREE.OrbitControls used to move the camera.
