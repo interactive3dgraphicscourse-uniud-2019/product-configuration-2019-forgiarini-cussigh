@@ -205,6 +205,7 @@ function createTools() {
  * @param {String} part Object part name
  */
 let updateTextureColor = function (name, part) {
+  path = "textures/tables/" + textureParameters.material + "/"; //changed
   console.log("need to update *" + part + "* color with *" + name + "*");
   textureParameters.color = name;
   diffuseMap = loadTexture(path + textureParameters.material + textureParameters.color + "_Diffuse.jpg");

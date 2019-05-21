@@ -136,7 +136,6 @@ function createCamera(position, lookAt) {
 function createScene() {
   loader.load("models/plane.obj", function (obj) {
     geometry = obj.detail.loaderRootNode.children[0].geometry;
-    geometry.center();
     mesh = new THREE.Mesh(geometry, ourMaterial1);
     mesh.scale.multiplyScalar(0.05);
     THREE.BufferGeometryUtils.computeTangents(geometry);
@@ -145,10 +144,8 @@ function createScene() {
 
   loader2.load("models/legs.obj", function (obj) {
     geometry2 = obj.detail.loaderRootNode.children[0].geometry;
-    geometry2.center();
     mesh2 = new THREE.Mesh(geometry2, ourMaterial2);
     mesh2.scale.multiplyScalar(0.05);
-    mesh2.position.set(10,10,10);
     THREE.BufferGeometryUtils.computeTangents(geometry2);
     scene.add(mesh2);
   });
@@ -160,7 +157,7 @@ function createTools() {
   // Creating a GUI with options.
 
   let menuData = {
-    partID: "table",
+    partID: "plane",
     partName: "Piano Tavolo",
     roughness: {
       min: 0.0,
@@ -233,10 +230,86 @@ function createTools() {
     ]
   }
 
+  let menuData2 = {
+    partID: "legs",
+    partName: "Gambe Tavolo",
+    roughness: {
+      min: 0.0,
+      max: 5.0,
+      step: 0.2,
+      start: 0
+    },
+    textures: [{
+      typeID: "wood",
+      typeSelect: "Wood",
+      colors: [
+        {
+          id: "_1",
+          iconURL: "textures\\tables\\wood\\wood_1_Diffuse.jpg",
+        },
+        {
+          id: "_2",
+          iconURL: "textures\\tables\\wood\\wood_2_Diffuse.jpg",
+        },
+        {
+          id: "_3",
+          iconURL: "textures\\tables\\wood\\wood_3_Diffuse.jpg",
+        },
+        {
+          id: "_4",
+          iconURL: "textures\\tables\\wood\\wood_4_Diffuse.jpg",
+        },
+        {
+          id: "_5",
+          iconURL: "textures\\tables\\wood\\wood_5_Diffuse.jpg",
+        },
+      ]
+    },
+    {
+      typeID: "plastic",
+      typeSelect: "Plastica",
+      colors: [
+        {
+          id: "_1",
+          alt: "bianco",
+          iconURL: "textures\\tables\\plastic\\plastic_1_Diffuse.jpg",
+        },
+        {
+          id: "_2",
+          alt: "rosso",
+          iconURL: "textures\\tables\\plastic\\plastic_2_Diffuse.jpg",
+        },
+        {
+          id: "_3",
+          alt: "verde",
+          iconURL: "textures\\tables\\plastic\\plastic_3_Diffuse.jpg",
+        },
+        {
+          id: "_4",
+          alt: "blu",
+          iconURL: "textures\\tables\\plastic\\plastic_4_Diffuse.jpg",
+        },
+        {
+          id: "_5",
+          alt: "marrone",
+          iconURL: "textures\\tables\\plastic\\plastic_5_Diffuse.jpg",
+        },
+        {
+          id: "_6",
+          alt: "grigio",
+          iconURL: "textures\\tables\\plastic\\plastic_6_Diffuse.jpg",
+        },
+      ]
+    },
+    ]
+  }
   let optionsContainer = document.getElementById("editorOptions");
   let partContainer = buildMenuOptions(optionsContainer, menuData);
-  let control = new EditorPartController(partContainer, "table");
+  let control = new EditorPartController(partContainer, "plane");
 
+  let optionsContainer2 = document.getElementById("editorOptions");
+  let partContainer2 = buildMenuOptions(optionsContainer2, menuData2);
+  let control2 = new EditorPartController(partContainer2, "legs");
 }
 
 /**
@@ -244,10 +317,22 @@ function createTools() {
  * @param {String} part Object part name
  */
 let updateTextureColor = function (name, part) {
+
+
+  if (part=="legs"){
   console.log("need to update *" + part + "* color with *" + name + "*");
-  textureParameters.color = name;
-  diffuseMap = loadTexture(path + textureParameters.material + textureParameters.color + "_Diffuse.jpg");
-  ourMaterial1.needsUpdate = true;
+  textureParameters2.color = name;
+  path = "textures/tables/" + textureParameters2.material + "/";
+  diffuseMap2 = loadTexture(path + textureParameters2.material + textureParameters2.color + "_Diffuse.jpg");
+  ourMaterial2.needsUpdate = true;
+  }
+  else {
+    console.log("need to update *" + part + "* color with *" + name + "*");
+    textureParameters.color = name;
+    path = "textures/tables/" + textureParameters.material + "/";
+    diffuseMap = loadTexture(path + textureParameters.material + textureParameters.color + "_Diffuse.jpg");
+    ourMaterial1.needsUpdate = true;
+  }
 }
 
 /**
@@ -257,19 +342,40 @@ let updateTextureColor = function (name, part) {
 */
 
 let updateTexture = function (name, color, part) {
+
+  if (part=="legs"){
   console.log("need to update *" + part + "* texture with *" + name + "*" + " color *" + color + "*");
-  textureParameters.material = name;
-  textureParameters.color = color;
-  path = "textures/tables/" + textureParameters.material + "/";
-  normalMap = loadTexture(path + textureParameters.material + "_Normal.jpg");
-  diffuseMap = loadTexture(path + textureParameters.material + textureParameters.color + "_Diffuse.jpg");
-  specularMap = loadTexture(path + textureParameters.material + "_Specular.jpg");
-  roughnessMap = loadTexture(path + textureParameters.material + "_Roughness.jpg");
+  textureParameters2.material = name;
+  textureParameters2.color = color;
+  path = "textures/tables/" + textureParameters2.material + "/";
+  normalMap2 = loadTexture(path + textureParameters2.material + "_Normal.jpg");
+  diffuseMap2 = loadTexture(path + textureParameters2.material + textureParameters2.color + "_Diffuse.jpg");
+  specularMap2 = loadTexture(path + textureParameters2.material + "_Specular.jpg");
+  roughnessMap2 = loadTexture(path + textureParameters2.material + "_Roughness.jpg");
+  }
+
+  else{
+    console.log("need to update *" + part + "* texture with *" + name + "*" + " color *" + color + "*");
+    textureParameters.material = name;
+    textureParameters.color = color;
+    path = "textures/tables/" + textureParameters.material + "/";
+    normalMap = loadTexture(path + textureParameters.material + "_Normal.jpg");
+    diffuseMap = loadTexture(path + textureParameters.material + textureParameters.color + "_Diffuse.jpg");
+    specularMap = loadTexture(path + textureParameters.material + "_Specular.jpg");
+    roughnessMap = loadTexture(path + textureParameters.material + "_Roughness.jpg");
+    }
 }
 
 let updateTextureRoughness = function (part, val) {
-  console.log("need to update *" + part + "* roughness with *" + val + "*");
-  textureParameters.normalScale = val;
+
+  if (part=="legs"){
+    console.log("need to update *" + part + "* roughness with *" + val + "*");
+    textureParameters2.normalScale = val;
+  }
+  else {
+    console.log("need to update *" + part + "* roughness with *" + val + "*");
+    textureParameters.normalScale = val;
+  }
 }
 
 function init() {
@@ -338,12 +444,12 @@ function updateUniforms() {
     light2Parameters.green * light2Parameters.intensity,
     light2Parameters.blue * light2Parameters.intensity);
 
-  uniforms2.textureRepeat.value = new THREE.Vector2(textureParameters.repeatS, textureParameters.repeatT);
+  uniforms2.textureRepeat.value = new THREE.Vector2(textureParameters2.repeatS, textureParameters2.repeatT);
   uniforms2.diffuseMap.value = diffuseMap2;
   uniforms2.specularMap.value = specularMap2;
   uniforms2.roughnessMap.value = roughnessMap2;
   uniforms2.normalMap.value = normalMap2;
-  uniforms2.normalScale.value = new THREE.Vector2(textureParameters.normalScale, textureParameters.normalScale);
+  uniforms2.normalScale.value = new THREE.Vector2(textureParameters2.normalScale, textureParameters2.normalScale);
 }
 
 function updateWorld() {
