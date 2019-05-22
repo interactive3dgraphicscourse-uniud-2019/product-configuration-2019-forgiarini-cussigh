@@ -2,7 +2,8 @@
 	width: 100%;
 	position: fixed;
 	margin: 0px 0px 0px 0px;
-	height: auto;
+	z-index: 0;
+	height: 0;
 }
 
 #editorOptions {
@@ -67,4 +68,19 @@
 
 .tooltip:hover .tooltiptext {
 	visibility: visible;
+}
+
+.parts-container.hide {
+	display: none;
+}
+
+.close-button {
+	width: 20px;
+	height: 20px;
+	background-color: green;
+	float: right;
+}
+
+.top-menu {
+	width: 100%;
 }

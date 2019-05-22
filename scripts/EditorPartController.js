@@ -86,7 +86,7 @@ class EditorPartController {
             }
         });
     }
-    
+
     updateSlider() {
         updateTextureRoughness(this.name, this.rangeInput.value);
     }
@@ -143,4 +143,41 @@ function buildMenuOptions(container, data) {
     let partContainer = insertingHTML.documentElement.children[1].firstChild;
     container.appendChild(partContainer);
     return partContainer;
+}
+
+let closeEditorHandler = function (controller, e) {
+    controller.updateVisibility();
+}
+
+class EditorController {
+    
+    constructor(domEL) {
+        let element = domEL;
+        this.domEL = element;
+        this.closeButton = this.domEL.querySelectorAll(".close-button")[0];
+        this.menuVisible = true;
+        let that = this;
+        this.closeButton.addEventListener("click", closeEditorHandler.bind(this.closeButton, that), false);
+        this.partsContainer = this.domEL.querySelectorAll(".parts-container")[0];
+    }
+
+    updateVisibility() {
+        if (this.menuVisible) {
+            this.hideEditor();
+            this.menuVisible = false;
+        } else {
+            this.showEditor();
+            this.menuVisible = true;
+        }
+    }
+    
+    showEditor() {
+        this.partsContainer.classList.remove("hide");
+    }
+    
+    hideEditor() {
+        if (!this.partsContainer.classList.contains("hide")) {
+            this.partsContainer.classList += " hide";
+        }
+    }
 }

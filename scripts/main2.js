@@ -171,22 +171,27 @@ function createTools() {
       colors: [
         {
           id: "_1",
+          alt: "ebano",
           iconURL: "textures\\tables\\wood\\wood_1_Diffuse.jpg",
         },
         {
           id: "_2",
+          alt: "pioppo",
           iconURL: "textures\\tables\\wood\\wood_2_Diffuse.jpg",
         },
         {
           id: "_3",
+          alt: "olmo",
           iconURL: "textures\\tables\\wood\\wood_3_Diffuse.jpg",
         },
         {
           id: "_4",
+          alt: "acero",
           iconURL: "textures\\tables\\wood\\wood_4_Diffuse.jpg",
         },
         {
           id: "_5",
+          alt: "mogano",
           iconURL: "textures\\tables\\wood\\wood_5_Diffuse.jpg",
         },
       ]
@@ -245,22 +250,27 @@ function createTools() {
       colors: [
         {
           id: "_1",
+          alt: "ebano",
           iconURL: "textures\\tables\\wood\\wood_1_Diffuse.jpg",
         },
         {
           id: "_2",
+          alt: "pioppo",
           iconURL: "textures\\tables\\wood\\wood_2_Diffuse.jpg",
         },
         {
           id: "_3",
+          alt: "olmo",
           iconURL: "textures\\tables\\wood\\wood_3_Diffuse.jpg",
         },
         {
           id: "_4",
+          alt: "acero",
           iconURL: "textures\\tables\\wood\\wood_4_Diffuse.jpg",
         },
         {
           id: "_5",
+          alt: "mogano",
           iconURL: "textures\\tables\\wood\\wood_5_Diffuse.jpg",
         },
       ]
@@ -304,12 +314,15 @@ function createTools() {
     ]
   }
   let optionsContainer = document.getElementById("editorOptions");
-  let partContainer = buildMenuOptions(optionsContainer, menuData);
-  let control = new EditorPartController(partContainer, "plane");
+  let partsWrapper = optionsContainer.querySelectorAll(".parts-container")[0];
 
-  let optionsContainer2 = document.getElementById("editorOptions");
-  let partContainer2 = buildMenuOptions(optionsContainer2, menuData2);
-  let control2 = new EditorPartController(partContainer2, "legs");
+  let partContainer = buildMenuOptions(partsWrapper, menuData);
+  let partContainer2 = buildMenuOptions(partsWrapper, menuData2);
+
+  let controllers = [];
+  controllers.push(new EditorController(optionsContainer));
+  controllers.push(new EditorPartController(partContainer, "table"));
+  controllers.push(new EditorPartController(partContainer2, "legs"));
 }
 
 /**
