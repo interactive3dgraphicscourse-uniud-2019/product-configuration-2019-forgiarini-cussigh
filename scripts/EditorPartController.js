@@ -22,7 +22,7 @@ let sliderHandler = function (controller, e) {
 }
 
 class EditorPartController {
-    constructor(domEl, name, data) {
+    constructor(domEl, name) {
         let el = domEl;
         let partName = name;
         this.container = el;
@@ -86,6 +86,7 @@ class EditorPartController {
             }
         });
     }
+    
     updateSlider() {
         updateTextureRoughness(this.name, this.rangeInput.value);
     }
