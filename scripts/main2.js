@@ -379,6 +379,7 @@ let updateTextureRoughness = function (part, val) {
 }
 
 function init() {
+  console.log("merging problmes");
   scene = new THREE.Scene();
   show_debug_tools = true;
   enable_shadows = true;
