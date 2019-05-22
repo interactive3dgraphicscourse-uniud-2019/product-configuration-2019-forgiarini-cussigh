@@ -32,8 +32,7 @@ let fs;
 
 var ourMaterial;
 
-var loader = new THREE.OBJLoader2();
-loader.useIndices = true;
+var loader;
 
 function loadTexture(file) {
   var texture = new THREE.TextureLoader().load(file, function (texture) {
@@ -107,7 +106,7 @@ function createCamera(position, lookAt) {
 
 function createScene() {
   loader.load("models/table2.obj", function (obj) {
-    geometry = obj.detail.loaderRootNode.children[0].geometry;
+    let geometry = obj.detail.loaderRootNode.children[0].geometry;
     geometry.center();
     mesh = new THREE.Mesh(geometry, ourMaterial);
     mesh.scale.multiplyScalar(0.05);
@@ -135,22 +134,27 @@ function createTools() {
       colors: [
         {
           id: "_1",
+          alt: "bambo",
           iconURL: "textures\\tables\\wood\\wood_1_Diffuse.jpg",
         },
         {
           id: "_2",
+          alt: "acero",
           iconURL: "textures\\tables\\wood\\wood_2_Diffuse.jpg",
         },
         {
           id: "_3",
+          alt: "ebano",
           iconURL: "textures\\tables\\wood\\wood_3_Diffuse.jpg",
         },
         {
           id: "_4",
+          alt: "olmo",
           iconURL: "textures\\tables\\wood\\wood_4_Diffuse.jpg",
         },
         {
           id: "_5",
+          alt: "pino",
           iconURL: "textures\\tables\\wood\\wood_5_Diffuse.jpg",
         },
       ]
@@ -233,6 +237,28 @@ let updateTextureRoughness = function (part, val) {
   textureParameters.normalScale = val;
 }
 
+function createLoader() {
+  var manager = new THREE.LoadingManager();
+  manager.onStart = function (url, itemsLoaded, itemsTotal) {
+    console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+  };
+
+  manager.onLoad = function () {
+    console.log('Loading complete!');
+  };
+
+  manager.onProgress = function (url, itemsLoaded, itemsTotal) {
+    console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+  };
+
+  manager.onError = function (url) {
+    console.log('There was an error loading ' + url);
+  };
+
+  loader = new THREE.OBJLoader2(manager);
+  loader.useIndices = true;
+}
+
 function init() {
   scene = new THREE.Scene();
   show_debug_tools = true;
@@ -255,13 +281,14 @@ function init() {
   // add listener for resize event of window to update renderer
   window.addEventListener("resize", resizeListener, false);
 
-  
   vs = document.getElementById("vertex").textContent;
   fs = document.getElementById("fragment").textContent;
   ourMaterial = new THREE.ShaderMaterial({ uniforms: uniforms, vertexShader: vs, fragmentShader: fs });
   ourMaterial.vertexTangents = true;
   ourMaterial.needsUpdate = true;
   
+  createLoader();
+
   createScene();
 
   updateWorld();

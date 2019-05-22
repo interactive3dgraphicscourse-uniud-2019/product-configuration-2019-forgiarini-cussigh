@@ -22,7 +22,7 @@ let sliderHandler = function (controller, e) {
 }
 
 class EditorPartController {
-    constructor(domEl, name, data) {
+    constructor(domEl, name) {
         let el = domEl;
         let partName = name;
         this.container = el;
@@ -86,6 +86,7 @@ class EditorPartController {
             }
         });
     }
+    
     updateSlider() {
         updateTextureRoughness(this.name, this.rangeInput.value);
     }
@@ -125,9 +126,11 @@ function buildMenuOptions(container, data) {
         item.colors.forEach(texture => {
             let id = texture.id;
             let iconUrl = texture.iconURL;
+            let alt = texture.alt;
             let tmpl_obj = {
                 id: id,
-                url: iconUrl
+                url: iconUrl,
+                alt: alt
             };
 
             let textureWrapperEL = parser.parseFromString(tmpl("tmpl-insert-texture-icon-wrapper", tmpl_obj), "text/xml");
