@@ -14,4 +14,8 @@ Dopo un iniziale tentativo di utilizzo della libreria [Dat Gui](https://github.c
 
 Finita la logica per l'interfaccia.
 
-Collegato lavoro fatto sugli shader con l'interfaccia e aggiornate le icone delle texture nel  menu
+Collegato lavoro fatto sugli shader con l'interfaccia e aggiornate le icone delle texture nel menu.
+
+22.05.2019
+=============
+Separato il tavolo in due parti, aggiunto un pulsante per nascondere il menu. Ora &egrave; possibile modificare la texture e il colore di ciascuna parte del tavolo.
