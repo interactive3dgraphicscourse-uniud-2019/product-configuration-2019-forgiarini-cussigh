@@ -141,3 +141,16 @@ function xmlToString(xmlData) {
     }
     return xmlString;
 }
+
+function loadTexture(file) {
+    var texture = new THREE.TextureLoader().load(file, function (texture) {
+
+        texture.minFilter = THREE.LinearMipMapLinearFilter;
+        texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+        texture.offset.set(0, 0);
+        texture.needsUpdate = true;
+        renderWorld();
+    })
+    return texture;
+}
