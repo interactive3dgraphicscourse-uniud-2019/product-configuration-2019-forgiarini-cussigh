@@ -65,212 +65,124 @@ function createScene() {
   let fs = document.getElementById("fragment").textContent;
 
   sceneObjectsControllers = [];
-  sceneObjectsControllers.push(new ObjPartController(vs, fs, "plane", [light1Parameters, light2Parameters]));
-  sceneObjectsControllers.push(new ObjPartController(vs, fs, "legs", [light1Parameters, light2Parameters]));
+
+  sceneObjectsControllers.push(new ObjPartController({
+    vertexShader: vs,
+    fragmentShader: fs,
+    modelName: "plane",
+    partID: "2345",
+    partDescription: "Piano Tavolo",
+    lights: [light1Parameters, light2Parameters],
+    textureData: {
+      id: "wood", 
+      color: "_2"
+    }
+  }));
+
+  sceneObjectsControllers.push(new ObjPartController({
+    vertexShader: vs,
+    fragmentShader: fs,
+    modelName: "legs",
+    partID: "1234",
+    partDescription: "Gambe Tavolo",
+    lights: [light1Parameters, light2Parameters],
+    textureData: {
+      id: "plastic", 
+      color: "_4"
+    }
+  }));
 }
 
 function createTools() {
   // Creating a GUI with options.
-
-  let menuData = {
-    partID: "plane",
-    partName: "Piano Tavolo",
-    roughness: {
-      min: 0.0,
-      max: 5.0,
-      step: 0.2,
-      start: 0
-    },
-    textures: [{
-      typeID: "wood",
-      typeSelect: "Wood",
-      colors: [
-        {
-          id: "_1",
-          alt: "ebano",
-          iconURL: "textures\\tables\\wood\\wood_1_Diffuse.jpg",
-        },
-        {
-          id: "_2",
-          alt: "pioppo",
-          iconURL: "textures\\tables\\wood\\wood_2_Diffuse.jpg",
-        },
-        {
-          id: "_3",
-          alt: "olmo",
-          iconURL: "textures\\tables\\wood\\wood_3_Diffuse.jpg",
-        },
-        {
-          id: "_4",
-          alt: "acero",
-          iconURL: "textures\\tables\\wood\\wood_4_Diffuse.jpg",
-        },
-        {
-          id: "_5",
-          alt: "mogano",
-          iconURL: "textures\\tables\\wood\\wood_5_Diffuse.jpg",
-        },
-      ]
-    },
-    {
-      typeID: "plastic",
-      typeSelect: "Plastica",
-      colors: [
-        {
-          id: "_1",
-          alt: "bianco",
-          iconURL: "textures\\tables\\plastic\\plastic_1_Diffuse.jpg",
-        },
-        {
-          id: "_2",
-          alt: "rosso",
-          iconURL: "textures\\tables\\plastic\\plastic_2_Diffuse.jpg",
-        },
-        {
-          id: "_3",
-          alt: "verde",
-          iconURL: "textures\\tables\\plastic\\plastic_3_Diffuse.jpg",
-        },
-        {
-          id: "_4",
-          alt: "blu",
-          iconURL: "textures\\tables\\plastic\\plastic_4_Diffuse.jpg",
-        },
-        {
-          id: "_5",
-          alt: "marrone",
-          iconURL: "textures\\tables\\plastic\\plastic_5_Diffuse.jpg",
-        },
-        {
-          id: "_6",
-          alt: "grigio",
-          iconURL: "textures\\tables\\plastic\\plastic_6_Diffuse.jpg",
-        },
-      ]
-    },
+  let avaiableTextures = [{
+    typeID: "wood",
+    typeSelect: "Wood",
+    colors: [
+      {
+        id: "_1",
+        alt: "ebano",
+        iconURL: "textures\\tables\\wood\\wood_1_Diffuse.jpg",
+      },
+      {
+        id: "_2",
+        alt: "pioppo",
+        iconURL: "textures\\tables\\wood\\wood_2_Diffuse.jpg",
+      },
+      {
+        id: "_3",
+        alt: "olmo",
+        iconURL: "textures\\tables\\wood\\wood_3_Diffuse.jpg",
+      },
+      {
+        id: "_4",
+        alt: "acero",
+        iconURL: "textures\\tables\\wood\\wood_4_Diffuse.jpg",
+      },
+      {
+        id: "_5",
+        alt: "mogano",
+        iconURL: "textures\\tables\\wood\\wood_5_Diffuse.jpg",
+      },
     ]
-  }
-
-  let menuData2 = {
-    partID: "legs",
-    partName: "Gambe Tavolo",
-    roughness: {
-      min: 0.0,
-      max: 5.0,
-      step: 0.2,
-      start: 0
-    },
-    textures: [{
-      typeID: "wood",
-      typeSelect: "Wood",
-      colors: [
-        {
-          id: "_1",
-          alt: "ebano",
-          iconURL: "textures\\tables\\wood\\wood_1_Diffuse.jpg",
-        },
-        {
-          id: "_2",
-          alt: "pioppo",
-          iconURL: "textures\\tables\\wood\\wood_2_Diffuse.jpg",
-        },
-        {
-          id: "_3",
-          alt: "olmo",
-          iconURL: "textures\\tables\\wood\\wood_3_Diffuse.jpg",
-        },
-        {
-          id: "_4",
-          alt: "acero",
-          iconURL: "textures\\tables\\wood\\wood_4_Diffuse.jpg",
-        },
-        {
-          id: "_5",
-          alt: "mogano",
-          iconURL: "textures\\tables\\wood\\wood_5_Diffuse.jpg",
-        },
-      ]
-    },
-    {
-      typeID: "plastic",
-      typeSelect: "Plastica",
-      colors: [
-        {
-          id: "_1",
-          alt: "bianco",
-          iconURL: "textures\\tables\\plastic\\plastic_1_Diffuse.jpg",
-        },
-        {
-          id: "_2",
-          alt: "rosso",
-          iconURL: "textures\\tables\\plastic\\plastic_2_Diffuse.jpg",
-        },
-        {
-          id: "_3",
-          alt: "verde",
-          iconURL: "textures\\tables\\plastic\\plastic_3_Diffuse.jpg",
-        },
-        {
-          id: "_4",
-          alt: "blu",
-          iconURL: "textures\\tables\\plastic\\plastic_4_Diffuse.jpg",
-        },
-        {
-          id: "_5",
-          alt: "marrone",
-          iconURL: "textures\\tables\\plastic\\plastic_5_Diffuse.jpg",
-        },
-        {
-          id: "_6",
-          alt: "grigio",
-          iconURL: "textures\\tables\\plastic\\plastic_6_Diffuse.jpg",
-        },
-      ]
-    },
+  },
+  {
+    typeID: "plastic",
+    typeSelect: "Plastica",
+    colors: [
+      {
+        id: "_1",
+        alt: "bianco",
+        iconURL: "textures\\tables\\plastic\\plastic_1_Diffuse.jpg",
+      },
+      {
+        id: "_2",
+        alt: "rosso",
+        iconURL: "textures\\tables\\plastic\\plastic_2_Diffuse.jpg",
+      },
+      {
+        id: "_3",
+        alt: "verde",
+        iconURL: "textures\\tables\\plastic\\plastic_3_Diffuse.jpg",
+      },
+      {
+        id: "_4",
+        alt: "blu",
+        iconURL: "textures\\tables\\plastic\\plastic_4_Diffuse.jpg",
+      },
+      {
+        id: "_5",
+        alt: "marrone",
+        iconURL: "textures\\tables\\plastic\\plastic_5_Diffuse.jpg",
+      },
+      {
+        id: "_6",
+        alt: "grigio",
+        iconURL: "textures\\tables\\plastic\\plastic_6_Diffuse.jpg",
+      },
     ]
-  }
+  },
+  ];
 
   let optionsContainer = document.getElementById("editorOptions");
   let partsWrapper = optionsContainer.querySelectorAll(".parts-container")[0];
-
-  let partContainer = buildMenuOptions(partsWrapper, menuData);
-  let partContainer2 = buildMenuOptions(partsWrapper, menuData2);
-
   let controllers = [];
   controllers.push(new EditorController(optionsContainer));
-  controllers.push(new EditorPartController(partContainer, "plane"));
-  controllers.push(new EditorPartController(partContainer2, "legs"));
-}
 
-/**
-* @param {String} name Texture ID
-* @param {String} color Texture color ID
-* @param {String} part Object part name
-*/
-let updateTexture = function (name, color, part) {
-  console.log("need to update *" + part + "* texture with *" + name + "*" + " color *" + color + "*");
   sceneObjectsControllers.forEach(objControl => {
-    if (objControl.name == part){
-      objControl.updateTexture(name, color);
+    let menuData = {
+      partID: objControl.name,
+      partName: objControl.description,
+      roughness: {
+        min: 0.0,
+        max: 5.0,
+        step: 0.2,
+        start: 0
+      },
+      textures: avaiableTextures
     }
-  });
-}
-
-let updateTextureRoughness = function (part, val) {
-  console.log("need to update *" + part + "* roughness with *" + val + "*");
-  sceneObjectsControllers.forEach(objControl => {
-    if (objControl.name == part){
-      objControl.updateTextureRoughness(val);
-    }
-  });
-}
-
-let updateTextureColor = function (name, part) {
-  console.log("need to update *" + part + "* color with *" + name + "*");
-  sceneObjectsControllers.forEach(objControl => {
-    if (objControl.name == part){
-      objControl.updateTextureColor(name);
-    }
+    let partMenuContainer = buildMenuOptions(partsWrapper, menuData);
+    controllers.push(new EditorPartController(partMenuContainer, objControl));
   });
 }
 

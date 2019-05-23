@@ -4,7 +4,7 @@ let iconSelectHandler = function (controller, e) {
     if (controller.currentTextureSelected == textureID) {
         return;
     }
-    controller.clearTextureSelection();
+    controller.clearTextureColorSelection();
     controller.selectTexture(textureID, true);
 }
 
@@ -14,7 +14,7 @@ let textureTypeSelectHandler = function (controller, e) {
         return;
     }
     controller.hideTexturesAvaiable();
-    controller.showTextureTypes(selectedType);
+    controller.showTextureTypes(selectedType, true);
 }
 
 let sliderHandler = function (controller, e) {
@@ -22,11 +22,11 @@ let sliderHandler = function (controller, e) {
 }
 
 class EditorPartController {
-    constructor(domEl, name) {
+    constructor(domEl, objControl) {
         let el = domEl;
-        let partName = name;
+        this.objController = objControl;
         this.container = el;
-        this.name = partName;
+        this.name = this.objController.name;
 
         this.selectTextureContainer = this.container.querySelectorAll(".avaiable-materials")[0];
         this.selectTextureMenu = this.container.querySelectorAll(".select-texture-material")[0];
@@ -42,7 +42,24 @@ class EditorPartController {
 
         this.selectTextureMenu.addEventListener("change", textureTypeSelectHandler.bind(this.selectTextureMenu, that), false);
         this.rangeInput.addEventListener("input", sliderHandler.bind(this.rangeInput, that), false);
-        this.showTextureTypes("wood");
+        if (this.objController.textureActiveID == null) {
+            this.showTextureTypes("wood", true);
+        } else {
+            let index = -1;
+            for (let i = 0, n = this.selectTextureMenu.children.length; i < n; i++) {
+                if (this.selectTextureMenu.children[i].value == this.objController.textureActiveID) {
+                    index = i;
+                    break;
+                }
+            }
+            this.selectTextureMenu.selectedIndex = index;
+            this.showTextureTypes(this.objController.textureActiveID, false);
+
+            this.clearTextureColorSelection();
+            this.selectTexture(this.objController.textureColorActive, false);
+        }
+        this.textureActiveID = null;
+        this.textureColorActive = null;
     }
 
     selectTexture(textureID, updateActiveColor) {
@@ -53,19 +70,19 @@ class EditorPartController {
         });
         this.currentTextureSelected = textureID;
         if (updateActiveColor) {
-            updateTextureColor(textureID, this.name);
+            this.objController.updateTextureColor(textureID);
         }
     }
 
-    clearTextureSelection() {
+    clearTextureColorSelection() {
         this.textures.forEach(textureWrapper => {
             textureWrapper.classList.remove("selected");
         });
     }
 
-    showTextureTypes(typeName) {
+    showTextureTypes(typeName, updateController) {
         let that = this;
-        this.clearTextureSelection();
+        this.clearTextureColorSelection();
         let colorID = "";
         this.texturesTypes.forEach(textureTypeWrapper => {
             if (textureTypeWrapper.getAttribute("data-texture-type") == typeName) {
@@ -76,7 +93,9 @@ class EditorPartController {
             }
         });
         this.currentTextureTypeSelected = typeName;
-        updateTexture(typeName, colorID, this.name);
+        if (updateController) {
+            this.objController.updateTexture(typeName, colorID);
+        }
     }
 
     hideTexturesAvaiable() {
@@ -88,7 +107,7 @@ class EditorPartController {
     }
 
     updateSlider() {
-        updateTextureRoughness(this.name, this.rangeInput.value);
+        this.objController.updateTextureRoughness(this.rangeInput.value);
     }
 }
 
@@ -150,7 +169,7 @@ let closeEditorHandler = function (controller, e) {
 }
 
 class EditorController {
-    
+
     constructor(domEL) {
         let element = domEL;
         this.domEL = element;
@@ -170,11 +189,11 @@ class EditorController {
             this.menuVisible = true;
         }
     }
-    
+
     showEditor() {
         this.partsContainer.classList.remove("hide");
     }
-    
+
     hideEditor() {
         if (!this.partsContainer.classList.contains("hide")) {
             this.partsContainer.classList += " hide";

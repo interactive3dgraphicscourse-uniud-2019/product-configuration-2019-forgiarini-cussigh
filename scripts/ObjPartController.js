@@ -1,8 +1,8 @@
 class ObjPartController {
-    constructor(vs, fs, objName, lights) {
+    constructor(data) {
         this.textureParameters = {
-            material: "plastic",
-            color: "_1",
+            material: null,
+            color: null,
             repeatS: 1.0,
             repeatT: 1.0,
             normalScale: 0.0,
@@ -14,9 +14,13 @@ class ObjPartController {
             specularMap: null,
             roughnessMap: null,
         }
+        
+        this.textureActiveID = null;
+        this.textureColorActive = null;
 
-        this.updateTexture("wood", "_1");
-        this.lights = lights;
+        this.updateTexture(data.textureData.id, data.textureData.color);
+
+        this.lights = data.lights;
 
         this.uniforms = {
             specularMap: { type: "t", value: this.maps.specularMap },
@@ -33,8 +37,8 @@ class ObjPartController {
 
         this.material = new THREE.ShaderMaterial({
             uniforms: this.uniforms,
-            vertexShader: vs,
-            fragmentShader: fs
+            vertexShader: data.vertexShader,
+            fragmentShader: data.fragmentShader
         });
 
         this.material.vertexTangents = true;
@@ -42,7 +46,7 @@ class ObjPartController {
         let loader = new THREE.OBJLoader2();
         loader.useIndices = true;
         let that = this;
-        loader.load("models/" + objName + ".obj", function (obj) {
+        loader.load("models/" + data.modelName + ".obj", function (obj) {
             let geometry = obj.detail.loaderRootNode.children[0].geometry;
             let mesh = new THREE.Mesh(geometry, that.material);
             mesh.scale.multiplyScalar(0.05);
@@ -50,10 +54,17 @@ class ObjPartController {
             scene.add(mesh);
         });
 
-        this.name = objName;
+        this.name = data.partID;
+        this.description = data.partDescription;
     }
-    
-    updateTexture(name, color){
+
+    updateTexture(name, color) {
+        if (this.textureActiveID == name) {
+            return;
+        }
+        this.textureActiveID = name;
+        this.textureColorActive = color;
+
         this.textureParameters.material = name;
         this.textureParameters.color = color;
         let path = "textures/tables/" + this.textureParameters.material + "/";
@@ -64,16 +75,21 @@ class ObjPartController {
     }
 
     updateTextureColor(color) {
+        if (this.textureColorActive == color) {
+            return;
+        }
+        this.textureColorActive = color;
+
         let path = "textures/tables/" + this.textureParameters.material + "/";
         this.maps.diffuseMap = loadTexture(path + this.textureParameters.material + color + "_Diffuse.jpg");
         this.material.needsUpdate = true;
     }
-    
-    updateTextureRoughness(val){
+
+    updateTextureRoughness(val) {
         this.textureParameters.normalScale = val;
     }
-    
-    updateUniforms(){
+
+    updateUniforms() {
         this.uniforms.clight1.value = new THREE.Vector3(
             this.lights[0].red * this.lights[0].intensity,
             this.lights[0].green * this.lights[0].intensity,
