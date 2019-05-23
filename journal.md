@@ -19,3 +19,7 @@ Collegato lavoro fatto sugli shader con l'interfaccia e aggiornate le icone dell
 22.05.2019
 =============
 Separato il tavolo in due parti, aggiunto un pulsante per nascondere il menu. Ora &egrave; possibile modificare la texture e il colore di ciascuna parte del tavolo.
+
+23.05.2019
+=============
+Sistemati alcuni problemi di aggiornamento del menu al primo start.
