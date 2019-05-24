@@ -63,7 +63,8 @@ function createScene() {
 
   let vs = document.getElementById("vertex").textContent;
   let fs = document.getElementById("fragment").textContent;
-
+  let tc = new TextureController("./textures/tables/");
+  console.log(tc);
   sceneObjectsControllers = [];
 
   sceneObjectsControllers.push(new ObjPartController({
@@ -76,7 +77,8 @@ function createScene() {
     textureData: {
       id: "wood", 
       color: "_2"
-    }
+    },
+    textureController: tc
   }));
 
   sceneObjectsControllers.push(new ObjPartController({
@@ -89,7 +91,8 @@ function createScene() {
     textureData: {
       id: "plastic", 
       color: "_4"
-    }
+    },
+    textureController: tc
   }));
 }
 

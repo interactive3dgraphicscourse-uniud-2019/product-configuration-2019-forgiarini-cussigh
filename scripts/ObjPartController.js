@@ -17,6 +17,7 @@ class ObjPartController {
         
         this.textureActiveID = null;
         this.textureColorActive = null;
+        this.textureController = data.textureController;
 
         this.updateTexture(data.textureData.id, data.textureData.color);
 
@@ -67,11 +68,13 @@ class ObjPartController {
 
         this.textureParameters.material = name;
         this.textureParameters.color = color;
-        let path = "textures/tables/" + this.textureParameters.material + "/";
-        this.maps.normalMap = loadTexture(path + this.textureParameters.material + "_Normal.jpg");
-        this.maps.diffuseMap = loadTexture(path + this.textureParameters.material + this.textureParameters.color + "_Diffuse.jpg");
-        this.maps.specularMap = loadTexture(path + this.textureParameters.material + "_Specular.jpg");
-        this.maps.roughnessMap = loadTexture(path + this.textureParameters.material + "_Roughness.jpg");
+
+        let texture = this.textureController.getTexture(this.textureParameters.material, this.textureParameters.color);
+
+        this.maps.normalMap = texture.normalMap;
+        this.maps.diffuseMap = texture.diffuseMap;
+        this.maps.specularMap = texture.specularMap;
+        this.maps.roughnessMap = texture.roughnessMap;
     }
 
     updateTextureColor(color) {
@@ -80,8 +83,9 @@ class ObjPartController {
         }
         this.textureColorActive = color;
 
-        let path = "textures/tables/" + this.textureParameters.material + "/";
-        this.maps.diffuseMap = loadTexture(path + this.textureParameters.material + color + "_Diffuse.jpg");
+        let texture = this.textureController.getTexture(this.textureParameters.material, this.textureParameters.color);
+
+        this.maps.diffuseMap = texture.diffuseMap;
         this.material.needsUpdate = true;
     }
 
