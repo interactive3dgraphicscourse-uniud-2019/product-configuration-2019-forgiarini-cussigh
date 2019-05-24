@@ -170,14 +170,15 @@
             <div class="available-colors">
                 <p>Colore</p>
             </div>
-            <div class="slidercontainer">
-                <input type="range" min="{%=part.minValSlider%}" max="{%=part.maxValSlider%}" value="{%=part.startValSlider%}" step="{%=part.stepSlider%}" class="slider" />
-            </div>
         </div>
     </script>
     
     <script type="text/x-tmpl" id="tmpl-insert-texture-type-wrapper">
-        <div class="available-textures hide" data-texture-type="{%=texture.type_name%}"></div>
+        <div class="available-textures hide" data-texture-type="{%=texture.type_name%}">
+            <div class="slidercontainer">
+                  <input type="range" min="{%=texture.minValSlider%}" max="{%=texture.maxValSlider%}" value="{%=texture.startValSlider%}" step="{%=texture.stepSlider%}" class="slider" />
+              </div>
+        </div>
     </script>
     
     <script type="text/x-tmpl" id="tmpl-insert-texture-icon-wrapper">

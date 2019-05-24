@@ -101,6 +101,12 @@ function createTools() {
   let avaiableTextures = [{
     typeID: "wood",
     typeSelect: "Wood",
+    roughness: {
+      min: 0.0,
+      max: 10.0,
+      step: 1.0,
+      start: 0
+    },
     colors: [
       {
         id: "_1",
@@ -132,6 +138,12 @@ function createTools() {
   {
     typeID: "plastic",
     typeSelect: "Plastica",
+    roughness: {
+      min: 0.0,
+      max: 5.0,
+      step: 0.2,
+      start: 0
+    },
     colors: [
       {
         id: "_1",
@@ -176,12 +188,6 @@ function createTools() {
     let menuData = {
       partID: objControl.name,
       partName: objControl.description,
-      roughness: {
-        min: 0.0,
-        max: 5.0,
-        step: 0.2,
-        start: 0
-      },
       textures: avaiableTextures
     }
     let partMenuContainer = buildMenuOptions(partsWrapper, menuData);

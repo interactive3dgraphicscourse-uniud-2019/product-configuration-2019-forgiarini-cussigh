@@ -18,7 +18,7 @@ let textureTypeSelectHandler = function (controller, e) {
 }
 
 let sliderHandler = function (controller, e) {
-    controller.updateSlider();
+    controller.updateSlider(e.target.value);
 }
 
 class EditorPartController {
@@ -32,7 +32,7 @@ class EditorPartController {
         this.selectTextureMenu = this.container.querySelectorAll(".select-texture-material")[0];
         this.textures = this.container.querySelectorAll(".texture-icon-wrapper");
         this.texturesTypes = this.container.querySelectorAll(".available-textures");
-        this.rangeInput = this.container.querySelectorAll(".slidercontainer input")[0];
+        this.rangeInput = this.container.querySelectorAll(".slidercontainer input");
 
         let that = this;
 
@@ -41,7 +41,10 @@ class EditorPartController {
         });
 
         this.selectTextureMenu.addEventListener("change", textureTypeSelectHandler.bind(this.selectTextureMenu, that), false);
-        this.rangeInput.addEventListener("input", sliderHandler.bind(this.rangeInput, that), false);
+        this.rangeInput.forEach(range => {
+            range.addEventListener("input", sliderHandler.bind(range, that), false);
+        });
+
         if (this.objController.textureParameters.material == null) {
             this.showTextureTypes("wood", true);
         } else {
@@ -81,12 +84,18 @@ class EditorPartController {
     showTextureTypes(typeName, updateController) {
         let that = this;
         this.clearTextureColorSelection();
+        this.resetSliders();
         let colorID = "";
         this.texturesTypes.forEach(textureTypeWrapper => {
             if (textureTypeWrapper.getAttribute("data-texture-type") == typeName) {
-                textureTypeWrapper.classList.remove("hide");
+                let slider = textureTypeWrapper.querySelectorAll(".slidercontainer input")[0];
+                let newSlideVal = parseFloat(slider.min);
+                slider.val = newSlideVal;
+                that.updateSlider(newSlideVal);
+
                 colorID = textureTypeWrapper.querySelectorAll(".texture-icon-wrapper")[0].getAttribute("data-icon-id");
                 that.selectTexture(colorID, false);
+                textureTypeWrapper.classList.remove("hide");
                 return;
             }
         });
@@ -104,8 +113,14 @@ class EditorPartController {
         });
     }
 
-    updateSlider() {
-        this.objController.updateTextureRoughness(this.rangeInput.value);
+    updateSlider(newVal) {
+        this.objController.updateTextureRoughness(newVal);
+    }
+
+    resetSliders(){
+        this.rangeInput.forEach(range => {
+            range.value = 0.0;
+        });
     }
 }
 
@@ -114,10 +129,6 @@ function buildMenuOptions(container, data) {
     let tmpl_obj = {
         name_id: data.partID,
         name: data.partName,
-        minValSlider: data.roughness.min,
-        maxValSlider: data.roughness.max,
-        startValSlider: data.roughness.start,
-        stepSlider: data.roughness.step
     };
 
     let parser = new DOMParser();
@@ -130,7 +141,11 @@ function buildMenuOptions(container, data) {
         tmpl.arg = "texture";
         let tmpl_obj = {
             type_name: item.typeID,
-            type: item.typeSelect
+            type: item.typeSelect,
+            minValSlider: item.roughness.min,
+            maxValSlider: item.roughness.max,
+            startValSlider: item.roughness.start,
+            stepSlider: item.roughness.step
         }
         let optionEL = parser.parseFromString(tmpl("tmpl-option-texture-type", tmpl_obj), "text/xml");
         let option = optionEL.firstChild;

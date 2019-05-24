@@ -143,9 +143,7 @@ function xmlToString(xmlData) {
 }
 
 function loadTexture(file) {
-    console.log("loading: ",file);
     var texture = new THREE.TextureLoader().load(file, function (texture) {
-
         texture.minFilter = THREE.LinearMipMapLinearFilter;
         texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
         texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
