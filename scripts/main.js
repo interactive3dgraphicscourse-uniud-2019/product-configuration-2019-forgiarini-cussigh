@@ -63,8 +63,8 @@ function createScene() {
 
   let vs = document.getElementById("vertex").textContent;
   let fs = document.getElementById("fragment").textContent;
-  let tc = new TextureController("./textures/tables/");
-  console.log(tc);
+  
+  textureController = new TextureController("./textures/tables/");
   sceneObjectsControllers = [];
 
   sceneObjectsControllers.push(new ObjPartController({
@@ -75,10 +75,10 @@ function createScene() {
     partDescription: "Piano Tavolo",
     lights: [light1Parameters, light2Parameters],
     textureData: {
-      id: "wood", 
+      id: "wood",
       color: "_2"
     },
-    textureController: tc
+    textureController: textureController
   }));
 
   sceneObjectsControllers.push(new ObjPartController({
@@ -89,10 +89,10 @@ function createScene() {
     partDescription: "Gambe Tavolo",
     lights: [light1Parameters, light2Parameters],
     textureData: {
-      id: "plastic", 
+      id: "plastic",
       color: "_4"
     },
-    textureController: tc
+    textureController: textureController
   }));
 }
 
@@ -190,6 +190,7 @@ function createTools() {
 }
 
 let sceneObjectsControllers;
+let textureController;
 
 function init() {
   scene = new THREE.Scene();

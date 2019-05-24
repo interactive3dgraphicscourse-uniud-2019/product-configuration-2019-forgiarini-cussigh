@@ -42,24 +42,22 @@ class EditorPartController {
 
         this.selectTextureMenu.addEventListener("change", textureTypeSelectHandler.bind(this.selectTextureMenu, that), false);
         this.rangeInput.addEventListener("input", sliderHandler.bind(this.rangeInput, that), false);
-        if (this.objController.textureActiveID == null) {
+        if (this.objController.textureParameters.material == null) {
             this.showTextureTypes("wood", true);
         } else {
             let index = -1;
             for (let i = 0, n = this.selectTextureMenu.children.length; i < n; i++) {
-                if (this.selectTextureMenu.children[i].value == this.objController.textureActiveID) {
+                if (this.selectTextureMenu.children[i].value == this.objController.textureParameters.material) {
                     index = i;
                     break;
                 }
             }
             this.selectTextureMenu.selectedIndex = index;
-            this.showTextureTypes(this.objController.textureActiveID, false);
+            this.showTextureTypes(this.objController.textureParameters.material, false);
 
             this.clearTextureColorSelection();
-            this.selectTexture(this.objController.textureColorActive, false);
+            this.selectTexture(this.objController.textureParameters.color, false);
         }
-        this.textureActiveID = null;
-        this.textureColorActive = null;
     }
 
     selectTexture(textureID, updateActiveColor) {

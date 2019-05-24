@@ -8,31 +8,26 @@ class TextureController {
     loadColor(material, color) {
         for (let i = 0, n = this.textures.length; i < n; i++) {
             if (this.textures[i].material == material) {
-                let map = loadTexture(this.path + material +"/"+material + color + "_Diffuse.jpg");
+                let map = loadTexture(this.path + material + "/" + material + color + "_Diffuse.jpg");
                 this.textures[i].diffuseMaps.push({
                     color: color,
                     map: map
                 });
-                return {
-                    diffuseMap: map
-                }
+                return map;
             }
         }
     }
 
     loadTexture(material, color) {
-        console.log("================================================");
-        console.log("Loading textures");
-        console.log("================================================");
         this.textures.push({
             material: material,
-            normalMap: loadTexture(this.path + material +"/"+material+ "_Normal.jpg"),
+            normalMap: loadTexture(this.path + material + "/" + material + "_Normal.jpg"),
             diffuseMaps: [{
                 color: color,
-                map: loadTexture(this.path + material +"/"+material + color + "_Diffuse.jpg")
+                map: loadTexture(this.path + material + "/" + material + color + "_Diffuse.jpg")
             }],
-            specularMap: loadTexture(this.path + material +"/"+material + "_Specular.jpg"),
-            roughnessMap: loadTexture(this.path + material +"/"+material + "_Roughness.jpg"),
+            specularMap: loadTexture(this.path + material + "/" + material + "_Specular.jpg"),
+            roughnessMap: loadTexture(this.path + material + "/" + material + "_Roughness.jpg"),
         });
         let tmp = this.textures[this.textures.length - 1];
         return {
@@ -75,7 +70,7 @@ class TextureController {
             return this.loadTexture(material, color);
         }
     }
-    
+
     removeTexture(id) {
 
     }

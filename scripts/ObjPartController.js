@@ -14,9 +14,7 @@ class ObjPartController {
             specularMap: null,
             roughnessMap: null,
         }
-        
-        this.textureActiveID = null;
-        this.textureColorActive = null;
+
         this.textureController = data.textureController;
 
         this.updateTexture(data.textureData.id, data.textureData.color);
@@ -60,11 +58,9 @@ class ObjPartController {
     }
 
     updateTexture(name, color) {
-        if (this.textureActiveID == name) {
+        if (this.textureParameters.material == name) {
             return;
         }
-        this.textureActiveID = name;
-        this.textureColorActive = color;
 
         this.textureParameters.material = name;
         this.textureParameters.color = color;
@@ -78,11 +74,10 @@ class ObjPartController {
     }
 
     updateTextureColor(color) {
-        if (this.textureColorActive == color) {
+        if (this.textureParameters.color == color) {
             return;
         }
-        this.textureColorActive = color;
-
+        this.textureParameters.color = color;
         let texture = this.textureController.getTexture(this.textureParameters.material, this.textureParameters.color);
 
         this.maps.diffuseMap = texture.diffuseMap;
