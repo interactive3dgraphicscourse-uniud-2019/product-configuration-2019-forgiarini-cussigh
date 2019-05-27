@@ -29,8 +29,10 @@ class ObjPartController {
             normalScale: { type: "v2", value: new THREE.Vector2(1, 1) },
             pointLightPosition1: { type: "v3", value: this.lights[0].position },
             pointLightPosition2: { type: "v3", value: this.lights[1].position },
+            pointLightPosition3: { type: "v3", value: this.lights[2].position },
             clight1: { type: "v3", value: new THREE.Vector3() },
             clight2: { type: "v3", value: new THREE.Vector3() },
+            clight3: { type: "v3", value: new THREE.Vector3() },
             textureRepeat: { type: "v2", value: new THREE.Vector2(1, 1) }
         }
 
@@ -98,6 +100,11 @@ class ObjPartController {
             this.lights[1].red * this.lights[1].intensity,
             this.lights[1].green * this.lights[1].intensity,
             this.lights[1].blue * this.lights[1].intensity);
+
+        this.uniforms.clight3.value = new THREE.Vector3(
+            this.lights[2].red * this.lights[2].intensity,
+            this.lights[2].green * this.lights[2].intensity,
+            this.lights[2].blue * this.lights[2].intensity);
 
         this.uniforms.textureRepeat.value = new THREE.Vector2(this.textureParameters.repeatS, this.textureParameters.repeatT);
         this.uniforms.diffuseMap.value = this.maps.diffuseMap;

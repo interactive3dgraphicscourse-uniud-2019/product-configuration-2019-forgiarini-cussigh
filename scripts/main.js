@@ -73,7 +73,7 @@ function createScene() {
     modelName: "plane",
     partID: "2345",
     partDescription: "Piano Tavolo",
-    lights: [light1Parameters, light2Parameters],
+    lights: [light1Parameters, light2Parameters, light3Parameters],
     textureData: {
       id: "wood",
       color: "_2"
@@ -87,7 +87,7 @@ function createScene() {
     modelName: "legs",
     partID: "1234",
     partDescription: "Gambe Tavolo",
-    lights: [light1Parameters, light2Parameters],
+    lights: [light1Parameters, light2Parameters,light3Parameters],
     textureData: {
       id: "plastic",
       color: "_4"
