@@ -188,6 +188,36 @@ function createTools() {
       },
     ]
   },
+  {
+    typeID: "metal",
+    typeSelect: "Metallo",
+    roughness: {
+      min: 0.0,
+      max: 1.0,
+      step: 0.1,
+      start: 0
+    },
+    colors: [
+      {
+        id: "_1",
+        alt: "ferro",
+        iconURL: "",
+        iconColor: "rgb(255,255,255)"
+      },
+      {
+        id: "_2",
+        alt: "pandino",
+        iconURL: "textures\\tables\\metal\\metal_2_Diffuse.jpg",
+        iconColor: ""
+      },
+      {
+        id: "_3",
+        alt: "rame",
+        iconURL: "textures\\tables\\metal\\metal_3_Diffuse.jpg",
+        iconColor: ""
+      },
+    ]
+  },
   ];
 
   let optionsContainer = document.getElementById("editorOptions");
