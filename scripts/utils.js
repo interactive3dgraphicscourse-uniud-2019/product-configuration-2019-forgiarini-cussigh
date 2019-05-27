@@ -153,3 +153,10 @@ function loadTexture(file) {
     })
     return texture;
 }
+
+function createNodeHTML(templateName, argName, data) {
+    tmpl.arg = argName;
+    let insertingHTML = htmlParser.parseFromString(tmpl(templateName, data), "text/html");
+    let partContainer = insertingHTML.documentElement.children[1].firstChild;
+    return partContainer;
+}

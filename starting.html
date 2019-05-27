@@ -20,6 +20,7 @@
   <script src='lib/OBJLoader2.js'></script> 
   <script src='lib/BufferGeometryUtils.js'></script>
   <script src="scripts/lights.js"></script>
+  <script src="scripts/EditorController.js"></script>
   <script src="scripts/EditorPartController.js"></script>
   <script src="scripts/ObjPartController.js"></script>
   <script src="scripts/TextureController.js"></script>
@@ -175,19 +176,24 @@
     
     <script type="text/x-tmpl" id="tmpl-insert-texture-type-wrapper">
         <div class="available-textures hide" data-texture-type="{%=texture.type_name%}">
+            <div class="available-textures-wrapper"></div>
             <div class="slidercontainer">
                   <input type="range" min="{%=texture.minValSlider%}" max="{%=texture.maxValSlider%}" value="{%=texture.startValSlider%}" step="{%=texture.stepSlider%}" class="slider" />
-              </div>
+            </div>
         </div>
     </script>
     
     <script type="text/x-tmpl" id="tmpl-insert-texture-icon-wrapper">
-        <div class="texture-icon-wrapper tooltip" data-icon-id="{%=texture_info.id%}">
+        <div class="texture-icon-wrapper tooltip" data-icon-id="{%=texture_info.id%}"">
             <span class="tooltiptext">{%=texture_info.alt%}</span>
-            <img class="texture-icon" src="{%=texture_info.url%}" alt="{%=texture_info.alt%} icon" />
-        </div>
+            <div class="texture-icon-container" style="background-color: {%=texture_info.background_color%}"></div>
+          </div>
     </script>
-    
+
+    <script type="text/x-tmpl" id="tmpl-insert-texture-icon-img">
+          <img class="texture-icon" src="{%=texture_info.url%}" alt="{%=texture_info.alt%} icon" />
+    </script>
+
     <script type="text/x-tmpl" id="tmpl-option-texture-type">
         <option value="{%=texture.type_name%}">{%=texture.type%}</option>
     </script>

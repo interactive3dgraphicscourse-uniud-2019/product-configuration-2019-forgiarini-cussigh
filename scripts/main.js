@@ -112,26 +112,31 @@ function createTools() {
         id: "_1",
         alt: "ebano",
         iconURL: "textures\\tables\\wood\\wood_1_Diffuse.jpg",
+        iconColor: ""
       },
       {
         id: "_2",
         alt: "pioppo",
         iconURL: "textures\\tables\\wood\\wood_2_Diffuse.jpg",
+        iconColor: ""
       },
       {
         id: "_3",
         alt: "olmo",
         iconURL: "textures\\tables\\wood\\wood_3_Diffuse.jpg",
+        iconColor: ""
       },
       {
         id: "_4",
         alt: "acero",
         iconURL: "textures\\tables\\wood\\wood_4_Diffuse.jpg",
+        iconColor: ""
       },
       {
         id: "_5",
         alt: "mogano",
         iconURL: "textures\\tables\\wood\\wood_5_Diffuse.jpg",
+        iconColor: ""
       },
     ]
   },
@@ -148,32 +153,38 @@ function createTools() {
       {
         id: "_1",
         alt: "bianco",
-        iconURL: "textures\\tables\\plastic\\plastic_1_Diffuse.jpg",
+        iconURL: "",
+        iconColor: "rgb(255,255,255)"
       },
       {
         id: "_2",
         alt: "rosso",
         iconURL: "textures\\tables\\plastic\\plastic_2_Diffuse.jpg",
+        iconColor: ""
       },
       {
         id: "_3",
         alt: "verde",
         iconURL: "textures\\tables\\plastic\\plastic_3_Diffuse.jpg",
+        iconColor: ""
       },
       {
         id: "_4",
         alt: "blu",
         iconURL: "textures\\tables\\plastic\\plastic_4_Diffuse.jpg",
+        iconColor: ""
       },
       {
         id: "_5",
         alt: "marrone",
         iconURL: "textures\\tables\\plastic\\plastic_5_Diffuse.jpg",
+        iconColor: ""
       },
       {
         id: "_6",
         alt: "grigio",
         iconURL: "textures\\tables\\plastic\\plastic_6_Diffuse.jpg",
+        iconColor: ""
       },
     ]
   },
@@ -199,6 +210,8 @@ let sceneObjectsControllers;
 let textureController;
 
 function init() {
+  htmlParser = new DOMParser();;
+
   scene = new THREE.Scene();
   show_debug_tools = true;
   enable_shadows = true;

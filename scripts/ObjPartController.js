@@ -25,10 +25,10 @@ class ObjPartController {
             specularMap: { type: "t", value: this.maps.specularMap },
             diffuseMap: { type: "t", value: this.maps.diffuseMap },
             roughnessMap: { type: "t", value: this.maps.roughnessMap },
-            pointLightPosition1: { type: "v3", value: this.lights[0].position },
-            pointLightPosition2: { type: "v3", value: this.lights[1].position },
             normalMap: { type: "t", value: this.maps.normalMap },
             normalScale: { type: "v2", value: new THREE.Vector2(1, 1) },
+            pointLightPosition1: { type: "v3", value: this.lights[0].position },
+            pointLightPosition2: { type: "v3", value: this.lights[1].position },
             clight1: { type: "v3", value: new THREE.Vector3() },
             clight2: { type: "v3", value: new THREE.Vector3() },
             textureRepeat: { type: "v2", value: new THREE.Vector2(1, 1) }

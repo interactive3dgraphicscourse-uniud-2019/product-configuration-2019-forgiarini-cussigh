@@ -13,7 +13,7 @@
 	padding: 10px;
 }
 
-.available-textures {
+.available-textures-wrapper {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -26,6 +26,11 @@
 	padding: 5px;
 }
 
+.texture-icon-container{
+	width: 25px;
+	height: 25px;
+}
+
 .texture-icon-wrapper.selected {
 	background-color: red;
 }
@@ -36,8 +41,8 @@
 }
 
 .texture-icon {
-	width: 25px;
-	height: 25px;
+	width: inherit;
+	height: inherit;
 	vertical-align: middle;
 }
 
