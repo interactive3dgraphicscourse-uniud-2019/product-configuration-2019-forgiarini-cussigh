@@ -111,32 +111,32 @@ function createTools() {
       {
         id: "_1",
         alt: "ebano",
-        iconURL: "textures\\tables\\wood\\wood_1_Diffuse.jpg",
-        iconColor: ""
+        iconURL: "",
+        iconColor: "#dfd4c2"
       },
       {
         id: "_2",
         alt: "pioppo",
-        iconURL: "textures\\tables\\wood\\wood_2_Diffuse.jpg",
-        iconColor: ""
+        iconURL: "",
+        iconColor: "#dbb77b"
       },
       {
         id: "_3",
         alt: "olmo",
-        iconURL: "textures\\tables\\wood\\wood_3_Diffuse.jpg",
-        iconColor: ""
+        iconURL: "",
+        iconColor: "#7e5f29"
       },
       {
         id: "_4",
         alt: "acero",
-        iconURL: "textures\\tables\\wood\\wood_4_Diffuse.jpg",
-        iconColor: ""
+        iconURL: "",
+        iconColor: "#4f3210"
       },
       {
         id: "_5",
         alt: "mogano",
-        iconURL: "textures\\tables\\wood\\wood_5_Diffuse.jpg",
-        iconColor: ""
+        iconURL: "",
+        iconColor: "#5f3525"
       },
     ]
   },
@@ -154,37 +154,37 @@ function createTools() {
         id: "_1",
         alt: "bianco",
         iconURL: "",
-        iconColor: "rgb(255,255,255)"
+        iconColor: "#d1d2cd"
       },
       {
         id: "_2",
         alt: "rosso",
-        iconURL: "textures\\tables\\plastic\\plastic_2_Diffuse.jpg",
-        iconColor: ""
+        iconURL: "",
+        iconColor: "#9e2423"
       },
       {
         id: "_3",
         alt: "verde",
-        iconURL: "textures\\tables\\plastic\\plastic_3_Diffuse.jpg",
-        iconColor: ""
+        iconURL:"",
+        iconColor: "#1e5f3f"
       },
       {
         id: "_4",
         alt: "blu",
-        iconURL: "textures\\tables\\plastic\\plastic_4_Diffuse.jpg",
-        iconColor: ""
+        iconURL: "",
+        iconColor: "#2b717b"
       },
       {
         id: "_5",
         alt: "marrone",
-        iconURL: "textures\\tables\\plastic\\plastic_5_Diffuse.jpg",
-        iconColor: ""
+        iconURL:"",
+        iconColor: "#99824e"
       },
       {
         id: "_6",
         alt: "grigio",
-        iconURL: "textures\\tables\\plastic\\plastic_6_Diffuse.jpg",
-        iconColor: ""
+        iconURL: "",
+        iconColor: "#999999"
       },
     ]
   },
@@ -202,19 +202,19 @@ function createTools() {
         id: "_1",
         alt: "ferro",
         iconURL: "",
-        iconColor: "rgb(255,255,255)"
+        iconColor: "#8c7958"
       },
       {
         id: "_2",
         alt: "pandino",
-        iconURL: "textures\\tables\\metal\\metal_2_Diffuse.jpg",
-        iconColor: ""
+        iconURL: "",
+        iconColor: "#8f5047"
       },
       {
         id: "_3",
         alt: "rame",
-        iconURL: "textures\\tables\\metal\\metal_3_Diffuse.jpg",
-        iconColor: ""
+        iconURL: "",
+        iconColor: "#7d7371"
       },
     ]
   },
