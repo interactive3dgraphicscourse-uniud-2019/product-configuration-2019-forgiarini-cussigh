@@ -223,8 +223,7 @@ function createTools() {
   let optionsContainer = document.getElementById("editorOptions");
   let partsWrapper = optionsContainer.querySelectorAll(".parts-container")[0];
   let controllers = [];
-  controllers.push(new EditorController(optionsContainer));
-
+  
   sceneObjectsControllers.forEach(objControl => {
     let menuData = {
       partID: objControl.name,
@@ -234,6 +233,7 @@ function createTools() {
     let partMenuContainer = buildMenuOptions(partsWrapper, menuData);
     controllers.push(new EditorPartController(partMenuContainer, objControl));
   });
+  controllers.push(new EditorController(optionsContainer));
 }
 
 let sceneObjectsControllers;

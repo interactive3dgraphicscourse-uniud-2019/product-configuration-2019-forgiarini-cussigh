@@ -70,14 +70,32 @@ class EditorController {
         let that = this;
         this.closeButton.addEventListener("click", closeEditorHandler.bind(this.closeButton, that), false);
         this.partsContainer = this.domEL.querySelectorAll(".parts-container")[0];
+        this.objectParts = this.partsContainer.querySelectorAll(".part");
+        if(this.objectParts.length > 1){
+            this.objectParts.forEach((part, i) =>{
+                if(i>0){
+                    let separator = createNodeHTML("tmpl-part-separator", "separator", {});
+                    this.partsContainer.insertBefore(separator, part);
+                }
+            });
+        }
+
+/*         
+        let bottomPartsFix = createNodeHTML("tmpl-bottom-parts", "fix", {});
+        this.partsContainer.appendChild(bottomPartsFix); 
+        */
     }
 
     updateVisibility() {
         if (this.menuVisible) {
             this.hideEditor();
+            if (!this.closeButton.classList.contains("close")) {
+                this.closeButton.classList += " close";
+            }    
             this.menuVisible = false;
         } else {
             this.showEditor();
+            this.closeButton.classList.remove("close");
             this.menuVisible = true;
         }
     }
