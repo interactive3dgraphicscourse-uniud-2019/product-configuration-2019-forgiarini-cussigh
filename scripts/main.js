@@ -103,8 +103,8 @@ function createTools() {
     typeSelect: "Wood",
     roughness: {
       min: 0.0,
-      max: 10.0,
-      step: 1.0,
+      max: 4.0,
+      step: 0.2,
       start: 0
     },
     colors: [
@@ -145,7 +145,7 @@ function createTools() {
     typeSelect: "Plastica",
     roughness: {
       min: 0.0,
-      max: 5.0,
+      max: 4.0,
       step: 0.2,
       start: 0
     },
@@ -215,6 +215,12 @@ function createTools() {
         alt: "rame",
         iconURL: "",
         iconColor: "#7d7371"
+      },
+      {
+        id: "_4",
+        alt: "ossidiana",
+        iconURL: "",
+        iconColor: "#000000"
       },
     ]
   },
