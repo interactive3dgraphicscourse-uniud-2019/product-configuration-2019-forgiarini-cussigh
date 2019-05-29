@@ -184,11 +184,11 @@
         <div class="part" data-part="{%=part.name_id%}">
             <div class="part-name">{%=part.name%}</div>
             <div class="avaiable-materials">
-                <p class="label">Material</p>
+                <div class="label">Material</div>
                 <select class="select-texture-material"></select>
             </div>
             <div class="available-colors">
-                <p class="label">Color</p>
+                <div class="label">Color</div>
             </div>
         </div>
     </script>
@@ -197,16 +197,21 @@
         <div class="available-textures hide" data-texture-type="{%=texture.type_name%}">
             <div class="available-textures-wrapper"></div>
             <div class="slidercontainer">
-                <p class="label">Roughness</p>
+                <div class="label">Roughness</div>
                   <input type="range" min="{%=texture.minValSlider%}" max="{%=texture.maxValSlider%}" value="{%=texture.startValSlider%}" step="{%=texture.stepSlider%}" class="slider" />
             </div>
         </div>
     </script>
     
+    <script type="text/x-tmpl" id="tmpl-insert-texture-tooltip-wrapper">
+      <span class="tooltiptext">{%=texture_info.alt%}</span>
+    </script>
+    
     <script type="text/x-tmpl" id="tmpl-insert-texture-icon-wrapper">
-        <div class="texture-icon-wrapper tooltip" data-icon-id="{%=texture_info.id%}"">
-            <span class="tooltiptext">{%=texture_info.alt%}</span>
-            <div class="texture-icon-container" style="background-color: {%=texture_info.background_color%}"></div>
+        <div class="texture-icon-wrapper tooltip" data-icon-id="{%=texture_info.id%}">
+            <div class="texture-icon-container" data-icon-color="{%=texture_info.alt%}">
+                <div class="background-icon-color" style="background-color: {%=texture_info.background_color%}"></div>
+            </div>
           </div>
     </script>
 

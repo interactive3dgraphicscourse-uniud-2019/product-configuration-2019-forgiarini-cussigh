@@ -80,10 +80,8 @@ class EditorController {
             });
         }
 
-/*         
         let bottomPartsFix = createNodeHTML("tmpl-bottom-parts", "fix", {});
         this.partsContainer.appendChild(bottomPartsFix); 
-        */
     }
 
     updateVisibility() {

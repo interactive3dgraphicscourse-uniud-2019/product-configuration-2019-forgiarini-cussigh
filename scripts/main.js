@@ -228,7 +228,7 @@ function createTools() {
     let menuData = {
       partID: objControl.name,
       partName: objControl.description,
-      textures: avaiableTextures
+      textures: avaiableTextures,
     }
     let partMenuContainer = buildMenuOptions(partsWrapper, menuData);
     controllers.push(new EditorPartController(partMenuContainer, objControl));
