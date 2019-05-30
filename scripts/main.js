@@ -1,4 +1,3 @@
-let controls, stats;
 
 /**
  * Creates an istance of THREE.OrbitControls used to move the camera.
@@ -17,7 +16,7 @@ function createControls() {
  * Usefull function to handle resize event of browser. It updates renderer dimensions.
  * @param {Event} e resize event
  */
-let resizeListener = e => {
+function resizeListener(e) {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -31,9 +30,6 @@ function createRenderer() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0xf0f0f0);
   renderer.setPixelRatio(window.devicePixelRatio);
-  //renderer.gammaInput = true;
-  //renderer.gammaOutput = true;
-  //renderer.shadowMap.enabled = true;
   document.body.appendChild(renderer.domElement);
 }
 
@@ -59,10 +55,12 @@ function createCamera(position, lookAt) {
 }
 
 function createScene() {
-  createLights();
+  if(show_debug_tools){
+    createMeshLights();
+  }
 
-  let vs = document.getElementById("vertex").textContent;
-  let fs = document.getElementById("fragment").textContent;
+  let vs = document.getElementById("vertexShader").textContent;
+  let fs = document.getElementById("fragmentShader").textContent;
   
   textureController = new TextureController("./textures/tables/");
   sceneObjectsControllers = [];
@@ -73,7 +71,7 @@ function createScene() {
     modelName: "plane",
     partID: "2345",
     partDescription: "Piano Tavolo",
-    lights: [light1Parameters, light2Parameters, light3Parameters],
+    lights: lightsInSceneParameters,
     textureData: {
       id: "wood",
       color: "_2"
@@ -87,7 +85,7 @@ function createScene() {
     modelName: "legs",
     partID: "1234",
     partDescription: "Gambe Tavolo",
-    lights: [light1Parameters, light2Parameters,light3Parameters],
+    lights: lightsInSceneParameters,
     textureData: {
       id: "plastic",
       color: "_4"
@@ -236,18 +234,20 @@ function createTools() {
   controllers.push(new EditorController(optionsContainer));
 }
 
-let sceneObjectsControllers;
-let textureController;
-
 function init() {
+  console.log("Follow the 🐇...");
   htmlParser = new DOMParser();;
 
   scene = new THREE.Scene();
   show_debug_tools = true;
-  enable_shadows = true;
+
   createRenderer();
 
-  createCamera(new THREE.Vector3(10, 10, 20));
+  createCamera(new THREE.Vector3(
+    2.792848812291361, 
+    6.611740148960574,
+    7.46642801695597
+  ));
 
   // controls for camera
   createControls();
@@ -268,15 +268,8 @@ function init() {
   updateWorld();
 }
 
-function updateUniforms() {
-  sceneObjectsControllers.forEach(objControl => {
-    objControl.updateUniforms();
-  });
-}
-
 function updateWorld() {
   requestAnimationFrame(updateWorld);
-  updateUniforms();
   controls.update();
   if (show_debug_tools) {
     stats.update();

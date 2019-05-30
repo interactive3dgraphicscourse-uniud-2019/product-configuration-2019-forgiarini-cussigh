@@ -75,7 +75,7 @@ class EditorController {
             this.objectParts.forEach((part, i) =>{
                 if(i>0){
                     let separator = createNodeHTML("tmpl-part-separator", "separator", {});
-                    this.partsContainer.insertBefore(separator, part);
+                    that.partsContainer.insertBefore(separator, part);
                 }
             });
         }

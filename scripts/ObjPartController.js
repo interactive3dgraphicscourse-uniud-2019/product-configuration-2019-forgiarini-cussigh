@@ -15,26 +15,47 @@ class ObjPartController {
             roughnessMap: null,
         }
 
-        this.textureController = data.textureController;
-
-        this.updateTexture(data.textureData.id, data.textureData.color);
 
         this.lights = data.lights;
 
         this.uniforms = {
-            specularMap: { type: "t", value: this.maps.specularMap },
-            diffuseMap: { type: "t", value: this.maps.diffuseMap },
-            roughnessMap: { type: "t", value: this.maps.roughnessMap },
-            normalMap: { type: "t", value: this.maps.normalMap },
+            specularMap: { type: "t", value: undefined },
+            diffuseMap: { type: "t", value: undefined },
+            roughnessMap: { type: "t", value: undefined },
+            normalMap: { type: "t", value: undefined },
             normalScale: { type: "v2", value: new THREE.Vector2(1, 1) },
             pointLightPosition1: { type: "v3", value: this.lights[0].position },
             pointLightPosition2: { type: "v3", value: this.lights[1].position },
             pointLightPosition3: { type: "v3", value: this.lights[2].position },
-            clight1: { type: "v3", value: new THREE.Vector3() },
-            clight2: { type: "v3", value: new THREE.Vector3() },
-            clight3: { type: "v3", value: new THREE.Vector3() },
+            clight1: {
+                type: "v3",
+                value: new THREE.Vector3(
+                    this.lights[0].red * this.lights[0].intensity,
+                    this.lights[0].green * this.lights[0].intensity,
+                    this.lights[0].blue * this.lights[0].intensity)
+            },
+            clight2: {
+                type: "v3",
+                value: new THREE.Vector3(
+                    this.lights[1].red * this.lights[1].intensity,
+                    this.lights[1].green * this.lights[1].intensity,
+                    this.lights[1].blue * this.lights[1].intensity)
+            },
+            clight3: {
+                type: "v3",
+                value: new THREE.Vector3(
+                    this.lights[2].red * this.lights[2].intensity,
+                    this.lights[2].green * this.lights[2].intensity,
+                    this.lights[2].blue * this.lights[2].intensity)
+            },
             textureRepeat: { type: "v2", value: new THREE.Vector2(1, 1) }
         }
+
+        this.textureController = data.textureController;
+
+        this.updateTexture(data.textureData.id, data.textureData.color);
+
+        this.uniforms.textureRepeat.value = new THREE.Vector2(this.textureParameters.repeatS, this.textureParameters.repeatT);
 
         this.material = new THREE.ShaderMaterial({
             uniforms: this.uniforms,
@@ -73,6 +94,11 @@ class ObjPartController {
         this.maps.diffuseMap = texture.diffuseMap;
         this.maps.specularMap = texture.specularMap;
         this.maps.roughnessMap = texture.roughnessMap;
+
+        this.uniforms.diffuseMap.value = this.maps.diffuseMap;
+        this.uniforms.specularMap.value = this.maps.specularMap;
+        this.uniforms.roughnessMap.value = this.maps.roughnessMap;
+        this.uniforms.normalMap.value = this.maps.normalMap;
     }
 
     updateTextureColor(color) {
@@ -83,34 +109,16 @@ class ObjPartController {
         let texture = this.textureController.getTexture(this.textureParameters.material, this.textureParameters.color);
 
         this.maps.diffuseMap = texture.diffuseMap;
+        this.uniforms.diffuseMap.value = this.maps.diffuseMap;
         this.material.needsUpdate = true;
     }
 
     updateTextureRoughness(val) {
         this.textureParameters.normalScale = val;
+        this.uniforms.normalScale.value = new THREE.Vector2(this.textureParameters.normalScale, this.textureParameters.normalScale);
     }
 
-    updateUniforms() {
-        this.uniforms.clight1.value = new THREE.Vector3(
-            this.lights[0].red * this.lights[0].intensity,
-            this.lights[0].green * this.lights[0].intensity,
-            this.lights[0].blue * this.lights[0].intensity);
-
-        this.uniforms.clight2.value = new THREE.Vector3(
-            this.lights[1].red * this.lights[1].intensity,
-            this.lights[1].green * this.lights[1].intensity,
-            this.lights[1].blue * this.lights[1].intensity);
-
-        this.uniforms.clight3.value = new THREE.Vector3(
-            this.lights[2].red * this.lights[2].intensity,
-            this.lights[2].green * this.lights[2].intensity,
-            this.lights[2].blue * this.lights[2].intensity);
-
-        this.uniforms.textureRepeat.value = new THREE.Vector2(this.textureParameters.repeatS, this.textureParameters.repeatT);
-        this.uniforms.diffuseMap.value = this.maps.diffuseMap;
-        this.uniforms.specularMap.value = this.maps.specularMap;
-        this.uniforms.roughnessMap.value = this.maps.roughnessMap;
-        this.uniforms.normalMap.value = this.maps.normalMap;
-        this.uniforms.normalScale.value = new THREE.Vector2(this.textureParameters.normalScale, this.textureParameters.normalScale);
+    updateLightPositions(){
+        
     }
 }
