@@ -6,7 +6,7 @@ function buildMenuOptions(container, data) {
         name: data.partName,
     };
 
-    let partEditor = createNodeHTML("tmpl-insert-part-wrapper", "part", tmpl_obj);
+    let partEditor = Util.createNodeHTML("tmpl-insert-part-wrapper", "part", tmpl_obj);
     let selectTextureType = partEditor.querySelectorAll(".select-texture-material")[0];
     let textureTypes = partEditor.querySelectorAll(".available-colors")[0];
 
@@ -20,10 +20,10 @@ function buildMenuOptions(container, data) {
             stepSlider: item.roughness.step
         }
 
-        let optionEL = createNodeHTML("tmpl-option-texture-type", "texture", tmpl_obj);
+        let optionEL = Util.createNodeHTML("tmpl-option-texture-type", "texture", tmpl_obj);
         selectTextureType.appendChild(optionEL);
 
-        let typeWrapper = createNodeHTML("tmpl-insert-texture-type-wrapper", "texture", tmpl_obj);
+        let typeWrapper = Util.createNodeHTML("tmpl-insert-texture-type-wrapper", "texture", tmpl_obj);
 
         let textureIconsWrapper = typeWrapper.querySelectorAll(".available-textures-wrapper")[0];
         item.colors.forEach(texture => {
@@ -37,13 +37,13 @@ function buildMenuOptions(container, data) {
                 alt: alt
             };
 
-            let textureEl = createNodeHTML("tmpl-insert-texture-icon-wrapper", "texture_info", tmpl_obj);
+            let textureEl = Util.createNodeHTML("tmpl-insert-texture-icon-wrapper", "texture_info", tmpl_obj);
             if (iconUrl !== "") {
                 let tmpl_obj = {
                     url: iconUrl,
                     alt: alt
                 };
-                let iconEl = createNodeHTML("tmpl-insert-texture-icon-img", "texture_info", tmpl_obj);
+                let iconEl = Util.createNodeHTML("tmpl-insert-texture-icon-img", "texture_info", tmpl_obj);
                 let iconWrapper = textureEl.querySelectorAll(".texture-icon-container")[0];
                 iconWrapper.appendChild(iconEl);
             }
@@ -70,14 +70,34 @@ class EditorController {
         let that = this;
         this.closeButton.addEventListener("click", closeEditorHandler.bind(this.closeButton, that), false);
         this.partsContainer = this.domEL.querySelectorAll(".parts-container")[0];
+        this.objectParts = this.partsContainer.querySelectorAll(".part");
+        if (this.objectParts.length > 1) {
+            this.objectParts.forEach((part, i) => {
+                if (i > 0) {
+                    let separator = Util.createNodeHTML("tmpl-part-separator", "separator", {});
+                    that.partsContainer.insertBefore(separator, part);
+                }
+            });
+        }
+
+        let bottomPartsFix = Util.createNodeHTML("tmpl-bottom-parts", "fix", {});
+        this.partsContainer.appendChild(bottomPartsFix);
+
+        this.menuTotalHeight = this.domEL.offsetHeight;
+        this.partsContainerHeight = this.partsContainer.offsetHeight;
+        this.updateDimensions();
     }
 
     updateVisibility() {
         if (this.menuVisible) {
             this.hideEditor();
+            if (!this.closeButton.classList.contains("close")) {
+                this.closeButton.classList += " close";
+            }
             this.menuVisible = false;
         } else {
             this.showEditor();
+            this.closeButton.classList.remove("close");
             this.menuVisible = true;
         }
     }
@@ -90,5 +110,15 @@ class EditorController {
         if (!this.partsContainer.classList.contains("hide")) {
             this.partsContainer.classList += " hide";
         }
+    }
+
+    updateDimensions() {
+        // fixing parts container height to show or hide scrollbar
+        if (window.innerHeight < this.menuTotalHeight) {
+            this.partsContainer.style.height = (window.innerHeight - (this.menuTotalHeight - this.partsContainerHeight)) + "px";
+        } else {
+            this.partsContainer.style.height = "";
+        }
+        // @todo resize menu on mobile
     }
 }

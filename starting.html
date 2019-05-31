@@ -31,15 +31,26 @@
   <div class="options-container">
     <div id="editorOptions" class="options">
         <div class="top-menu">
-            <div class="close-button"></div>
+            <div class="close-button">
+              <div class="close-icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="512px" height="512px" class="">
+                  <g>
+                    <script xmlns="http://www.w3.org/2000/svg" class="active-path" style="fill:#000000"></script>
+                    <g>
+                      <path d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" data-original="#000000" class="active-path" fill="#000000"></path>
+                    </g>
+                  </g> 
+                </svg>            
+              </div>
+            </div>
           </div>
-          <div class="parts-container"></div>    
+          <div class="parts-container"></div>
     </div>
   </div>
   <div style="display: none">
 
     <!-- Shaders -->
-    <script type="text/x-glsl" id="vertex">
+    <script type="text/x-glsl" id="vertexShader">
         varying vec3 vNormal;
         varying vec3 vPosition;
         varying vec2 uVv;
@@ -63,7 +74,7 @@
         }
         </script>
 
-    <script type="text/x-glsl" id="fragment">
+    <script type="text/x-glsl" id="fragmentShader">
 
           varying vec3 vTangent;
           varying vec3 vBitangent;
@@ -166,15 +177,25 @@
         </script>
 
     <!-- templates used to create options menu -->
+    <script type="text/x-tmpl" id="tmpl-part-separator">
+      <div class="part-separator"></div>
+    </script>
+
+    <script type="text/x-tmpl" id="tmpl-bottom-parts">
+      <div class="bottom-parts"></div>    
+    </script>
+
     <script type="text/x-tmpl" id="tmpl-insert-part-wrapper">
         <div class="part" data-part="{%=part.name_id%}">
             <div class="part-name">{%=part.name%}</div>
             <div class="avaiable-materials">
-                <p>Materiale</p>
-                <select class="select-texture-material"></select>
+                <div class="label">Material</div>
+                <div class="select-wrapper">
+                  <select class="select-texture-material"></select>
+                </div>
             </div>
             <div class="available-colors">
-                <p>Colore</p>
+                <div class="label">Color</div>
             </div>
         </div>
     </script>
@@ -183,15 +204,21 @@
         <div class="available-textures hide" data-texture-type="{%=texture.type_name%}">
             <div class="available-textures-wrapper"></div>
             <div class="slidercontainer">
+                <div class="label">Roughness</div>
                   <input type="range" min="{%=texture.minValSlider%}" max="{%=texture.maxValSlider%}" value="{%=texture.startValSlider%}" step="{%=texture.stepSlider%}" class="slider" />
             </div>
         </div>
     </script>
     
+    <script type="text/x-tmpl" id="tmpl-insert-texture-tooltip-wrapper">
+      <span class="tooltiptext">{%=texture_info.alt%}</span>
+    </script>
+    
     <script type="text/x-tmpl" id="tmpl-insert-texture-icon-wrapper">
-        <div class="texture-icon-wrapper tooltip" data-icon-id="{%=texture_info.id%}"">
-            <span class="tooltiptext">{%=texture_info.alt%}</span>
-            <div class="texture-icon-container" style="background-color: {%=texture_info.background_color%}"></div>
+        <div class="texture-icon-wrapper tooltip" data-icon-id="{%=texture_info.id%}">
+            <div class="texture-icon-container" data-icon-color="{%=texture_info.alt%}">
+                <div class="background-icon-color" style="background-color: {%=texture_info.background_color%}"></div>
+            </div>
           </div>
     </script>
 
