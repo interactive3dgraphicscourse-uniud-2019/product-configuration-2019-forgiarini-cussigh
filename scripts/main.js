@@ -20,6 +20,12 @@ function resizeListener(e) {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+
+  menuControllers.forEach(controller => {
+    if(controller.type == "editor"){
+      controller.istance.updateHeights();
+    }
+  });
 };
 
 /**
@@ -55,13 +61,13 @@ function createCamera(position, lookAt) {
 }
 
 function createScene() {
-  if(show_debug_tools){
+  if (show_debug_tools) {
     createMeshLights();
   }
 
   let vs = document.getElementById("vertexShader").textContent;
   let fs = document.getElementById("fragmentShader").textContent;
-  
+
   textureController = new TextureController("./textures/tables/");
   sceneObjectsControllers = [];
 
@@ -163,7 +169,7 @@ function createTools() {
       {
         id: "_3",
         alt: "verde",
-        iconURL:"",
+        iconURL: "",
         iconColor: "#1e5f3f"
       },
       {
@@ -175,7 +181,7 @@ function createTools() {
       {
         id: "_5",
         alt: "marrone",
-        iconURL:"",
+        iconURL: "",
         iconColor: "#99824e"
       },
       {
@@ -220,8 +226,8 @@ function createTools() {
 
   let optionsContainer = document.getElementById("editorOptions");
   let partsWrapper = optionsContainer.querySelectorAll(".parts-container")[0];
-  let controllers = [];
   
+  menuControllers = [];
   sceneObjectsControllers.forEach(objControl => {
     let menuData = {
       partID: objControl.name,
@@ -229,9 +235,14 @@ function createTools() {
       textures: avaiableTextures,
     }
     let partMenuContainer = buildMenuOptions(partsWrapper, menuData);
-    controllers.push(new EditorPartController(partMenuContainer, objControl));
+    menuControllers.push({
+      type: "editorPart", istance: new EditorPartController(partMenuContainer, objControl)
+    });
   });
-  controllers.push(new EditorController(optionsContainer));
+
+  menuControllers.push({
+    type: "editor", istance: new EditorController(optionsContainer)
+  });
 }
 
 function init() {
@@ -244,7 +255,7 @@ function init() {
   createRenderer();
 
   createCamera(new THREE.Vector3(
-    2.792848812291361, 
+    2.792848812291361,
     6.611740148960574,
     7.46642801695597
   ));

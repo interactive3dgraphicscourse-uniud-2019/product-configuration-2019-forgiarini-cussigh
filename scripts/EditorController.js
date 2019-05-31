@@ -71,9 +71,9 @@ class EditorController {
         this.closeButton.addEventListener("click", closeEditorHandler.bind(this.closeButton, that), false);
         this.partsContainer = this.domEL.querySelectorAll(".parts-container")[0];
         this.objectParts = this.partsContainer.querySelectorAll(".part");
-        if(this.objectParts.length > 1){
-            this.objectParts.forEach((part, i) =>{
-                if(i>0){
+        if (this.objectParts.length > 1) {
+            this.objectParts.forEach((part, i) => {
+                if (i > 0) {
                     let separator = createNodeHTML("tmpl-part-separator", "separator", {});
                     that.partsContainer.insertBefore(separator, part);
                 }
@@ -81,7 +81,11 @@ class EditorController {
         }
 
         let bottomPartsFix = createNodeHTML("tmpl-bottom-parts", "fix", {});
-        this.partsContainer.appendChild(bottomPartsFix); 
+        this.partsContainer.appendChild(bottomPartsFix);
+
+        this.menuTotalHeight = this.domEL.offsetHeight;
+        this.partsContainerHeight = this.partsContainer.offsetHeight;
+        this.updateHeights();
     }
 
     updateVisibility() {
@@ -89,7 +93,7 @@ class EditorController {
             this.hideEditor();
             if (!this.closeButton.classList.contains("close")) {
                 this.closeButton.classList += " close";
-            }    
+            }
             this.menuVisible = false;
         } else {
             this.showEditor();
@@ -105,6 +109,14 @@ class EditorController {
     hideEditor() {
         if (!this.partsContainer.classList.contains("hide")) {
             this.partsContainer.classList += " hide";
+        }
+    }
+
+    updateHeights() {
+        if (window.innerHeight < this.menuTotalHeight) {
+            this.partsContainer.style.height = (window.innerHeight - (this.menuTotalHeight - this.partsContainerHeight)) + "px";
+        } else {
+            this.partsContainer.style.height = "";
         }
     }
 }

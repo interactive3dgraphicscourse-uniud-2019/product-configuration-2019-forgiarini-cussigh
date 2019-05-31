@@ -14,3 +14,5 @@ let htmlParser;
 
 let sceneObjectsControllers;
 let textureController;
+
+let menuControllers;

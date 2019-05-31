@@ -122,7 +122,8 @@ div.part-name {
 }
 
 .parts-container {
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: auto;
 	max-height: 1080px;
 	/* Firefox */
 	-moz-transition: max-height 0.25s ease-in;
@@ -135,6 +136,7 @@ div.part-name {
 }
 
 .parts-container.hide {
+	overflow-y: hidden;
 	max-height: 0px;
 	/* Firefox */
 	-moz-transition: max-height 0.25s ease-out;
