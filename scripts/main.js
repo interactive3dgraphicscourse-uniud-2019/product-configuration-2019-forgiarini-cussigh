@@ -23,7 +23,7 @@ function resizeListener(e) {
 
   menuControllers.forEach(controller => {
     if(controller.type == "editor"){
-      controller.istance.updateHeights();
+      controller.istance.updateDimensions();
     }
   });
 };
@@ -265,7 +265,7 @@ function init() {
 
   // creating stats of frame
   if (show_debug_tools) {
-    stats = createStats();
+    stats = Util.createStats();
     // uncomment if you need to draw coordinate axes when building the scene
     Coordinates.drawAllAxes();
   }
