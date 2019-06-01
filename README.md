@@ -19,6 +19,8 @@ Il progetto è inoltre realizzato in modo da mantenere le medesime funzionalità
 Il modello del tavolo è scaricato dal sito www.cgtrader.com con royalty free license ed è stato modificato e UV-mapped per adattarsi alle esigenze.
 Le texture sono disegnate a partire da basi reperite su www.textures.com, ricomposte e ritoccate per costruire la diffuseMap da cui poi sono state realizzate le altre texture necessarie. Le normalMap in particolare sono generate tramite plugin di Gimp esterno a partire dalle diffuseMap.
 
+![modello](screenshots/model.png)
+
 ## Shader
 
 Gli shader creati implementano la Lambertian BRDF e la Microfacet Specular BRDF per il calcolo rispettivamente del fattore diffuse e specular.
@@ -44,5 +46,5 @@ Il menù inoltre implementa una scrollbar nell'eventualità il browser venga rid
 ## Testing
 Il visualizzatore mantiene i 60fps su desktop.
 Su mobile è stato testato sia su chrome che su safari e preserva la totalità delle funzionalità.
-Sui dispositivi di fascia medio-alta (iphone 6, iphone SE, OnePlus3) il framerate rimane inalterato.
-Sui dispositivi di fascia bassa (Asus zenphone 2, Xiaomi mi a1) il framerate varia dai 25 ai 45 frame.
+Sui dispositivi di fascia medio-alta (iphone 6, iphone SE, OnePlus3) il framerate rimane inalterato a 60fps.
+Sui dispositivi di fascia bassa (Asus zenphone 2, Xiaomi mi a1, Huawei P8 lite smart) il framerate varia dai 30 ai 45 frame.
