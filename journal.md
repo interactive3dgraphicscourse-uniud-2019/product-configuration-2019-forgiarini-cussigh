@@ -44,3 +44,7 @@ Corretti i riflessi indesiderati sulla parte inferiore.
 29.05.2019
 =============
 Realizzato il css dell'interfaccia
+
+01.06.2019
+=============
+Aggiunto il materiale marmo
