@@ -77,5 +77,44 @@ If you use textures / 3D models / substances / ..., make sure that you have the 
 In this project, you are allowed to re-use assets taken elsewhere, but **entirely copying** others' work, even with slight modifications, is forbidden and will have serious consequences beyond the deletion of your project. In any case, mention any source of inspiration in your journal and final report.
 
 ## Credits
-
 The image above comes from a [Ford car configurator built in three.js](http://www.ford.com/cars/mustang/customizer/#!/customize).
+
+## Membri del gruppo
+
+Cussigh Filippo - n° 123413
+
+Forgiarini Alessandro - n° 120562
+
+## Descrizione del progetto
+
+Il progetto riguarda la creazione di un web visualizer per la visualizzazione e modifica di un modello a scelta.
+Il modello scelto è un tavolo suddiviso in due parti: il piano e le gambe.
+L'applicazione permette di variare le parti in base al tipo di materiale (legno, plastica, metallo), a una selezione di colori scelti adatti ai materiali, e ad un fattore di roughness che determina la ruvidità/imperfezione della superficie.
+La telecamera è interamente manovrabile e consente la libera ispezione del tavolo.
+Il progetto è inoltre realizzato in modo da mantenere le medesime funzionalità anche su mobile.
+
+## Modelli e Texture
+
+Il modello del tavolo è scaricato dal sito www.cgtrader.com con royalty free license ed è stato modificato e UV-mapped per adattarsi alle esigenze.
+Le texture sono disegnate a partire da basi reperite su www.textures.com, ricomposte e ritoccate per costruire la diffuseMap da cui poi sono state realizzate le altre texture necessarie. Le normalMap in particolare sono generate tramite plugin di Gimp esterno a partire dalle diffuseMap.
+
+## Shader
+
+Gli shader creati implementano la Lambertian BRDF e la Microfacet Specular BRDF per il calcolo rispettivamente del fattore diffuse e specular.
+In particolare per la Microfacet Specular BRDF vengono utilizzate:
+- la funzione di Schlick per la riflettanza di Fresnel
+- la GGX per la distrubuzione delle microfaccette
+- l'approssimazione di Smith per il fattore geometrico
+
+Inoltre viene implementato il bump mapping.
+
+Gli shader utilizzano quattro texture per ciascune materiale: Diffuse map, Roughness map, Specular map e Normal map
+
+Le luci utilizzate sono bianche e puntiformi, che illuminano la quasi totalità dell'oggetto, in quanto deve risultare visibile da tutte le angolazioni per via dello spostamento manuale della telecamera.
+
+## Interfaccia
+
+L'interfaccia è stata scritta manualmente per permettere la creazione di un menù dinamico, che varii le opzioni a disposizione in base alla scelta del materiale.
+Il menù è diviso in due sezioni indipendenti per la modifica delle due parti del modello tramite un menù a tendina per il materiale, una selezione a icone per il colore e uno slider per la roughness.
+Il css dei menù è interamente personalizzato per rispecchiare la scelta di design del visualizzatore. 
+Sono state implementate le animazioni per l'apertura e chiusura dei menù e del pulsante di collapse.

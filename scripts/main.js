@@ -228,6 +228,36 @@ function createTools() {
       },
     ]
   },
+  {
+    typeID: "marble",
+    typeSelect: "Marmo",
+    roughness: {
+      min: 0.0,
+      max: 1.0,
+      step: 0.05,
+      start: 0
+    },
+    colors: [
+      {
+        id: "_1",
+        alt: "marble1",
+        iconURL: "",
+        iconColor: "#d4bbbe"
+      },
+      {
+        id: "_2",
+        alt: "marble2",
+        iconURL: "",
+        iconColor: "#98b098"
+      },
+      {
+        id: "_3",
+        alt: "marble3",
+        iconURL: "",
+        iconColor: "#c0c0c0"
+      },
+    ]
+  },
   ];
 
   let optionsContainer = document.getElementById("editorOptions");
