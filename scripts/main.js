@@ -285,7 +285,7 @@ function createTools() {
 }
 
 function init() {
-  show_debug_tools = false;
+  show_debug_tools = true;
   show_fps = true;
   if (show_debug_tools) {
     console.log("Follow the 🐇...");
