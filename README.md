@@ -23,7 +23,7 @@ Le texture sono disegnate a partire da basi reperite su www.textures.com, ricomp
 
 ## Shader
 
-Gli shader creati implementano la Lambertian BRDF e la Microfacet Specular BRDF per il calcolo rispettivamente del fattore diffuse e specular.
+Gli shader creati implementano la Lamberti  an BRDF e la Microfacet Specular BRDF per il calcolo rispettivamente del fattore diffuse e specular.
 In particolare per la Microfacet Specular BRDF vengono utilizzate:
 - la funzione di Schlick per la riflettanza di Fresnel
 - la GGX per la distrubuzione delle microfaccette

@@ -76,11 +76,11 @@ function createScene() {
     partID: "2345",
     partDescription: "Piano Tavolo",
     lights: lightsInSceneParameters,
-    materialsAvaiable: ["wood", "metal", "plastic", "marble"],
+    materialsAvaiable: ["wood", "metal", "plastic", "marble","aluminium"],
     textureData: {
       id: "wood",
       color: "_2",
-      normalScale: 0.0
+      normalScale: 0.1
     },
     textureController: textureController
   }));
@@ -96,7 +96,7 @@ function createScene() {
     textureData: {
       id: "plastic",
       color: "_4",
-      normalScale: 0.0
+      normalScale: 0.4
     },
     textureController: textureController
   }));
@@ -110,7 +110,7 @@ function createTools() {
     roughness: {
       min: 0.0,
       max: 4.0,
-      step: 0.2,
+      step: 0.05,
       start: 0.0
     },
     colors: [
@@ -150,9 +150,9 @@ function createTools() {
     typeID: "plastic",
     typeSelect: "Plastica",
     roughness: {
-      min: 0.0,
-      max: 4.0,
-      step: 0.2,
+      min: 0.15,
+      max: 2.3,
+      step: 0.05,
       start: 0.0
     },
     colors: [
@@ -200,7 +200,7 @@ function createTools() {
     roughness: {
       min: 0.0,
       max: 1.0,
-      step: 0.1,
+      step: 0.05,
       start: 0.0
     },
     colors: [
@@ -258,6 +258,26 @@ function createTools() {
         iconURL: "",
         iconColor: "#c0c0c0"
       },
+    ]
+  },
+
+  {
+    typeID: "aluminium",
+    typeSelect: "aluminium",
+    roughness: {
+      min: 0.12,
+      max: 0.26,
+      step: 0.02,
+      start: 0.0
+    },
+    colors: [
+      {
+        id: "_1",
+        alt: "aluminium1",
+        iconURL: "",
+        iconColor: "#d4bbbe"
+      },
+    
     ]
   },
   ];
