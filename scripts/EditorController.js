@@ -79,9 +79,10 @@ class EditorController {
         let element = domEL;
         this.domEL = element;
         this.closeButton = this.domEL.querySelectorAll(".close-button")[0];
+        this.topMenuContainer = this.domEL.querySelectorAll(".top-menu")[0];
         this.menuVisible = true;
         let that = this;
-        this.closeButton.addEventListener("click", closeEditorHandler.bind(this.closeButton, that), false);
+        this.topMenuContainer.addEventListener("click", closeEditorHandler.bind(this.closeButton, that), false);
         this.partsContainer = this.domEL.querySelectorAll(".parts-container")[0];
         this.objectParts = this.partsContainer.querySelectorAll(".part");
         if (this.objectParts.length > 1) {
