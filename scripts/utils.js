@@ -163,6 +163,10 @@ class Util {
     }
 
     static isMobile(){
-        return window.innerWidth <= mobileWidth;
+        return window.innerWidth <= MOBILE_WIDTH;
+    }
+
+    static is(el, selector) {
+        return (el.matches || el.matchesSelector || el.msMatchesSelector || el.mozMatchesSelector || el.webkitMatchesSelector || el.oMatchesSelector).call(el, selector);
     }
 }

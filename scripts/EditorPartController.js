@@ -18,7 +18,7 @@ let textureTypeSelectHandler = function (controller, e) {
 }
 
 let sliderHandler = function (controller, e) {
-    controller.updateSlider(e.target.value);
+    controller.updateControllerRoughness(e.target.value);
 }
 
 class EditorPartController {
@@ -57,9 +57,11 @@ class EditorPartController {
             }
             this.selectTextureMenu.selectedIndex = index;
             this.showTextureTypes(this.objController.textureParameters.material, false);
-
             this.clearTextureColorSelection();
             this.selectTexture(this.objController.textureParameters.color, false);
+
+            this.setSliderValue(
+                this.objController.textureParameters.material, this.objController.textureParameters.normalScale);
         }
     }
 
@@ -90,9 +92,10 @@ class EditorPartController {
             if (textureTypeWrapper.getAttribute("data-texture-type") == typeName) {
                 let slider = textureTypeWrapper.querySelectorAll(".slidercontainer input")[0];
                 let newSlideVal = parseFloat(slider.min);
-                slider.val = newSlideVal;
-                that.updateSlider(newSlideVal);
-
+                slider.value = newSlideVal;
+                if (updateController) {
+                    that.updateControllerRoughness(newSlideVal);
+                }
                 colorID = textureTypeWrapper.querySelectorAll(".texture-icon-wrapper")[0].getAttribute("data-icon-id");
                 that.selectTexture(colorID, false);
                 textureTypeWrapper.classList.remove("hide");
@@ -113,13 +116,30 @@ class EditorPartController {
         });
     }
 
-    updateSlider(newVal) {
+    updateControllerRoughness(newVal) {
         this.objController.updateTextureRoughness(newVal);
     }
 
     resetSliders() {
         this.rangeInput.forEach(range => {
             range.value = 0.0;
+        });
+    }
+
+    setSliderValue(material, value) {
+        this.rangeInput.forEach(range => {
+            let el = range;
+            while (!Util.is(el, ".available-textures")) {
+                el = el.parentNode;
+            }
+            if (el.getAttribute('data-texture-type') === material) {
+                if (value < range.min) {
+                    value = range.min;
+                } else if (value > range.max) {
+                    value = range.max;
+                }
+                range.value = value;
+            }
         });
     }
 }

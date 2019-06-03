@@ -2,12 +2,13 @@
 /**
  * Creates an istance of THREE.OrbitControls used to move the camera.
  */
-function createControls() {
+function createControls(lookAt) {
   controls = new THREE.OrbitControls(camera, renderer.domElement);
 
   // disabling key commands
   controls.enableKeys = false;
-
+  lookAt = typeof lookAt == "undefined" ? new THREE.Vector3(0, 0, 0) : lookAt;
+  controls.target = lookAt;
   //call this only in static scenes (i.e., if there is no animation loop)
   //controls.addEventListener( 'change', render );
 }
@@ -22,7 +23,7 @@ function resizeListener(e) {
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   menuControllers.forEach(controller => {
-    if(controller.type == "editor"){
+    if (controller.type == "editor") {
       controller.istance.updateDimensions();
     }
   });
@@ -44,9 +45,8 @@ function createRenderer() {
  * If position and lookAt parameters are not passed, camera will be placed at 2,5,10 and look at 0,0,0.
  *
  * @param {Object} [position] Vector3 of camera position
- * @param {Object} [lookAt]   Vector3 of camera lookAt
  */
-function createCamera(position, lookAt) {
+function createCamera(position) {
   camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
@@ -56,8 +56,6 @@ function createCamera(position, lookAt) {
   position =
     typeof position == "undefined" ? new THREE.Vector3(10, 20, 20) : position;
   camera.position.set(position.x, position.y, position.z);
-  lookAt = typeof lookAt == "undefined" ? new THREE.Vector3(0, 0, 0) : lookAt;
-  camera.lookAt(lookAt);
 }
 
 function createScene() {
@@ -68,7 +66,7 @@ function createScene() {
   let vs = document.getElementById("vertexShader").textContent;
   let fs = document.getElementById("fragmentShader").textContent;
 
-  textureController = new TextureController("./textures/tables/");
+  textureController = new TextureController(TEXTURES_PATH + "tables/");
   sceneObjectsControllers = [];
 
   sceneObjectsControllers.push(new ObjPartController({
@@ -78,9 +76,11 @@ function createScene() {
     partID: "2345",
     partDescription: "Piano Tavolo",
     lights: lightsInSceneParameters,
+    materialsAvaiable: ["wood", "metal", "plastic", "marble"],
     textureData: {
       id: "wood",
-      color: "_2"
+      color: "_2",
+      normalScale: 0.0
     },
     textureController: textureController
   }));
@@ -91,10 +91,12 @@ function createScene() {
     modelName: "legs",
     partID: "1234",
     partDescription: "Gambe Tavolo",
+    materialsAvaiable: ["wood", "metal", "plastic"],
     lights: lightsInSceneParameters,
     textureData: {
       id: "plastic",
-      color: "_4"
+      color: "_4",
+      normalScale: 0.0
     },
     textureController: textureController
   }));
@@ -109,7 +111,7 @@ function createTools() {
       min: 0.0,
       max: 4.0,
       step: 0.2,
-      start: 0
+      start: 0.0
     },
     colors: [
       {
@@ -151,7 +153,7 @@ function createTools() {
       min: 0.0,
       max: 4.0,
       step: 0.2,
-      start: 0
+      start: 0.0
     },
     colors: [
       {
@@ -199,7 +201,7 @@ function createTools() {
       min: 0.0,
       max: 1.0,
       step: 0.1,
-      start: 0
+      start: 0.0
     },
     colors: [
       {
@@ -235,7 +237,7 @@ function createTools() {
       min: 0.0,
       max: 1.0,
       step: 0.05,
-      start: 0
+      start: 0.0
     },
     colors: [
       {
@@ -262,13 +264,14 @@ function createTools() {
 
   let optionsContainer = document.getElementById("editorOptions");
   let partsWrapper = optionsContainer.querySelectorAll(".parts-container")[0];
-  
+
   menuControllers = [];
   sceneObjectsControllers.forEach(objControl => {
     let menuData = {
       partID: objControl.name,
       partName: objControl.description,
       textures: avaiableTextures,
+      controller: objControl
     }
     let partMenuContainer = buildMenuOptions(partsWrapper, menuData);
     menuControllers.push({
@@ -282,22 +285,32 @@ function createTools() {
 }
 
 function init() {
-  console.log("Follow the 🐇...");
+  show_debug_tools = false;
+
+  if (show_debug_tools) {
+    console.log("Follow the 🐇...");
+  }
+
   htmlParser = new DOMParser();;
 
   scene = new THREE.Scene();
-  show_debug_tools = true;
 
   createRenderer();
 
-  createCamera(new THREE.Vector3(
+  let cameraPosition = new THREE.Vector3(
     2.792848812291361,
     6.611740148960574,
     7.46642801695597
-  ));
+  );
+  createCamera(cameraPosition);
 
+  let cameraLookAt = new THREE.Vector3(
+    0,
+    2.05,
+    0
+  )
   // controls for camera
-  createControls();
+  createControls(cameraLookAt);
 
   // creating stats of frame
   if (show_debug_tools) {

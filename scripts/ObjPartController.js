@@ -1,29 +1,38 @@
 class ObjPartController {
     constructor(data) {
+
+        this.materials = data.materialsAvaiable;
+
         this.textureParameters = {
             material: null,
             color: null,
             repeatS: 1.0,
             repeatT: 1.0,
-            normalScale: 0.0,
+            normalScale: data.textureData.normalScale,
         };
-
-        this.maps = {
-            normalMap: null,
-            diffuseMap: null,
-            specularMap: null,
-            roughnessMap: null,
-        }
-
 
         this.lights = data.lights;
 
         this.uniforms = {
+            // texture
             specularMap: { type: "t", value: undefined },
             diffuseMap: { type: "t", value: undefined },
             roughnessMap: { type: "t", value: undefined },
             normalMap: { type: "t", value: undefined },
-            normalScale: { type: "v2", value: new THREE.Vector2(1, 1) },
+            normalScale: { 
+                type: "v2", 
+                value: new THREE.Vector2(
+                    this.textureParameters.normalScale, 
+                    this.textureParameters.normalScale) 
+            },
+            textureRepeat: { 
+                type: "v2", 
+                value: new THREE.Vector2(
+                    this.textureParameters.repeatS, 
+                    this.textureParameters.repeatT) 
+            },
+
+            //scene lights
             pointLightPosition1: { type: "v3", value: this.lights[0].position },
             pointLightPosition2: { type: "v3", value: this.lights[1].position },
             pointLightPosition3: { type: "v3", value: this.lights[2].position },
@@ -48,14 +57,11 @@ class ObjPartController {
                     this.lights[2].green * this.lights[2].intensity,
                     this.lights[2].blue * this.lights[2].intensity)
             },
-            textureRepeat: { type: "v2", value: new THREE.Vector2(1, 1) }
         }
 
         this.textureController = data.textureController;
 
         this.updateTexture(data.textureData.id, data.textureData.color);
-
-        this.uniforms.textureRepeat.value = new THREE.Vector2(this.textureParameters.repeatS, this.textureParameters.repeatT);
 
         this.material = new THREE.ShaderMaterial({
             uniforms: this.uniforms,
@@ -65,10 +71,12 @@ class ObjPartController {
 
         this.material.vertexTangents = true;
         this.material.needsUpdate = true;
+
+        //Loading object model
         let loader = new THREE.OBJLoader2();
         loader.useIndices = true;
         let that = this;
-        loader.load("models/" + data.modelName + ".obj", function (obj) {
+        loader.load(MODELS_PATH + data.modelName + ".obj", function (obj) {
             let geometry = obj.detail.loaderRootNode.children[0].geometry;
             let mesh = new THREE.Mesh(geometry, that.material);
             mesh.scale.multiplyScalar(0.05);
@@ -90,15 +98,10 @@ class ObjPartController {
 
         let texture = this.textureController.getTexture(this.textureParameters.material, this.textureParameters.color);
 
-        this.maps.normalMap = texture.normalMap;
-        this.maps.diffuseMap = texture.diffuseMap;
-        this.maps.specularMap = texture.specularMap;
-        this.maps.roughnessMap = texture.roughnessMap;
-
-        this.uniforms.diffuseMap.value = this.maps.diffuseMap;
-        this.uniforms.specularMap.value = this.maps.specularMap;
-        this.uniforms.roughnessMap.value = this.maps.roughnessMap;
-        this.uniforms.normalMap.value = this.maps.normalMap;
+        this.uniforms.diffuseMap.value = texture.diffuseMap;
+        this.uniforms.specularMap.value = texture.specularMap;
+        this.uniforms.roughnessMap.value = texture.roughnessMap;
+        this.uniforms.normalMap.value = texture.normalMap;
     }
 
     updateTextureColor(color) {
@@ -108,17 +111,19 @@ class ObjPartController {
         this.textureParameters.color = color;
         let texture = this.textureController.getTexture(this.textureParameters.material, this.textureParameters.color);
 
-        this.maps.diffuseMap = texture.diffuseMap;
-        this.uniforms.diffuseMap.value = this.maps.diffuseMap;
+        this.uniforms.diffuseMap.value = texture.diffuseMap;
         this.material.needsUpdate = true;
     }
 
     updateTextureRoughness(val) {
         this.textureParameters.normalScale = val;
-        this.uniforms.normalScale.value = new THREE.Vector2(this.textureParameters.normalScale, this.textureParameters.normalScale);
+        this.uniforms.normalScale.value = new THREE.Vector2(
+            this.textureParameters.normalScale, 
+            this.textureParameters.normalScale
+            );
     }
 
-    updateLightPositions(){
-        
+    updateLightPositions() {
+
     }
 }
