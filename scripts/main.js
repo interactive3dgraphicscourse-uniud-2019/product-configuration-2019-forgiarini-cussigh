@@ -286,7 +286,7 @@ function createTools() {
 
 function init() {
   show_debug_tools = false;
-
+  show_fps = true;
   if (show_debug_tools) {
     console.log("Follow the 🐇...");
   }
@@ -313,8 +313,11 @@ function init() {
   createControls(cameraLookAt);
 
   // creating stats of frame
-  if (show_debug_tools) {
+  if (show_fps) {
     stats = Util.createStats();
+  }
+
+  if (show_debug_tools) {
     // uncomment if you need to draw coordinate axes when building the scene
     Coordinates.drawAllAxes();
   }
@@ -331,7 +334,7 @@ function init() {
 function updateWorld() {
   requestAnimationFrame(updateWorld);
   controls.update();
-  if (show_debug_tools) {
+  if (show_fps) {
     stats.update();
   }
   renderWorld();
