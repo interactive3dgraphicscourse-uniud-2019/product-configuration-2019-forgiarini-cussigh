@@ -37,7 +37,8 @@ function createRenderer() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0xf0f0f0);
   renderer.setPixelRatio(window.devicePixelRatio);
-  document.body.appendChild(renderer.domElement);
+  let canvasContainer = document.getElementById("rendererContainer");
+  canvasContainer.appendChild(renderer.domElement);
 }
 
 /**
