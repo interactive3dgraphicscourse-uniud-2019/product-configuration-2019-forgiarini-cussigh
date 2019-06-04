@@ -10,7 +10,7 @@ Forgiarini Alessandro - n° 120562
 
 Il progetto riguarda la creazione di un web visualizer per la visualizzazione e modifica di un modello a scelta.
 Il modello scelto è un tavolo suddiviso in due parti: il piano e le gambe.
-L'applicazione permette di variare le parti in base al tipo di materiale (legno, plastica, metallo, marmo), a una selezione di colori scelti adatti ai materiali, e ad un fattore di roughness che determina la ruvidità/imperfezione della superficie.
+L'applicazione permette di variare le parti in base al tipo di materiale (legno, plastica, metallo, marmo, alluminio), a una selezione di colori scelti adatti ai materiali, e ad un fattore di roughness che determina la ruvidità/imperfezione della superficie.
 La telecamera è interamente manovrabile e consente la libera ispezione del tavolo.
 Il progetto è inoltre realizzato in modo da mantenere le medesime funzionalità anche su mobile.
 
@@ -34,6 +34,7 @@ Inoltre viene implementato il bump mapping.
 Gli shader utilizzano quattro texture per ciascune materiale: Diffuse map, Roughness map, Specular map e Normal map
 
 Le luci utilizzate sono bianche e puntiformi, che illuminano la quasi totalità dell'oggetto, in quanto deve risultare visibile da tutte le angolazioni per via dello spostamento manuale della telecamera.
+Infine è presente una luce ambientale di intensità bassa per rendere visibili le parti del tavolo non raggiunte dalle luci puntiformi.
 
 ## Interfaccia
 

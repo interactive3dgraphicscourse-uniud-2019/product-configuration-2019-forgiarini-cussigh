@@ -48,3 +48,11 @@ Realizzato il css dell'interfaccia
 01.06.2019
 =============
 Aggiunto il materiale marmo
+
+03.06.2019
+=============
+Aggiunta una luce ambientale    
+
+04.06.2019
+=============
+Aggiunto il materiale alluminio

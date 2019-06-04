@@ -79,7 +79,7 @@ function createScene() {
     materialsAvaiable: ["wood", "metal", "plastic", "marble","aluminium"],
     textureData: {
       id: "wood",
-      color: "_2",
+      color: "_1",
       normalScale: 0.1
     },
     textureController: textureController
@@ -94,8 +94,8 @@ function createScene() {
     materialsAvaiable: ["wood", "metal", "plastic"],
     lights: lightsInSceneParameters,
     textureData: {
-      id: "plastic",
-      color: "_4",
+      id: "metal",
+      color: "_3",
       normalScale: 0.4
     },
     textureController: textureController
@@ -263,7 +263,7 @@ function createTools() {
 
   {
     typeID: "aluminium",
-    typeSelect: "aluminium",
+    typeSelect: "Aluminium",
     roughness: {
       min: 0.12,
       max: 0.26,
@@ -275,9 +275,14 @@ function createTools() {
         id: "_1",
         alt: "aluminium1",
         iconURL: "",
-        iconColor: "#d4bbbe"
+        iconColor: "#979ca0"
       },
-    
+      {
+        id: "_2",
+        alt: "aluminium2",
+        iconURL: "",
+        iconColor: "#958e67"
+      },
     ]
   },
   ];
