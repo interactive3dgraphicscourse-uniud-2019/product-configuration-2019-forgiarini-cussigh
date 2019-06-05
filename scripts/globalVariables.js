@@ -21,3 +21,4 @@ let sceneObjectsControllers;
 let textureController;
 
 let menuControllers;
+let partsControllers;

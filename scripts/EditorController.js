@@ -72,7 +72,7 @@ function buildMenuOptions(container, data) {
 function buildPresetObj(container, data){
 
     let dataToEncode = {
-        table: data.table,
+        plane: data.plane,
         legs: data.legs
     }
 
@@ -112,7 +112,6 @@ class EditorController {
     
     static addSeparators(container, separatorTemplateName){
         let objectParts = container.childNodes;
-        console.log(objectParts);
         if (objectParts.length > 1) {
             objectParts.forEach((part, i) => {
                 if (i > 0) {

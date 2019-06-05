@@ -201,12 +201,8 @@ class EditorPartController {
     }
 
     updateMenu(data){
-/*
-        {mat:"plastic", color: "_4", roughness: 2.0}
-*/
-        //select material
         this.fakeMaterials.forEach(item => {
-            if(item.matID == data.mat){
+            if(item.matID == data.material){
                 // Triggering change event
                 let event = document.createEvent('HTMLEvents');
                 event.initEvent('click', true, false);
@@ -220,7 +216,7 @@ class EditorPartController {
         this.selectTexture(data.color, true);
 
         //update roughness
-        this.setSliderValue(data.mat, data.roughness);
+        this.setSliderValue(data.material, data.roughness);
         this.updateControllerRoughness(data.roughness);
     }
 
