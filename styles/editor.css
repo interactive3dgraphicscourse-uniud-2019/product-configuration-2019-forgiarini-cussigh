@@ -1,34 +1,10 @@
-@font-face {
-	font-family: 'Aquawax';
-	src: URL('fonts/Aquawax\ Medium\ Trial.ttf') format('truetype');
-}
-
-.options-container {
-	width: 100%;
-	position: fixed;
-	margin: 0px 0px 0px 0px;
-	z-index: 0;
-	height: 0;
-}
-
 #editorOptions {
-	width: 300px;
 	float: right;
-	background-color: rgba(226, 233, 255, 0.73);
-	padding: 10px;
-	font-family: 'Aquawax', 'Times New Roman', serif;
+}
+
+.menu-label{
 	font-size: 20px;
-	letter-spacing: 2px;
-	word-spacing: 2px;
-	color: #656b7c;
-	font-weight: 400;
-	text-decoration: none;
-	font-style: normal;
-	font-variant: normal;
-	text-transform: none;
-	border-width: 2px;
-	border-style: solid;
-	border-color: #656b7c;
+	font-weight: 800;
 }
 
 div.label {
@@ -44,7 +20,7 @@ div.part-name {
 	font-weight: bold;
 }
 
-.part-separator {
+.part-separator, .preset-separator {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	width: 100%;
@@ -121,7 +97,7 @@ div.part-name {
 	visibility: visible;
 }
 
-.parts-container {
+.parts-container, .presets-list-container {
 	overflow-x: hidden;
 	overflow-y: auto;
 	max-height: 1080px;
@@ -135,7 +111,7 @@ div.part-name {
 	transition: max-height 0.25s ease-in;
 }
 
-.parts-container.hide {
+.parts-container.hide, .presets-list-container.hide {
 	overflow-y: hidden;
 	max-height: 0px;
 	/* Firefox */
@@ -247,7 +223,6 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .close-button {
-	cursor: pointer;
 	float: right;
 	/* Firefox */
 	-moz-transition: all 0.25s ease;
@@ -292,14 +267,123 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .top-menu {
+	cursor: pointer;
 	width: 100%;
 	height: 30px;
+	display: -ms-flexbox;
+	display: -webkit-flex;
 	display: flex;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-flex-wrap: nowrap;
+	-ms-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+	-webkit-justify-content: space-between;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	-webkit-align-content: flex-start;
+	-ms-flex-line-pack: start;
+	align-content: flex-start;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
 	align-items: center;
-	justify-content: flex-end;
 }
 
 .bottom-parts {
 	width: 100%;
 	height: 30px;
+}
+
+/*the container must be positioned relative:*/
+.select-wrapper {
+	position: relative;
+	font-family: 'Aquawax', 'Times New Roman', serif;
+	font-size: 17px;
+	width: 50%;
+}
+
+.select-wrapper select {
+	display: none;
+	/*hide original SELECT element:*/
+}
+
+.select-selected {
+	background-color: #e6e3eb;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+	position: absolute;
+	content: "";
+	top: 14px;
+	right: 10px;
+	width: 0;
+	height: 0;
+	border: 6px solid transparent;
+	border-color: #fff transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+
+.select-selected.select-arrow-active:after {
+	border-color: transparent transparent #fff transparent;
+	top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div,
+.select-selected {
+	color: #656b7c;
+	padding: 8px 16px;
+	border: 1px solid transparent;
+	border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+	cursor: pointer;
+	user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+	position: absolute;
+	background-color: #e6e9eb;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 99;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+	display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.available-textures-wrapper, .select-wrapper > div, .slidercontainer input {
+    margin-left: 10px;
+}
+
+#presetsContainer{
+	float: left;
+  width: 200px;
+}
+
+.preset-wrapper{
+cursor: pointer;
+  width: 180px;
+  height: 100px;
+  padding: 10px;
+}
+
+.preview-icon-container{
+  width: 100%;
+  height: 100%;
+}
+
+.preview-icon{
+  width: 100%;
+  height: 100%;
 }

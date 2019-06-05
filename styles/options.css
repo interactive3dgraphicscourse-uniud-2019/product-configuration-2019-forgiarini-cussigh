@@ -1,0 +1,26 @@
+
+.options-container {
+	width: 100%;
+	position: fixed;
+	margin: 0px 0px 0px 0px;
+	z-index: 1;
+	height: 0;
+}
+
+.options{
+	width: 300px;
+	background-color: rgba(226, 233, 255, 0.73);
+	padding: 10px;
+	font-size: 20px;
+	letter-spacing: 2px;
+	word-spacing: 2px;
+	color: #656b7c;
+	font-weight: 400;
+	text-decoration: none;
+	font-style: normal;
+	font-variant: normal;
+	text-transform: none;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #656b7c;
+}
