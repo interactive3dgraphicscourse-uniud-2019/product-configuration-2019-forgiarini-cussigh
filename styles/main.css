@@ -22,13 +22,11 @@ body {
 
 .site-navbar{
     position: relative;
-}
-
-.site-navbar{
     z-index: 1;
 }
 
 .site-nav-container{
+    padding: 20px;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
@@ -51,4 +49,25 @@ body {
 
 .site-menu li{
     display: inline;
+    padding: 10px 20px;
+    margin: 0 5px;
+    font-size: 18px;
+    background-color: red;
+    border-radius: 20px;
+    font-family: 'Aquawax', 'Times New Roman', serif;
+    text-decoration: none;
+}
+
+.site-menu li > a{
+    color: white;
+}
+.site-menu li:hover{
+    background-color: rgb(255, 125, 131);
+    cursor: pointer;
+    cursor: hand;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
 }
