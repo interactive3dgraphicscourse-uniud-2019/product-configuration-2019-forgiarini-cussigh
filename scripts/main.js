@@ -280,8 +280,49 @@ function createTools() {
     });
   });
 
+  EditorController.addSeparators(partsWrapper, "tmpl-part-separator");
   menuControllers.push({
-    type: "editor", istance: new EditorController(optionsContainer)
+    type: "editor", istance: new EditorController(optionsContainer, ".parts-container")
+  });
+  
+  let presets = [
+    {
+      preview: "https://image.shutterstock.com/image-photo/funny-chihuahua-dog-posing-raincoat-260nw-1120210925.jpg",
+      alt: "tavolo bello",
+      table: {
+        material: "",
+        color: "",
+        roughness: 0
+      },
+      legs: {
+        material: "",
+        color: "",
+        roughness: 0
+      }
+    },
+    {
+      preview: "https://image.shutterstock.com/image-vector/cute-smiling-welsh-corgi-dog-260nw-1014458896.jpg",
+      alt: "tavolo ancora bello",
+      table: {
+        material: "",
+        color: "",
+        roughness: 0
+      },
+      legs: {
+        material: "",
+        color: "",
+        roughness: 0
+      }
+    },
+  ];
+  let presetsContainer = document.getElementById("presetsContainer");
+  let presetsWrapper = presetsContainer.querySelectorAll(".presets-list-container")[0];
+  for(i=0; i<presets.length; i++){
+    buildPresetObj(presetsWrapper, presets[i]);
+  }
+  EditorController.addSeparators(presetsWrapper, "tmpl-preset-separator");
+  menuControllers.push({
+    type: "editor", istance: new EditorController(presetsContainer, ".presets-list-container")
   });
 }
 

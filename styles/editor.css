@@ -1,34 +1,5 @@
-@font-face {
-	font-family: 'Aquawax';
-	src: URL('fonts/Aquawax\ Medium\ Trial.ttf') format('truetype');
-}
-
-.options-container {
-	width: 100%;
-	position: fixed;
-	margin: 0px 0px 0px 0px;
-	z-index: 1;
-	height: 0;
-}
-
 #editorOptions {
-	width: 300px;
 	float: right;
-	background-color: rgba(226, 233, 255, 0.73);
-	padding: 10px;
-	font-family: 'Aquawax', 'Times New Roman', serif;
-	font-size: 20px;
-	letter-spacing: 2px;
-	word-spacing: 2px;
-	color: #656b7c;
-	font-weight: 400;
-	text-decoration: none;
-	font-style: normal;
-	font-variant: normal;
-	text-transform: none;
-	border-width: 2px;
-	border-style: solid;
-	border-color: #656b7c;
 }
 
 .menu-label{
@@ -49,7 +20,7 @@ div.part-name {
 	font-weight: bold;
 }
 
-.part-separator {
+.part-separator, .preset-separator {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	width: 100%;
@@ -126,7 +97,7 @@ div.part-name {
 	visibility: visible;
 }
 
-.parts-container {
+.parts-container, .presets-list-container {
 	overflow-x: hidden;
 	overflow-y: auto;
 	max-height: 1080px;
@@ -140,7 +111,7 @@ div.part-name {
 	transition: max-height 0.25s ease-in;
 }
 
-.parts-container.hide {
+.parts-container.hide, .presets-list-container.hide {
 	overflow-y: hidden;
 	max-height: 0px;
 	/* Firefox */
@@ -393,4 +364,26 @@ input[type=range]:focus::-ms-fill-upper {
 
 .available-textures-wrapper, .select-wrapper > div, .slidercontainer input {
     margin-left: 10px;
+}
+
+#presetsContainer{
+	float: left;
+  width: 200px;
+}
+
+.preset-wrapper{
+cursor: pointer;
+  width: 180px;
+  height: 100px;
+  padding: 10px;
+}
+
+.preview-icon-container{
+  width: 100%;
+  height: 100%;
+}
+
+.preview-icon{
+  width: 100%;
+  height: 100%;
 }

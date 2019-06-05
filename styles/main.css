@@ -1,5 +1,10 @@
+@font-face {
+	font-family: 'Aquawax';
+	src: URL('fonts/Aquawax\ Medium\ Trial.ttf') format('truetype');
+}
+
 body {
-    font-family: Monospace;
+	font-family: 'Aquawax', 'Times New Roman', serif;
     background-color: #f0f0f0;
     margin: 0px;
     overflow: hidden;
@@ -16,11 +21,8 @@ body {
     z-index: 0;
 }
 
-.bg-white{
-    background-color: #ffffff;
-}
-
 .site-navbar{
+    background-color: #ffffff;
     position: relative;
     z-index: 1;
 }
@@ -52,7 +54,7 @@ body {
     padding: 10px 20px;
     margin: 0 5px;
     font-size: 18px;
-    background-color: red;
+    background-color: rgb(100, 154, 235);
     border-radius: 20px;
     font-family: 'Aquawax', 'Times New Roman', serif;
     text-decoration: none;
@@ -62,7 +64,7 @@ body {
     color: white;
 }
 .site-menu li:hover{
-    background-color: rgb(255, 125, 131);
+    background-color: rgb(146, 179, 230);
     cursor: pointer;
     cursor: hand;
 }

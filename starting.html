@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link type="text/css" rel="stylesheet" href="styles/options.css">
   <link type="text/css" rel="stylesheet" href="styles/editor.css">
   <link type="text/css" rel="stylesheet" href="styles/main.css">
   <script src="lib/three.js"></script>
@@ -31,44 +32,68 @@
   <header class="site-navbar bg-white" role="banner">
     <div class="site-nav-container">
         <div class="logo-container">
-          <a href="index.html" class=""><img src="images/logo.png" alt="Acme logo" width="100px"/></a>
+          <a href="#" class=""><img src="images/logo.png" alt="Acme logo" width="100px"/></a>
         </div>
         <div class="site-navigation-container">
           <nav class="site-navigation" role="navigation">
             <ul class="site-menu">
-              <li><a href="#home-section" class="nav-link">Home</a></li>
-              <li><a href="#products-section" class="nav-link">Products</a></li>
+              <li><a href="#" class="nav-link">Home</a></li>
+              <li><a href="#" class="nav-link">Products</a></li>
               <li><a href="#" class="nav-link">About Us</a></li>
-              <li><a href="#contact-section" class="nav-link">Contact</a></li>
+              <li><a href="#" class="nav-link">Contact</a></li>
             </ul>
           </nav>
         </div>
       </div>
     </div>
   </header>
+  <div class="presets-container">
+    
+  </div>
   <div class="options-container">
     <div id="editorOptions" class="options">
         <div class="top-menu">
-            <div class="menu-label">Opzioni</div>
+            <div class="menu-label">Options</div>
             <div class="close-button">
-              <div class="close-icon-container">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="512px" height="512px" class="">
-                  <g>
-                    <script xmlns="http://www.w3.org/2000/svg" class="active-path" style="fill:#000000"></script>
-                    <g>
-                      <path d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" data-original="#000000" class="active-path" fill="#000000"></path>
-                    </g>
-                  </g> 
-                </svg>            
-              </div>
+                <div class="close-icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="512px" height="512px" class="">
+                        <g>
+                            <script xmlns="http://www.w3.org/2000/svg" class="active-path" style="fill:#000000"></script>
+                            <g>
+                                <path d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" data-original="#000000" class="active-path" fill="#000000"></path>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
             </div>
-          </div>
-          <div class="parts-container"></div>
         </div>
-      </div>
-  <div id="rendererContainer"></div>
-  <div style="display: none">
+        <div class="parts-container"></div>
+    </div>
 
+    <div id="presetsContainer" class="options">
+        <div class="top-menu">
+            <div class="menu-label">Presets</div>
+            <div class="close-button">
+                <div class="close-icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="512px" height="512px" class="">
+                        <g>
+                            <script xmlns="http://www.w3.org/2000/svg" class="active-path" style="fill:#000000"></script>
+                            <g>
+                                <path d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" data-original="#000000" class="active-path" fill="#000000"></path>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="presets-list-container"></div>
+    </div>
+
+  </div>
+  
+  <div id="rendererContainer"></div>
+
+  <div style="display: none">
     <!-- Shaders -->
     <script type="text/x-glsl" id="vertexShader">
         varying vec3 vNormal;
@@ -199,6 +224,19 @@
     <!-- templates used to create options menu -->
     <script type="text/x-tmpl" id="tmpl-part-separator">
       <div class="part-separator"></div>
+    </script>
+
+    <script type="text/x-tmpl" id="tmpl-preset-separator">
+      <div class="preset-separator"></div>
+    </script>
+    
+    <script type="text/x-tmpl" id="tmpl-preset">
+      <div class="preset-wrapper">
+          <div class="preset-data" style="display: none" data-preset="{%=preset.data%}"></div>
+          <div class="preview-icon-container">
+            <img class="preview-icon" src="{%=preset.preview_url%}" alt="{%=preset.preview_alt%}" />
+          </div>
+      </div>
     </script>
 
     <script type="text/x-tmpl" id="tmpl-bottom-parts">

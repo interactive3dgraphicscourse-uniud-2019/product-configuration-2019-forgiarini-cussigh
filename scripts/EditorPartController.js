@@ -200,9 +200,33 @@ class EditorPartController {
         });
     }
 
+    updateMenu(data){
+/*
+        {mat:"plastic", color: "_4", roughness: 2.0}
+*/
+        //select material
+        this.fakeMaterials.forEach(item => {
+            if(item.matID == data.mat){
+                // Triggering change event
+                let event = document.createEvent('HTMLEvents');
+                event.initEvent('click', true, false);
+                item.domEl.dispatchEvent(event);
+                return;
+            }
+        });
+        
+        //select color
+        this.clearTextureColorSelection();
+        this.selectTexture(data.color, true);
+
+        //update roughness
+        this.setSliderValue(data.mat, data.roughness);
+        this.updateControllerRoughness(data.roughness);
+    }
+
     createFakeSelectMenu() {
         let selectWrapper = this.selectTextureMenu.parentNode;
-
+        this.fakeMaterials = [];
         /*create a new DIV that will act as the selected item*/
         let fakeSelected = document.createElement("DIV");
         fakeSelected.setAttribute("class", "select-selected");
@@ -219,6 +243,7 @@ class EditorPartController {
             fakeOption.innerHTML = this.selectTextureMenu.options[i].innerHTML;
             fakeOption.addEventListener("click", fakeOptionHandler.bind(fakeOption, this.selectTextureMenu), false);
             fakeOptionsContainer.appendChild(fakeOption);
+            this.fakeMaterials.push({ matID: this.selectTextureMenu.options[i].value, domEl: fakeOption });
         }
 
         selectWrapper.appendChild(fakeOptionsContainer);

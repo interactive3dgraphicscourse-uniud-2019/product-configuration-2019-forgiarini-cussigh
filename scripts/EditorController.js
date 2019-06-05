@@ -69,13 +69,29 @@ function buildMenuOptions(container, data) {
     return partEditor;
 }
 
+function buildPresetObj(container, data){
+
+    let dataToEncode = {
+        table: data.table,
+        legs: data.legs
+    }
+
+    let tmpl_obj = {
+        data: JSON.stringify(dataToEncode),
+        preview_url: data.preview,
+        alt: data.alt,
+    };
+    let preset = Util.createNodeHTML("tmpl-preset", "preset", tmpl_obj);
+    container.appendChild(preset);
+}
+
 let closeEditorHandler = function (controller, e) {
     controller.updateVisibility();
 }
 
 class EditorController {
 
-    constructor(domEL) {
+    constructor(domEL, partsToHideSelector) {
         let element = domEL;
         this.domEL = element;
         this.closeButton = this.domEL.querySelectorAll(".close-button")[0];
@@ -83,23 +99,28 @@ class EditorController {
         this.menuVisible = true;
         let that = this;
         this.topMenuContainer.addEventListener("click", closeEditorHandler.bind(this.closeButton, that), false);
-        this.partsContainer = this.domEL.querySelectorAll(".parts-container")[0];
-        this.objectParts = this.partsContainer.querySelectorAll(".part");
-        if (this.objectParts.length > 1) {
-            this.objectParts.forEach((part, i) => {
+        this.partsContainer = this.domEL.querySelectorAll(partsToHideSelector)[0];
+    
+        let bottomPartsFix = Util.createNodeHTML("tmpl-bottom-parts", "fix", {});
+        this.partsContainer.appendChild(bottomPartsFix);
+        
+        this.menuTotalHeight = this.domEL.offsetHeight;
+        this.partsContainerHeight = this.partsContainer.offsetHeight;
+
+        this.updateDimensions();
+    }
+    
+    static addSeparators(container, separatorTemplateName){
+        let objectParts = container.childNodes;
+        console.log(objectParts);
+        if (objectParts.length > 1) {
+            objectParts.forEach((part, i) => {
                 if (i > 0) {
-                    let separator = Util.createNodeHTML("tmpl-part-separator", "separator", {});
-                    that.partsContainer.insertBefore(separator, part);
+                    let separator = Util.createNodeHTML(separatorTemplateName, "separator", {});
+                    container.insertBefore(separator, part);
                 }
             });
         }
-
-        let bottomPartsFix = Util.createNodeHTML("tmpl-bottom-parts", "fix", {});
-        this.partsContainer.appendChild(bottomPartsFix);
-
-        this.menuTotalHeight = this.domEL.offsetHeight;
-        this.partsContainerHeight = this.partsContainer.offsetHeight;
-        this.updateDimensions();
     }
 
     updateVisibility() {
@@ -128,8 +149,8 @@ class EditorController {
 
     updateDimensions() {
         // fixing parts container height to show or hide scrollbar
-        if (window.innerHeight < this.menuTotalHeight) {
-            this.partsContainer.style.height = (window.innerHeight - (this.menuTotalHeight - this.partsContainerHeight)) + "px";
+        if (window.innerHeight - 94 < this.menuTotalHeight) {
+            this.partsContainer.style.height = ((window.innerHeight - 94) - (this.menuTotalHeight - this.partsContainerHeight)) + "px";
         } else {
             this.partsContainer.style.height = "";
         }
