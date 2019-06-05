@@ -199,7 +199,7 @@ function createTools() {
     roughness: {
       min: 0.0,
       max: 1.0,
-      step: 0.05,
+      step: 0.01,
       start: 0.0
     },
     colors: [
@@ -235,7 +235,7 @@ function createTools() {
     roughness: {
       min: 0.0,
       max: 1.0,
-      step: 0.05,
+      step: 0.02,
       start: 0.0
     },
     colors: [
@@ -266,7 +266,7 @@ function createTools() {
     roughness: {
       min: 0.12,
       max: 0.26,
-      step: 0.02,
+      step: 0.002,
       start: 0.0
     },
     colors: [
