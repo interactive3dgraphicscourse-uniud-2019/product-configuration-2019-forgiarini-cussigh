@@ -112,8 +112,12 @@ class EditorController {
     
     static addSeparators(container, separatorTemplateName){
         let objectParts = container.childNodes;
-        if (objectParts.length > 1) {
-            objectParts.forEach((part, i) => {
+        let partsPointers = [];
+        objectParts.forEach(part => {
+            partsPointers.push(part);
+        });
+        if (partsPointers.length > 1) {
+            partsPointers.forEach((part, i) => {
                 if (i > 0) {
                     let separator = Util.createNodeHTML(separatorTemplateName, "separator", {});
                     container.insertBefore(separator, part);
