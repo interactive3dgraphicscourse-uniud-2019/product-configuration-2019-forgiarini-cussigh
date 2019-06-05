@@ -73,7 +73,7 @@ function createScene() {
     fragmentShader: fs,
     modelName: "plane",
     partID: "2345",
-    partDescription: "Piano Tavolo",
+    partDescription: "Table Top",
     lights: lightsInSceneParameters,
     materialsAvaiable: ["wood", "metal", "plastic", "marble","aluminium"],
     textureData: {
@@ -89,7 +89,7 @@ function createScene() {
     fragmentShader: fs,
     modelName: "legs",
     partID: "1234",
-    partDescription: "Gambe Tavolo",
+    partDescription: "Table Legs",
     materialsAvaiable: ["wood", "metal", "plastic"],
     lights: lightsInSceneParameters,
     textureData: {
@@ -147,7 +147,7 @@ function createTools() {
   },
   {
     typeID: "plastic",
-    typeSelect: "Plastica",
+    typeSelect: "Plastic",
     roughness: {
       min: 0.15,
       max: 2.3,
@@ -195,7 +195,7 @@ function createTools() {
   },
   {
     typeID: "metal",
-    typeSelect: "Metallo",
+    typeSelect: "Metal",
     roughness: {
       min: 0.0,
       max: 1.0,
@@ -231,7 +231,7 @@ function createTools() {
   },
   {
     typeID: "marble",
-    typeSelect: "Marmo",
+    typeSelect: "Marble",
     roughness: {
       min: 0.0,
       max: 1.0,
@@ -313,31 +313,46 @@ function createTools() {
   
   let presets = [
     {
-      preview: "https://image.shutterstock.com/image-photo/funny-chihuahua-dog-posing-raincoat-260nw-1120210925.jpg",
-      alt: "tavolo bello",
+      preview: "images/tavolo1.jpg",
+      alt: "tavolo marmo",
       plane: {
-        material: "wood",
-        color: "_4",
-        roughness: 0.5
+        material: "marble",
+        color: "_1",
+        roughness: 0.6
       },
       legs: {
-        material: "plastic",
-        color: "_2",
-        roughness: 1.0
+        material: "metal",
+        color: "_4",
+        roughness: 0.2
       }
     },
     {
-      preview: "https://image.shutterstock.com/image-vector/cute-smiling-welsh-corgi-dog-260nw-1014458896.jpg",
-      alt: "tavolo ancora bello",
+      preview: "images/tavolo2.jpg",
+      alt: "tavolo alluminio",
       plane: {
-        material: "marble",
+        material: "aluminium",
+        color: "_1",
+        roughness: 0.17
+      },
+      legs: {
+        material: "wood",
         color: "_2",
-        roughness: 0.2
+        roughness: 2.0
+      }
+    },
+
+    {
+      preview: "images/tavolo3.jpg",
+      alt: "tavolo legno",
+      plane: {
+        material: "wood",
+        color: "_1",
+        roughness: 1.5
       },
       legs: {
         material: "metal",
         color: "_3",
-        roughness: 0
+        roughness: 0.3
       }
     },
   ];
@@ -360,7 +375,7 @@ function createTools() {
 }
 
 function init() {
-  show_debug_tools = true;
+  show_debug_tools = false;
   show_fps = true;
   if (show_debug_tools) {
     console.log("Follow the 🐇...");
