@@ -363,9 +363,7 @@ function createTools() {
     buildPresetObj(presetsWrapper, presets[i]);
   }
 
-  menuControllers.push({
-    type: "preset", istance: new PresetController(presetsWrapper, partsControllers)
-  });
+  let presetController = new PresetController(presetsWrapper, partsControllers);
 
   EditorController.addSeparators(presetsWrapper, "tmpl-preset-separator");
 
