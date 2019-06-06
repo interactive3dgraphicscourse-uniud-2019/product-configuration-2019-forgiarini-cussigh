@@ -23,7 +23,7 @@ function resizeListener(e) {
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   menuControllers.forEach(controller => {
-      controller.istance.updateDimensions();
+    controller.istance.updateDimensions();
   });
 };
 
@@ -33,7 +33,7 @@ function resizeListener(e) {
 function createRenderer() {
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0xf0f0f0);
+  renderer.setClearColor(0xfafafa);
   renderer.setPixelRatio(window.devicePixelRatio);
   let canvasContainer = document.getElementById("rendererContainer");
   canvasContainer.appendChild(renderer.domElement);
@@ -75,11 +75,11 @@ function createScene() {
     partID: "2345",
     partDescription: "Table Top",
     lights: lightsInSceneParameters,
-    materialsAvaiable: ["wood", "metal", "plastic", "marble","aluminium"],
+    materialsAvaiable: ["wood", "metal", "plastic", "marble", "aluminium"],
     textureData: {
       id: "wood",
-      color: "_1",
-      normalScale: 0.1
+      color: "_2",
+      normalScale: 3.45
     },
     textureController: textureController
   }));
@@ -93,9 +93,9 @@ function createScene() {
     materialsAvaiable: ["wood", "metal", "plastic"],
     lights: lightsInSceneParameters,
     textureData: {
-      id: "metal",
-      color: "_3",
-      normalScale: 0.4
+      id: "wood",
+      color: "_5",
+      normalScale: 0.75
     },
     textureController: textureController
   }));
@@ -115,31 +115,31 @@ function createTools() {
     colors: [
       {
         id: "_1",
-        alt: "ebano",
+        alt: "white",
         iconURL: "",
         iconColor: "#dfd4c2"
       },
       {
         id: "_2",
-        alt: "pioppo",
+        alt: "yellow",
         iconURL: "",
         iconColor: "#dbb77b"
       },
       {
         id: "_3",
-        alt: "olmo",
+        alt: "brown",
         iconURL: "",
         iconColor: "#7e5f29"
       },
       {
         id: "_4",
-        alt: "acero",
+        alt: "dark brown",
         iconURL: "",
         iconColor: "#4f3210"
       },
       {
         id: "_5",
-        alt: "mogano",
+        alt: "darkest brown",
         iconURL: "",
         iconColor: "#5f3525"
       },
@@ -157,37 +157,37 @@ function createTools() {
     colors: [
       {
         id: "_1",
-        alt: "bianco",
+        alt: "white",
         iconURL: "",
         iconColor: "#d1d2cd"
       },
       {
         id: "_2",
-        alt: "rosso",
+        alt: "red",
         iconURL: "",
         iconColor: "#9e2423"
       },
       {
         id: "_3",
-        alt: "verde",
+        alt: "green",
         iconURL: "",
         iconColor: "#1e5f3f"
       },
       {
         id: "_4",
-        alt: "blu",
+        alt: "blue",
         iconURL: "",
         iconColor: "#2b717b"
       },
       {
         id: "_5",
-        alt: "marrone",
+        alt: "brown",
         iconURL: "",
         iconColor: "#99824e"
       },
       {
         id: "_6",
-        alt: "grigio",
+        alt: "grey",
         iconURL: "",
         iconColor: "#999999"
       },
@@ -205,25 +205,25 @@ function createTools() {
     colors: [
       {
         id: "_1",
-        alt: "ferro",
+        alt: "brown",
         iconURL: "",
         iconColor: "#8c7958"
       },
       {
         id: "_2",
-        alt: "pandino",
+        alt: "red",
         iconURL: "",
         iconColor: "#8f5047"
       },
       {
         id: "_3",
-        alt: "rame",
+        alt: "grey",
         iconURL: "",
         iconColor: "#7d7371"
       },
       {
         id: "_4",
-        alt: "ossidiana",
+        alt: "black",
         iconURL: "",
         iconColor: "#000000"
       },
@@ -241,19 +241,19 @@ function createTools() {
     colors: [
       {
         id: "_1",
-        alt: "marble1",
+        alt: "pink",
         iconURL: "",
         iconColor: "#d4bbbe"
       },
       {
         id: "_2",
-        alt: "marble2",
+        alt: "green",
         iconURL: "",
         iconColor: "#98b098"
       },
       {
         id: "_3",
-        alt: "marble3",
+        alt: "grey",
         iconURL: "",
         iconColor: "#c0c0c0"
       },
@@ -272,13 +272,13 @@ function createTools() {
     colors: [
       {
         id: "_1",
-        alt: "aluminium1",
+        alt: "grey",
         iconURL: "",
         iconColor: "#979ca0"
       },
       {
         id: "_2",
-        alt: "aluminium2",
+        alt: "yellow",
         iconURL: "",
         iconColor: "#958e67"
       },
@@ -300,7 +300,7 @@ function createTools() {
     }
     let partMenuContainer = buildMenuOptions(partsWrapper, menuData);
     partsControllers.push({
-      type: "editorPart", 
+      type: "editorPart",
       istance: new EditorPartController(partMenuContainer, objControl),
       partID: objControl.name
     });
@@ -310,11 +310,13 @@ function createTools() {
   menuControllers.push({
     type: "editor", istance: new EditorController(optionsContainer, ".parts-container")
   });
-  
+
+  let previewPath = "images/";
+
   let presets = [
     {
-      preview: "images/tavolo1.jpg",
-      alt: "tavolo marmo",
+      preview: previewPath + "tavolo1.jpg",
+      alt: "marble table",
       plane: {
         material: "marble",
         color: "_1",
@@ -327,8 +329,8 @@ function createTools() {
       }
     },
     {
-      preview: "images/tavolo2.jpg",
-      alt: "tavolo alluminio",
+      preview: previewPath + "tavolo2.jpg",
+      alt: "aluminium table",
       plane: {
         material: "aluminium",
         color: "_1",
@@ -340,10 +342,9 @@ function createTools() {
         roughness: 2.0
       }
     },
-
     {
-      preview: "images/tavolo3.jpg",
-      alt: "tavolo legno",
+      preview: previewPath + "tavolo3.jpg",
+      alt: "wood table",
       plane: {
         material: "wood",
         color: "_1",
@@ -355,11 +356,9 @@ function createTools() {
         roughness: 0.3
       }
     },
-
-    
     {
-      preview: "images/tavolo4.jpg",
-      alt: "tavolo plastica",
+      preview: previewPath + "tavolo4.jpg",
+      alt: "plastic table",
       plane: {
         material: "plastic",
         color: "_4",
@@ -375,7 +374,7 @@ function createTools() {
 
   let presetsContainer = document.getElementById("presetsContainer");
   let presetsWrapper = presetsContainer.querySelectorAll(".presets-list-container")[0];
-  for(i=0; i<presets.length; i++){
+  for (let i = 0; i < presets.length; i++) {
     buildPresetObj(presetsWrapper, presets[i]);
   }
 
@@ -390,7 +389,7 @@ function createTools() {
 
 function init() {
   show_debug_tools = false;
-  show_fps = true;
+  show_fps = false;
   if (show_debug_tools) {
     console.log("Follow the 🐇...");
   }
