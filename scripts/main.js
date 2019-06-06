@@ -21,6 +21,8 @@ function resizeListener(e) {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  
+  mobileController.updateVisibility();
 
   menuControllers.forEach(controller => {
     controller.istance.updateDimensions();
@@ -455,7 +457,8 @@ function init() {
 
   // add listener for resize event of window to update renderer
   window.addEventListener("resize", resizeListener, false);
-
+  mobileController = new MobileController();
+  
   createScene();
   createTools();
 
