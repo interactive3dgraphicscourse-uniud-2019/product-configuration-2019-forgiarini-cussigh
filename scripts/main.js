@@ -72,7 +72,7 @@ function createScene() {
     vertexShader: vs,
     fragmentShader: fs,
     modelName: "plane",
-    partID: "2345",
+    partID: tablePlaneID,
     partDescription: "Table Top",
     lights: lightsInSceneParameters,
     materialsAvaiable: ["wood", "metal", "plastic", "marble", "aluminium"],
@@ -88,7 +88,7 @@ function createScene() {
     vertexShader: vs,
     fragmentShader: fs,
     modelName: "legs",
-    partID: "1234",
+    partID: tableLegsID,
     partDescription: "Table Legs",
     materialsAvaiable: ["wood", "metal", "plastic"],
     lights: lightsInSceneParameters,
@@ -293,20 +293,20 @@ function createTools() {
   partsControllers = [];
   sceneObjectsControllers.forEach(objControl => {
     let menuData = {
-      partID: objControl.name,
+      partID: objControl.partHandledID,
       partName: objControl.description,
       textures: avaiableTextures,
       controller: objControl
     }
-    let partMenuContainer = buildMenuOptions(partsWrapper, menuData);
+    let partMenuContainer = DomUtils.buildMenuOptions(partsWrapper, menuData);
     partsControllers.push({
       type: "editorPart",
       istance: new EditorPartController(partMenuContainer, objControl),
-      partID: objControl.name
+      partID: objControl.partHandledID
     });
   });
 
-  EditorController.addSeparators(partsWrapper, "tmpl-part-separator");
+  DomUtils.addSeparators(partsWrapper, "tmpl-part-separator");
   menuControllers.push({
     type: "editor", istance: new EditorController(optionsContainer, ".parts-container")
   });
@@ -317,70 +317,98 @@ function createTools() {
     {
       preview: previewPath + "tavolo1.jpg",
       alt: "marble table",
-      plane: {
-        material: "marble",
-        color: "_1",
-        roughness: 0.6
-      },
-      legs: {
-        material: "metal",
-        color: "_4",
-        roughness: 0.2
-      }
+      data: [{
+        //table
+        partID: tablePlaneID,
+        dataToApply: {
+          material: "marble",
+          color: "_1",
+          roughness: 0.6
+        }
+      }, {
+        // legs
+        partID: tableLegsID,
+        dataToApply: {
+          material: "metal",
+          color: "_4",
+          roughness: 0.2
+        }
+      }]
     },
     {
       preview: previewPath + "tavolo2.jpg",
       alt: "aluminium table",
-      plane: {
-        material: "aluminium",
-        color: "_1",
-        roughness: 0.17
-      },
-      legs: {
-        material: "wood",
-        color: "_2",
-        roughness: 2.0
-      }
+      data: [{
+        //table
+        partID: tablePlaneID,
+        dataToApply: {
+          material: "aluminium",
+          color: "_1",
+          roughness: 0.17
+        }
+      }, {
+        // legs
+        partID: tableLegsID,
+        dataToApply: {
+          material: "wood",
+          color: "_2",
+          roughness: 2.0
+        }
+      }]
     },
     {
       preview: previewPath + "tavolo3.jpg",
       alt: "wood table",
-      plane: {
-        material: "wood",
-        color: "_1",
-        roughness: 1.5
-      },
-      legs: {
-        material: "metal",
-        color: "_3",
-        roughness: 0.3
-      }
+      data: [{
+        //table
+        partID: tablePlaneID,
+        dataToApply: {
+          material: "wood",
+          color: "_1",
+          roughness: 1.5
+        }
+      }, {
+        // legs
+        partID: tableLegsID,
+        dataToApply: {
+          material: "metal",
+          color: "_3",
+          roughness: 0.3
+        }
+      }]
     },
     {
       preview: previewPath + "tavolo4.jpg",
       alt: "plastic table",
-      plane: {
-        material: "plastic",
-        color: "_4",
-        roughness: 1.5
-      },
-      legs: {
-        material: "wood",
-        color: "_1",
-        roughness: 0.1
-      }
+      data: [{
+        //table
+        partID: tablePlaneID,
+        dataToApply: {
+          material: "plastic",
+          color: "_4",
+          roughness: 1.5
+        }
+      }, {
+        // legs
+        partID: tableLegsID,
+        dataToApply: {
+          material: "wood",
+          color: "_1",
+          roughness: 0.1
+        }
+      }]
     },
   ];
 
   let presetsContainer = document.getElementById("presetsContainer");
   let presetsWrapper = presetsContainer.querySelectorAll(".presets-list-container")[0];
   for (let i = 0; i < presets.length; i++) {
-    buildPresetObj(presetsWrapper, presets[i]);
+    DomUtils.buildPresetObj(presetsWrapper, presets[i]);
   }
 
   let presetController = new PresetController(presetsWrapper, partsControllers);
 
-  EditorController.addSeparators(presetsWrapper, "tmpl-preset-separator");
+  DomUtils.addSeparators(presetsWrapper, "tmpl-preset-separator");
 
   menuControllers.push({
     type: "editor", istance: new EditorController(presetsContainer, ".presets-list-container")
@@ -417,7 +445,7 @@ function init() {
 
   // creating stats of frame
   if (show_fps) {
-    stats = Util.createStats();
+    stats = DomUtils.createStats();
   }
 
   if (show_debug_tools) {

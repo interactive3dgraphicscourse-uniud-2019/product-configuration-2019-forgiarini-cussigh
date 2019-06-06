@@ -35,18 +35,6 @@ class Util {
     }
 
     /**
-     * Create Stats for canvas and returns a reference to an istance of that plugin.
-     * Requires stats.js
-     */
-    static createStats() {
-        let stats = new Stats();
-        stats.domElement.style.position = "absolute";
-        stats.domElement.style.top = "0px";
-        document.body.appendChild(stats.domElement);
-        return stats;
-    }
-
-    /**
      * take a number in [0,255] range and returns his conversion in hexadecimal value
      * @param {Number} c 
      */
@@ -130,19 +118,6 @@ class Util {
         return (Math.abs(direction.angleTo(calculatedDirection)) < MAX_DIFFERENCE_ANGLE);
     }
 
-    static xmlToString(xmlData) {
-        let xmlString;
-        //IE
-        if (window.ActiveXObject) {
-            xmlString = xmlData.xml;
-        }
-        // code for Mozilla, Firefox, Opera, etc.
-        else {
-            xmlString = (new XMLSerializer()).serializeToString(xmlData);
-        }
-        return xmlString;
-    }
-
     static loadTexture(file) {
         var texture = new THREE.TextureLoader().load(file, texture => {
             texture.minFilter = THREE.LinearMipMapLinearFilter;
@@ -155,18 +130,7 @@ class Util {
         return texture;
     }
 
-    static createNodeHTML(templateName, argName, data) {
-        tmpl.arg = argName;
-        let insertingHTML = htmlParser.parseFromString(tmpl(templateName, data), "text/html");
-        let partContainer = insertingHTML.documentElement.children[1].firstChild;
-        return partContainer;
-    }
-
-    static isMobile(){
+    static isMobile() {
         return window.innerWidth <= MOBILE_WIDTH;
-    }
-
-    static is(el, selector) {
-        return (el.matches || el.matchesSelector || el.msMatchesSelector || el.mozMatchesSelector || el.webkitMatchesSelector || el.oMatchesSelector).call(el, selector);
     }
 }

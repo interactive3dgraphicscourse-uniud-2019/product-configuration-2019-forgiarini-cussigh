@@ -80,7 +80,7 @@ class EditorPartController {
         let el = domEl;
         this.objController = objControl;
         this.container = el;
-        this.name = this.objController.name;
+        this.name = this.objController.partHandledID;
 
         this.selectTextureContainer = this.container.querySelectorAll(".avaiable-materials")[0];
         this.selectTextureMenu = this.container.querySelectorAll(".select-texture-material")[0];
@@ -186,7 +186,7 @@ class EditorPartController {
     setSliderValue(material, value) {
         this.rangeInput.forEach(range => {
             let el = range;
-            while (!Util.is(el, ".available-textures")) {
+            while (!DomUtils.is(el, ".available-textures")) {
                 el = el.parentNode;
             }
             if (el.getAttribute('data-texture-type') === material) {

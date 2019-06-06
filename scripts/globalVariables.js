@@ -15,6 +15,9 @@ const MOBILE_WIDTH = 768;
 const MODELS_PATH = "models/";
 const TEXTURES_PATH = "textures/";
 
+const tablePlaneID = "1234";
+const tableLegsID = "6789";
+
 let htmlParser;
 
 let sceneObjectsControllers;

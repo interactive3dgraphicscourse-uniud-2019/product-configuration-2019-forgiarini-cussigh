@@ -18,10 +18,10 @@ class PresetController {
     }
 
     updateLiveModel(data) {
-        Object.keys(data).forEach(partID => {
+        data.forEach(part => {
             this.controllers.forEach(ctrl => {
-                if (ctrl.istance.name == partID) {
-                    ctrl.istance.updateMenu(data[partID]);
+                if (ctrl.istance.name == part.partID) {
+                    ctrl.istance.updateMenu(part.dataToApply);
                 }
             });
         });

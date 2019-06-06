@@ -84,7 +84,7 @@ class ObjPartController {
             scene.add(mesh);
         });
 
-        this.name = data.modelName;
+        this.partHandledID = data.partID;
         this.description = data.partDescription;
     }
 
