@@ -355,6 +355,22 @@ function createTools() {
         roughness: 0.3
       }
     },
+
+    
+    {
+      preview: "images/tavolo4.jpg",
+      alt: "tavolo plastica",
+      plane: {
+        material: "plastic",
+        color: "_4",
+        roughness: 1.5
+      },
+      legs: {
+        material: "wood",
+        color: "_1",
+        roughness: 0.1
+      }
+    },
   ];
 
   let presetsContainer = document.getElementById("presetsContainer");
