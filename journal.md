@@ -56,3 +56,8 @@ Aggiunta una luce ambientale
 04.06.2019
 =============
 Aggiunto il materiale alluminio
+
+05.06.2019
+=============
+Implementato il menù dei preset
+

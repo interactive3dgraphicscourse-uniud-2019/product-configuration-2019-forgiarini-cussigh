@@ -10,9 +10,11 @@ Forgiarini Alessandro - n° 120562
 
 Il progetto riguarda la creazione di un web visualizer per la visualizzazione e modifica di un modello a scelta.
 Il modello scelto è un tavolo suddiviso in due parti: il piano e le gambe.
-L'applicazione permette di variare le parti in base al tipo di materiale (legno, plastica, metallo, marmo, alluminio), a una selezione di colori scelti adatti ai materiali, e ad un fattore di roughness che determina la ruvidità/imperfezione della superficie.
+L'applicazione permette di variare le parti in base al tipo di materiale (legno, plastica, metallo, marmo, alluminio), a una selezione di colori scelti adatti ai materiali, e ad un fattore di roughness che determina la ruvidità/il rilievo della superficie.
 La telecamera è interamente manovrabile e consente la libera ispezione del tavolo.
-Il progetto è inoltre realizzato in modo da mantenere le medesime funzionalità anche su mobile.
+Il progetto è stato pensato per mantenere le stesse funzionalità sui dispositivi mobile.
+
+![modello](screenshots/whole.png)
 
 ## Modelli e Texture
 
@@ -23,7 +25,7 @@ Le texture sono disegnate a partire da basi reperite su www.textures.com, ricomp
 
 ## Shader
 
-Gli shader creati implementano la Lamberti  an BRDF e la Microfacet Specular BRDF per il calcolo rispettivamente del fattore diffuse e specular.
+Gli shader creati implementano la Lambertian BRDF e la Microfacet Specular BRDF per il calcolo rispettivamente del fattore diffuse e specular.
 In particolare per la Microfacet Specular BRDF vengono utilizzate:
 - la funzione di Schlick per la riflettanza di Fresnel
 - la GGX per la distrubuzione delle microfaccette
@@ -38,14 +40,25 @@ Infine è presente una luce ambientale di intensità bassa per rendere visibili 
 
 ## Interfaccia
 
+### Menù di design
+
 L'interfaccia è stata scritta manualmente per permettere la creazione di un menù dinamico, che varii le opzioni a disposizione in base alla scelta del materiale.
 Il menù è diviso in due sezioni indipendenti per la modifica delle due parti del modello tramite un menù a tendina per il materiale, una selezione a icone per il colore e uno slider per la roughness.
 Il css dei menù è interamente personalizzato in tutti i suoi elementi grafici.
 Sono state implementate le animazioni per l'apertura e chiusura dei menù e del pulsante di collapse.
 Il menù inoltre implementa una scrollbar nell'eventualità il browser venga ridimensionato e non siano visibili tutti i comandi, oppure nel caso sia visualizzato da mobile e la grandezza dello schermo non sia sufficiente.
+Nello screenshot si può vedere la casistica del menù chiuso e del menù scorrevole tramite barra. 
+
+### Menù dei preset
+
+A partire dal menù già realizzato è stato creato un menù per la selezione di preset predeterminati, che consentono di scegliere dei tavoli già abbinati nelle loro parti. La selezione del preset cambia i valori del menù di design, permettendo poi all'utente di modificare il tavolo a partire da quei valori.
+
+![modello](screenshots/menu.png)
 
 ## Testing
 Il visualizzatore mantiene i 60fps su desktop.
-Su mobile è stato testato sia su chrome che su safari e preserva la totalità delle funzionalità.
+Su tablet preserva la totalità delle funzionalità e del framerate.
+Data la natura dei menù, che necessitano di una certa risoluzione in larghezza, per preservare la funzionalità su smartphone viene nascosto automaticamente il menù dei preset e l'intestazione del sito.
+Il visualizzatore è stato testato su diversi dispositivi per controllare il framerate:
 Sui dispositivi di fascia medio-alta (iphone 6, iphone SE, OnePlus3) il framerate rimane inalterato a 60fps.
 Sui dispositivi di fascia bassa (Asus zenphone 2, Xiaomi mi a1, Huawei P8 lite smart) il framerate varia dai 30 ai 45 frame.
