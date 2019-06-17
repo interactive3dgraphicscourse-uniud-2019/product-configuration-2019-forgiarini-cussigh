@@ -110,7 +110,7 @@ function createTools() {
     typeSelect: "Wood",
     roughness: {
       min: 0.0,
-      max: 2.5,
+      max: 1.7,
       step: 0.05,
       start: 0.0
     },
@@ -152,7 +152,7 @@ function createTools() {
     typeSelect: "Plastic",
     roughness: {
       min: 0.15,
-      max: 1.8,
+      max: 1.3,
       step: 0.05,
       start: 0.0
     },
@@ -348,7 +348,7 @@ function createTools() {
         dataToApply: {
           material: "wood",
           color: "_2",
-          roughness: 2.0
+          roughness: 1.0
         }
       }]
     },
@@ -361,7 +361,7 @@ function createTools() {
         dataToApply: {
           material: "wood",
           color: "_1",
-          roughness: 1.5
+          roughness: 1
         }
       }, {
         // legs
@@ -382,7 +382,7 @@ function createTools() {
         dataToApply: {
           material: "plastic",
           color: "_4",
-          roughness: 1.5
+          roughness: 1
         }
       }, {
         // legs
