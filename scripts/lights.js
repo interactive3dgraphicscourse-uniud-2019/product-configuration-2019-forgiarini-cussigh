@@ -6,21 +6,21 @@ let lightsInSceneParameters = [
         red: 1.0,
         green: 1.0,
         blue: 1.0,
-        intensity: 0.75,
+        intensity: 0.6,
         position: new THREE.Vector3(7.0, 10.0, 7.0)
     },
     {
         red: 1.0,
         green: 1.0,
         blue: 1.0,
-        intensity: 0.75,
+        intensity: 0.6,
         position: new THREE.Vector3(-7.0, 10.0, -7.0)
     },
     {
         red: 1.0,
         green: 1.0,
         blue: 1.0,
-        intensity: 0.0,
+        intensity: 0.1,
         position: new THREE.Vector3(-0.0, -10.0, -0.0)
     },
 ];

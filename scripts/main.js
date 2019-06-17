@@ -77,11 +77,11 @@ function createScene() {
     partID: tablePlaneID,
     partDescription: "Table Top",
     lights: lightsInSceneParameters,
-    materialsAvaiable: ["wood", "metal", "plastic", "marble", "aluminium"],
+    materialsAvaiable: ["wood", "stone", "plastic", "marble", "aluminium"],
     textureData: {
       id: "wood",
-      color: "_2",
-      normalScale: 3.45
+      color: "_1",
+      normalScale: 1.0
     },
     textureController: textureController
   }));
@@ -92,7 +92,7 @@ function createScene() {
     modelName: "legs",
     partID: tableLegsID,
     partDescription: "Table Legs",
-    materialsAvaiable: ["wood", "metal", "plastic"],
+    materialsAvaiable: ["wood", "stone", "plastic"],
     lights: lightsInSceneParameters,
     textureData: {
       id: "wood",
@@ -110,7 +110,7 @@ function createTools() {
     typeSelect: "Wood",
     roughness: {
       min: 0.0,
-      max: 4.0,
+      max: 2.5,
       step: 0.05,
       start: 0.0
     },
@@ -152,7 +152,7 @@ function createTools() {
     typeSelect: "Plastic",
     roughness: {
       min: 0.15,
-      max: 2.3,
+      max: 1.8,
       step: 0.05,
       start: 0.0
     },
@@ -196,8 +196,8 @@ function createTools() {
     ]
   },
   {
-    typeID: "metal",
-    typeSelect: "Metal",
+    typeID: "stone",
+    typeSelect: "Stone",
     roughness: {
       min: 0.0,
       max: 1.0,
@@ -278,12 +278,6 @@ function createTools() {
         iconURL: "",
         iconColor: "#979ca0"
       },
-      {
-        id: "_2",
-        alt: "yellow",
-        iconURL: "",
-        iconColor: "#958e67"
-      },
     ]
   },
   ];
@@ -331,7 +325,7 @@ function createTools() {
         // legs
         partID: tableLegsID,
         dataToApply: {
-          material: "metal",
+          material: "stone",
           color: "_4",
           roughness: 0.2
         }
@@ -373,7 +367,7 @@ function createTools() {
         // legs
         partID: tableLegsID,
         dataToApply: {
-          material: "metal",
+          material: "stone",
           color: "_3",
           roughness: 0.3
         }

@@ -31,7 +31,7 @@ Separato il tavolo in due parti, aggiunto un pulsante per nascondere il menu. Or
 =============
 Sistemati alcuni problemi di aggiornamento del menu al primo start.
 
-Aggiunte le texture per il metallo
+Aggiunte le texture per la pietra
 
 27.05.2019
 =============
