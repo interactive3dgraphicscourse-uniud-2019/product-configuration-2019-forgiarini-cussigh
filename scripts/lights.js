@@ -1,4 +1,6 @@
 // default: white, 1.0 intensity
+ambientLight = new THREE.Vector3(0.3, 0.3, 0.3);
+
 let lightsInSceneParameters = [
     {
         red: 1.0,

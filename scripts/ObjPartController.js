@@ -19,17 +19,17 @@ class ObjPartController {
             diffuseMap: { type: "t", value: undefined },
             roughnessMap: { type: "t", value: undefined },
             normalMap: { type: "t", value: undefined },
-            normalScale: { 
-                type: "v2", 
+            normalScale: {
+                type: "v2",
                 value: new THREE.Vector2(
-                    this.textureParameters.normalScale, 
-                    this.textureParameters.normalScale) 
+                    this.textureParameters.normalScale,
+                    this.textureParameters.normalScale)
             },
-            textureRepeat: { 
-                type: "v2", 
+            textureRepeat: {
+                type: "v2",
                 value: new THREE.Vector2(
-                    this.textureParameters.repeatS, 
-                    this.textureParameters.repeatT) 
+                    this.textureParameters.repeatS,
+                    this.textureParameters.repeatT)
             },
 
             //scene lights
@@ -57,6 +57,8 @@ class ObjPartController {
                     this.lights[2].green * this.lights[2].intensity,
                     this.lights[2].blue * this.lights[2].intensity)
             },
+
+            ambientLight: { type: "v3", value: ambientLight }
         }
 
         this.textureController = data.textureController;
@@ -118,9 +120,9 @@ class ObjPartController {
     updateTextureRoughness(val) {
         this.textureParameters.normalScale = val;
         this.uniforms.normalScale.value = new THREE.Vector2(
-            this.textureParameters.normalScale, 
+            this.textureParameters.normalScale,
             this.textureParameters.normalScale
-            );
+        );
     }
 
     updateLightPositions() {

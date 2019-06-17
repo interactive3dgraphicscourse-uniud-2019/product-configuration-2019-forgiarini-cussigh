@@ -27,3 +27,5 @@ let menuControllers;
 let partsControllers;
 
 let mobileController;
+
+let ambientLight;
